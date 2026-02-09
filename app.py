@@ -824,7 +824,8 @@ def main():
                         st.session_state.conversation_started = True
                         st.rerun()
 
-            # Display chat messages
+        # Display chat messages (always show if there are messages)
+        if st.session_state.messages:
             chat_container = st.container()
             with chat_container:
                 for msg in st.session_state.messages:
@@ -841,34 +842,34 @@ def main():
                         </div>
                         ''', unsafe_allow_html=True)
 
-            # User input
-            if st.session_state.conversation_started:
-                user_input = st.chat_input(
-                    "Type as doctor / practice staff...")
+        # User input (only show when conversation has started)
+        if st.session_state.conversation_started:
+            user_input = st.chat_input(
+                "Type as doctor / practice staff...")
 
-                if user_input:
-                    st.session_state.messages.append({
-                        "role": "user",
-                        "content": user_input
-                    })
+            if user_input:
+                st.session_state.messages.append({
+                    "role": "user",
+                    "content": user_input
+                })
 
-                    # Build full message list for API
-                    api_messages = [
-                        {"role": "system", "content": st.session_state.system_prompt}
-                    ]
-                    api_messages.extend([
-                        {"role": m["role"], "content": m["content"]}
-                        for m in st.session_state.messages
-                    ])
+                # Build full message list for API
+                api_messages = [
+                    {"role": "system", "content": st.session_state.system_prompt}
+                ]
+                api_messages.extend([
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages
+                ])
 
-                    with st.spinner("Fritz denkt nach..."):
-                        response = call_azure_api(api_messages)
+                with st.spinner("Fritz denkt nach..."):
+                    response = call_azure_api(api_messages)
 
-                    st.session_state.messages.append({
-                        "role": "assistant",
-                        "content": response
-                    })
-                    st.rerun()
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": response
+                })
+                st.rerun()
 
 
 if __name__ == "__main__":
