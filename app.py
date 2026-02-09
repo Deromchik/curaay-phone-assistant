@@ -8,7 +8,8 @@ import json
 import streamlit as st
 
 # Azure OpenAI API configuration
-AZURE_API_KEY = "9RAYrqJIM6sqWhk5MyebGksr14PPIFpNrVYJ1YDo3QmYYV5ymo6YJQQJ99BBACPV0roXJ3w3AAABACOGcGa3"
+# Get API key from environment variable (can be overridden in main() from Streamlit secrets)
+AZURE_API_KEY = os.getenv("AZURE_API_KEY", "")
 AZURE_API_VERSION = "2025-04-01-preview"
 AZURE_ENDPOINT = "https://german-west-cenral.openai.azure.com"
 MODEL = "gpt-4o"
@@ -666,7 +667,8 @@ def main():
         pass
 
     if not AZURE_API_KEY:
-        st.error("⚠️ Azure API key is not configured.")
+        st.error("⚠️ Azure API key is not configured. Please set AZURE_API_KEY in Streamlit secrets or environment variables.")
+        st.info("For local setup, create a `.streamlit/secrets.toml` file with the following content:\n```toml\nAZURE_API_KEY = \"your-api-key-here\"\n```\n\nOr set an environment variable:\n```bash\nexport AZURE_API_KEY=\"your-api-key-here\"\n```")
         st.stop()
 
     # Initialize session state
