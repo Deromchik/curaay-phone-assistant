@@ -770,8 +770,15 @@ def main():
         st.markdown(
             '<div class="sub-header">Curaay - Patient Appointment Booking</div>', unsafe_allow_html=True)
 
-        # Start conversation button
+        # Start conversation section
         if not st.session_state.conversation_started:
+            # Field for first message (from doctor/practice)
+            first_message = st.text_input(
+                "💬 First message (from doctor/practice staff):",
+                placeholder="e.g., Praxis Schmidt, guten Tag!",
+                key="first_message_input"
+            )
+
             if st.button("🎬 Start Conversation", use_container_width=True):
                 config = {
                     "first_name": first_name,
@@ -795,6 +802,18 @@ def main():
                     st.session_state.system_prompt = prompt
 
                     api_messages = [{"role": "system", "content": prompt}]
+
+                    # Add first message from user if provided
+                    if first_message.strip():
+                        api_messages.append({
+                            "role": "user",
+                            "content": first_message.strip()
+                        })
+                        st.session_state.messages.append({
+                            "role": "user",
+                            "content": first_message.strip()
+                        })
+
                     with st.spinner("Starting conversation..."):
                         response = call_azure_api(api_messages)
 
