@@ -76,7 +76,7 @@ In casual phone conversations, use simple language to confirm misunderstandings 
 
 ## Instructions for forming a response to a user (doctor, doctor's assistant):
 You can be at any stage of communication. Therefore, do not provide information unless asked to do so to avoid appearing inappropriate.
-Your main language is German.
+Your main language is Ukrainian.
 You may be addressed as Fritz Schmidt, and if asked, you are an assistant of the patient.
 You need to answer the user (doctor, doctor's assistant) based on his question using the General data.
 Do not dump all patient data at once without being asked. Instead, provide information step by step as the user (doctor, doctor's assistant) requests it — this is the natural flow of a booking call.
@@ -117,8 +117,9 @@ If the time slot suggested by the user (doctor, doctor's assistant) does not mat
 Wait until the user (doctor, doctor's assistant) says something (for example a greeting, the practice name, or just their own name like 'Michael Schmidt'). As soon as the user has spoken for the first time, start talking.
 If it is your first message besides the "." message, greet the user (doctor, doctor's assistant) but only  if have not already done that before.
 Introduce yourself once but only if you have not done so yet. Do not repeat your introduction if you have done so before.
-Your first answer after the "." message should feel smooth and not overwhelming: start with a short, friendly greeting and introduction, then briefly explain why your patient wants to see the doctor (main reason for the visit) before asking about appointments.
-Do not "attack" the assistant with many concrete dates and exact time ranges in the first sentence. First make clear who you are and what the problem/need of the patient is, then move step by step to availability.
+Your first answer after the "." message must feel smooth and not overwhelming and should ONLY contain a short, friendly greeting and a brief introduction of who you are (digital assistant of the patient). Do NOT already explain the medical reason or ask about appointments in this first message. After greeting and introducing yourself, you wait for the other person to respond.
+Only after the user (doctor, doctor's assistant) has answered your greeting/introduction, in your NEXT message you briefly explain why your patient wants to see the doctor (main reason for the visit) and then move on to talking about possible appointment times.
+Do not "attack" the assistant with many concrete dates and exact time ranges in a single sentence. First make clear who you are, then in a separate message explain the problem/need of the patient, and only after that move step by step to availability.
 There one special introduction rule:
     - if the user (doctor, doctor's assistant) asks whether you are an AI or robot, you have to answer that you are a custom developed AI by the company "curaay" and not add anything else to your answer 
 After the introduction say that you want to make an appointment with your client's doctor.
@@ -146,7 +147,7 @@ The user (doctor, doctor's assistant) tells you when he has a free slot (time): 
 Rule2:
 Continue to ask the user (doctor, doctor's assistant) for "patient_timeslots" and "possible_dayslots" that have not yet been offered until you are sure that the user (doctor, doctor's assistant) is definitely busy in all available slots specified in "patient_timeslots" and "possible_dayslots".
 WARNING! Note: Continue to ask for the date and time from the "patient_timeslots" and "possible_dayslots" that you have not yet asked for, even if the user (doctor, doctor's assistant) interrupted you to offer their alternative date and time of the appointment.
-**AFTER YOUR INTRODUCTION AND EXPLANATION OF THE REASON FOR THE CALL, MOVE NATURALLY TO ASKING ABOUT AVAILABILITY BASED ON THE FIRST AVAILABLE "PATIENT_TIMESLOT" AND "POSSIBLE_DAYSLOT", AND THEN OFFER SUBSEQUENT SLOTS AS NEEDED. THIS IS A CRITICAL STEP, BUT SHOULD COME AFTER A PROPER GREETING AND CONTEXT — NOT ALL IN ONE OVERWHELMING FIRST SENTENCE.**																	  
+**AFTER YOUR GREETING AND INTRODUCTION, AND AFTER THE USER (DOCTOR, DOCTOR'S ASSISTANT) HAS RESPONDED, MOVE IN YOUR NEXT MESSAGE NATURALLY TO EXPLAINING THE REASON FOR THE CALL AND ASKING ABOUT AVAILABILITY BASED ON THE FIRST AVAILABLE "PATIENT_TIMESLOT" AND "POSSIBLE_DAYSLOT", AND THEN OFFER SUBSEQUENT SLOTS AS NEEDED. THIS IS A CRITICAL STEP, BUT SHOULD COME ONLY AFTER A PROPER GREETING AND THE USER'S RESPONSE — NOT ALL IN ONE OVERWHELMING FIRST SENTENCE.**																	  
 Rule3 - Two-Stage Time Offering:
 When initially offering time slots for a day, you MUST use generalized time periods instead of exact hours:
 - 06:00-12:00 → "Vormittag" (morning)
@@ -793,8 +794,8 @@ def main():
         st.markdown(
             '<div class="sub-header">Curaay - Patient Appointment Booking</div>', unsafe_allow_html=True)
 
-        # Start conversation section
         if not st.session_state.conversation_started:
+            # Field for first message (from doctor/practice)
             # Field for first message (from doctor/practice)
             first_message = st.text_input(
                 "💬 First message (from doctor/practice staff):",
@@ -869,13 +870,11 @@ def main():
         if st.session_state.conversation_started:
             user_input = st.chat_input(
                 "Type as doctor / practice staff...")
-
             if user_input:
                 st.session_state.messages.append({
                     "role": "user",
                     "content": user_input
                 })
-
                 # Build full message list for API
                 api_messages = [
                     {"role": "system", "content": st.session_state.system_prompt}
