@@ -317,8 +317,8 @@ DEFAULT_PATIENT_CONFIG = {
     "first_visit": "Dies ist der erste Besuch des Patienten",
     "doctor_name": "Privatpraxis Zaritzki Fine Dentistry - Berlin Gendarmenmarkt",
     "latest_booking_details": "2026-01-15",
-    "timeslots": """[{"date":"2026-05-16","slots":["12:50-15:30"],"weekNumber":20},{"date":"2026-05-22","slots":["11:00-13:30"],"weekNumber":21},{"date":"2026-07-03","slots":["08:00-10:30"],"weekNumber":27}]""",
-    "dayslots": """["2026-05-16", "2026-05-22", "2026-07-03"]"""
+    "timeslots": """[{"date":"2026-04-16","slots":["12:50-15:30"],"weekNumber":20},{"date":"2026-05-22","slots":["11:00-13:30"],"weekNumber":21},{"date":"2026-07-03","slots":["08:00-10:30"],"weekNumber":27}]""",
+    "dayslots": """["2026-04-16", "2026-05-22", "2026-07-03"]"""
 }
 
 # ============================================
