@@ -15,9 +15,10 @@ try:
         check_audio_support
     )
     AUDIO_AVAILABLE = True
+    AUDIO_ERROR = None
 except ImportError as e:
     AUDIO_AVAILABLE = False
-    st.warning(f"Audio features not available: {e}")
+    AUDIO_ERROR = str(e)
 
 # Azure OpenAI API configuration
 # Get API key from environment variable (can be overridden in main() from Streamlit secrets)
@@ -644,6 +645,10 @@ def main():
 
     # Initialize session state
     init_session_state()
+
+    # Show audio availability warning if needed
+    if not AUDIO_AVAILABLE and AUDIO_ERROR:
+        st.warning(f"⚠️ Audio features not available: {AUDIO_ERROR}. Install dependencies: pip install -r requirements.txt")
 
     # Layout
     col_chat, col_side = st.columns([2, 1])
