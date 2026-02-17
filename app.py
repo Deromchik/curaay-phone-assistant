@@ -7,6 +7,18 @@ import os
 import json
 import streamlit as st
 
+# Audio utilities for STT and TTS
+try:
+    from audio_utils import (
+        transcribe_audio,
+        text_to_speech,
+        check_audio_support
+    )
+    AUDIO_AVAILABLE = True
+except ImportError as e:
+    AUDIO_AVAILABLE = False
+    st.warning(f"Audio features not available: {e}")
+
 # Azure OpenAI API configuration
 # Get API key from environment variable (can be overridden in main() from Streamlit secrets)
 AZURE_API_KEY = os.getenv("AZURE_API_KEY", "")
@@ -464,6 +476,12 @@ def init_session_state():
         st.session_state.system_prompt = ""
     if "conversation_started" not in st.session_state:
         st.session_state.conversation_started = False
+    if "tts_enabled" not in st.session_state:
+        st.session_state.tts_enabled = False
+    if "audio_cache" not in st.session_state:
+        st.session_state.audio_cache = {}  # Cache for generated audio
+    if "stt_language" not in st.session_state:
+        st.session_state.stt_language = "de"  # Default to German
 
 
 def get_download_json() -> str:
@@ -665,6 +683,40 @@ def main():
 
         st.markdown("---")
 
+        # ---- Audio Settings ----
+        if AUDIO_AVAILABLE:
+            st.markdown("### 🎤 Audio Settings")
+            audio_support = check_audio_support()
+            
+            if audio_support.get("stt_available"):
+                st.session_state.stt_language = st.selectbox(
+                    "STT Language",
+                    options=["de", "en", "fr", "es", "it"],
+                    index=0,
+                    format_func=lambda x: {"de": "German", "en": "English", "fr": "French", "es": "Spanish", "it": "Italian"}.get(x, x),
+                    key="stt_lang_select"
+                )
+                st.caption("Language for speech-to-text transcription")
+            else:
+                st.warning("STT not available. Install transformers library.")
+            
+            if audio_support.get("tts_available"):
+                st.session_state.tts_enabled = st.toggle(
+                    "Enable TTS (Text-to-Speech)",
+                    value=st.session_state.tts_enabled,
+                    key="tts_toggle"
+                )
+                st.caption("Automatically convert assistant responses to speech")
+            else:
+                st.warning("TTS not available. Install kokoro-onnx library.")
+            
+            if audio_support.get("cuda_available"):
+                st.success("✓ GPU acceleration available")
+            else:
+                st.info("ℹ Running on CPU (slower)")
+            
+            st.markdown("---")
+
         # ---- Download Conversation ----
         if st.session_state.messages:
             st.markdown("### 📥 Download Conversation")
@@ -781,7 +833,7 @@ def main():
         if st.session_state.messages:
             chat_container = st.container()
             with chat_container:
-                for msg in st.session_state.messages:
+                for idx, msg in enumerate(st.session_state.messages):
                     if msg["role"] == "user":
                         st.markdown(f'''
                         <div class="chat-message user-message">
@@ -789,16 +841,82 @@ def main():
                         </div>
                         ''', unsafe_allow_html=True)
                     elif msg["role"] == "assistant":
+                        # Display message text
                         st.markdown(f'''
                         <div class="chat-message assistant-message">
                             <strong>🤖 Fritz Schmidt (Assistant):</strong><br>{msg["content"]}
                         </div>
                         ''', unsafe_allow_html=True)
+                        
+                        # TTS button and auto-play
+                        if AUDIO_AVAILABLE:
+                            col1, col2 = st.columns([1, 10])
+                            with col1:
+                                # Generate audio cache key
+                                audio_key = f"audio_{idx}_{hash(msg['content'])}"
+                                
+                                # Check if audio is already cached
+                                if audio_key not in st.session_state.audio_cache:
+                                    if st.button("🔊", key=f"play_btn_{idx}", help="Play audio"):
+                                        try:
+                                            with st.spinner("Generating audio..."):
+                                                audio_bytes = text_to_speech(msg["content"], language=st.session_state.stt_language)
+                                                st.session_state.audio_cache[audio_key] = audio_bytes
+                                                st.audio(audio_bytes, format="audio/wav", autoplay=True)
+                                        except Exception as e:
+                                            st.error(f"Failed to generate audio: {str(e)}")
+                                else:
+                                    if st.button("🔊", key=f"play_btn_{idx}", help="Play audio"):
+                                        st.audio(st.session_state.audio_cache[audio_key], format="audio/wav", autoplay=True)
+                            
+                            # Auto-play if TTS is enabled and this is the latest message
+                            if st.session_state.tts_enabled and idx == len(st.session_state.messages) - 1:
+                                if audio_key not in st.session_state.audio_cache:
+                                    try:
+                                        with st.spinner("Generating audio..."):
+                                            audio_bytes = text_to_speech(msg["content"], language=st.session_state.stt_language)
+                                            st.session_state.audio_cache[audio_key] = audio_bytes
+                                            st.audio(audio_bytes, format="audio/wav", autoplay=True)
+                                    except Exception as e:
+                                        st.warning(f"TTS failed: {str(e)}")
+                                else:
+                                    st.audio(st.session_state.audio_cache[audio_key], format="audio/wav", autoplay=True)
 
         # User input (only show when conversation has started)
         if st.session_state.conversation_started:
-            user_input = st.chat_input(
-                "Type as doctor / practice staff...")
+            user_input = None
+            
+            # Audio input for STT
+            if AUDIO_AVAILABLE:
+                audio_input = st.audio_input(
+                    "Record audio message...",
+                    key="audio_recorder"
+                )
+                if audio_input:
+                    try:
+                        with st.spinner("Transcribing audio..."):
+                            transcribed_text = transcribe_audio(
+                                audio_input.read(),
+                                language=st.session_state.stt_language
+                            )
+                        if transcribed_text:
+                            # Show transcribed text
+                            st.info(f"📝 Transcribed: {transcribed_text}")
+                            user_input = transcribed_text
+                        else:
+                            st.warning("No speech detected in audio.")
+                    except Exception as e:
+                        st.error(f"Failed to transcribe audio: {str(e)}")
+                        st.info("You can still type your message below.")
+            
+            # Text input (always available as fallback)
+            text_input = st.chat_input(
+                "Type as doctor / practice staff..." if not AUDIO_AVAILABLE else "Or type your message here..."
+            )
+            if text_input:
+                user_input = text_input
+            
+            # Process user input (from audio or text)
             if user_input:
                 st.session_state.messages.append({
                     "role": "user",
@@ -820,6 +938,7 @@ def main():
                     "role": "assistant",
                     "content": response
                 })
+                # Clear audio cache for new message to force regeneration
                 st.rerun()
 
 
