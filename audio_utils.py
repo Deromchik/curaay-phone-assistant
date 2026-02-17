@@ -20,19 +20,20 @@ except ImportError:
 
 # TTS imports
 try:
-    from kokoro_onnx import KokoroOnnx
+    from kokoro_onnx import Kokoro
     TTS_AVAILABLE = True
     TTS_LIBRARY = "kokoro-onnx"
+    KPipeline = None
 except ImportError:
     try:
         from kokoro import KPipeline
         TTS_AVAILABLE = True
         TTS_LIBRARY = "kokoro"
-        KokoroOnnx = None
+        Kokoro = None
     except ImportError:
         TTS_AVAILABLE = False
         TTS_LIBRARY = None
-        KokoroOnnx = None
+        Kokoro = None
         KPipeline = None
 
 
@@ -180,24 +181,55 @@ def transcribe_audio(audio_bytes: bytes, language: str = "de", model_name: str =
 # ============================================
 
 @st.cache_resource
-def load_tts_model():
+def load_tts_model(model_path: str = None, voices_path: str = None):
     """
     Load Kokoro TTS model.
     Uses caching to avoid reloading the model on every call.
     
+    Args:
+        model_path: Path to kokoro-v1.0.onnx file (if None, will try to download)
+        voices_path: Path to voices-v1.0.bin file (if None, will try to download)
+    
     Returns:
-        TTS model object
+        Tuple of (TTS model object, library_type)
     """
     if not TTS_AVAILABLE:
         raise ImportError("TTS functionality is not available. Please install kokoro-onnx or kokoro library.")
     
     try:
-        # Try kokoro-onnx first (lighter)
-        try:
-            model = KokoroOnnx()
+        if TTS_LIBRARY == "kokoro-onnx":
+            # kokoro-onnx requires model files
+            import os
+            import urllib.request
+            
+            # Default paths in cache directory
+            cache_dir = os.path.join(os.path.expanduser("~"), ".cache", "kokoro-onnx")
+            os.makedirs(cache_dir, exist_ok=True)
+            
+            if model_path is None:
+                model_path = os.path.join(cache_dir, "kokoro-v1.0.onnx")
+                if not os.path.exists(model_path):
+                    # Try to download model file
+                    model_url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx"
+                    try:
+                        urllib.request.urlretrieve(model_url, model_path)
+                    except Exception as e:
+                        raise RuntimeError(f"Failed to download model file. Please download manually from {model_url} and place at {model_path}. Error: {str(e)}")
+            
+            if voices_path is None:
+                voices_path = os.path.join(cache_dir, "voices-v1.0.bin")
+                if not os.path.exists(voices_path):
+                    # Try to download voices file
+                    voices_url = "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin"
+                    try:
+                        urllib.request.urlretrieve(voices_url, voices_path)
+                    except Exception as e:
+                        raise RuntimeError(f"Failed to download voices file. Please download manually from {voices_url} and place at {voices_path}. Error: {str(e)}")
+            
+            model = Kokoro(model_path, voices_path)
             return model, "kokoro-onnx"
-        except:
-            # Fallback to kokoro
+        else:
+            # Fallback to kokoro (if available)
             model = KPipeline(lang_code='a')  # 'a' for American English, 'b' for British
             return model, "kokoro"
     except Exception as e:
@@ -233,11 +265,34 @@ def text_to_speech(text: str, language: str = "de", speed: float = 1.0) -> bytes
         
         # Generate speech
         if library_type == "kokoro-onnx":
-            # kokoro-onnx API
-            audio_array = model.generate(text)
+            # kokoro-onnx API: use create() method with default voice
+            # Map language codes: "de" -> "de-de", "en" -> "en-us", etc.
+            lang_map = {
+                "de": "de-de",
+                "en": "en-us",
+                "fr": "fr-fr",
+                "es": "es-es",
+                "it": "it-it"
+            }
+            lang_code = lang_map.get(language.lower(), "en-us")
+            
+            # Get available voices and use first one (or default)
+            try:
+                voices = model.get_voices()
+                voice_name = voices[0] if voices else "af_sarah"  # Default voice
+            except:
+                voice_name = "af_sarah"  # Default fallback
+            
+            audio_array, sample_rate = model.create(
+                text=text,
+                voice=voice_name,
+                speed=speed,
+                lang=lang_code
+            )
         else:
             # kokoro API
             audio_array = model.generate(text)
+            sample_rate = 22050  # Default for kokoro
         
         # Validate audio array
         if audio_array is None or len(audio_array) == 0:
@@ -245,7 +300,7 @@ def text_to_speech(text: str, language: str = "de", speed: float = 1.0) -> bytes
         
         # Convert to bytes
         audio_bytes_io = io.BytesIO()
-        sf.write(audio_bytes_io, audio_array, 22050, format='WAV')  # Kokoro uses 22050 Hz
+        sf.write(audio_bytes_io, audio_array, sample_rate, format='WAV')
         audio_bytes_io.seek(0)
         
         return audio_bytes_io.read()
