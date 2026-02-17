@@ -63,7 +63,7 @@ def load_stt_model(model_name: str = "distil-whisper/distil-large-v3", device: O
         # Load model and processor
         model = AutoModelForSpeechSeq2Seq.from_pretrained(
             model_name,
-            torch_dtype=torch.float16 if device == "cuda" else torch.float32,
+            dtype=torch.float16 if device == "cuda" else torch.float32,
             low_cpu_mem_usage=True,
             use_safetensors=True
         )
@@ -71,13 +71,12 @@ def load_stt_model(model_name: str = "distil-whisper/distil-large-v3", device: O
         
         processor = AutoProcessor.from_pretrained(model_name)
         
-        # Create pipeline
+        # Create pipeline (dtype is already set in model, no need to specify again)
         pipe = pipeline(
             "automatic-speech-recognition",
             model=model,
             tokenizer=processor.tokenizer,
             feature_extractor=processor.feature_extractor,
-            torch_dtype=torch.float16 if device == "cuda" else torch.float32,
             device=device,
         )
         
