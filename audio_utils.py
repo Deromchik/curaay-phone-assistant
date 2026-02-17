@@ -266,13 +266,19 @@ def text_to_speech(text: str, language: str = "de", speed: float = 1.0) -> bytes
         # Generate speech
         if library_type == "kokoro-onnx":
             # kokoro-onnx API: use create() method with default voice
-            # Map language codes: "de" -> "de-de", "en" -> "en-us", etc.
+            # Map language codes to kokoro-onnx supported languages
+            # Supported: en-us, en-gb, es, fr-fr, hi, it, pt-br, ja, zh
+            # German (de) is NOT supported - fallback to English
             lang_map = {
-                "de": "de-de",
                 "en": "en-us",
                 "fr": "fr-fr",
-                "es": "es-es",
-                "it": "it-it"
+                "es": "es",
+                "it": "it",
+                "hi": "hi",
+                "pt": "pt-br",
+                "ja": "ja",
+                "zh": "zh",
+                "de": "en-us"  # German not supported, fallback to English
             }
             lang_code = lang_map.get(language.lower(), "en-us")
             
