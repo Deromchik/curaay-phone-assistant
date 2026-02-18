@@ -333,8 +333,16 @@ def init_session_state():
 
 def get_download_json() -> str:
     """Get conversation in download format: system + assistant/user messages."""
+    # Rebuild system prompt with current data to ensure it contains all substituted values
+    qa_scores_json = st.session_state.get("qa_scores_json", DEFAULT_QA_SCORES_JSON)
+    conversation_history = [
+        {"role": m["role"], "content": m["content"]}
+        for m in st.session_state.messages
+    ]
+    current_prompt = build_system_prompt(qa_scores_json, conversation_history)
+    
     download_msgs = [
-        {"role": "system", "content": st.session_state.system_prompt}
+        {"role": "system", "content": current_prompt}
     ]
     for msg in st.session_state.messages:
         download_msgs.append({"role": msg["role"], "content": msg["content"]})
@@ -650,6 +658,8 @@ def main():
                 
                 # Rebuild system prompt with updated conversation history
                 prompt = build_system_prompt(qa_scores_json, conversation_history)
+                # Update session state with current prompt
+                st.session_state.system_prompt = prompt
                 
                 # Build full message list for API
                 api_messages = [
