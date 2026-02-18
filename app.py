@@ -262,8 +262,9 @@ TOOLS = []
 def build_system_prompt(qa_scores_json: dict, conversation_history: list) -> str:
     """Build system prompt from portrait_qa_conversational_assistant template."""
     prompt = portrait_qa_conversational_assistant
-    prompt = prompt.replace("{{qa_scores_json}}", json.dumps(qa_scores_json, ensure_ascii=False, indent=2))
-    prompt = prompt.replace("{{conversation_history}}", json.dumps(conversation_history, ensure_ascii=False, indent=2))
+    # Template is f-string so {{x}} became {x}; replace single-brace placeholders
+    prompt = prompt.replace("{qa_scores_json}", json.dumps(qa_scores_json, ensure_ascii=False, indent=2))
+    prompt = prompt.replace("{conversation_history}", json.dumps(conversation_history, ensure_ascii=False, indent=2))
     return prompt
 
 
