@@ -153,6 +153,8 @@ Do not repeat the same tip, the same explanation, or the same phrasing from earl
 If the user asks about the same category again, give a DIFFERENT aspect of that category's feedback, or go deeper into a detail not yet mentioned.
 If you have exhausted all feedback points for a category, say you have already covered everything for that area and ask if the user wants to discuss another category.
 
+CRITICAL: This rule also applies to follow-up questions. Never reuse a follow-up question that appears anywhere in conversation_history, regardless of language. Each follow-up question number can only be used once per conversation.
+
 ---
 
 ### Off-topic Handling
@@ -180,7 +182,18 @@ Do NOT add any improvement tips after off-topic responses.
 ### Follow-Up Questions
 At the END of every on-topic response (Types A, B, C, E), add ONE short follow-up question.
 
-STRICT RULE: Use the pool below IN SEQUENTIAL ORDER. For the 1st on-topic response use #1, for the 2nd use #2, for the 3rd use #3, and so on. Count how many on-topic assistant messages exist in conversation_history and use the NEXT number. This also applies to translated versions — if #1 was used in Ukrainian, #1 is still consumed and the next response must use #2.
+CRITICAL RULE — NO EXCEPTIONS:
+Before generating your response, you MUST:
+1. Count ALL on-topic assistant messages in conversation_history (exclude off-topic responses).
+2. Use the question from the pool with number = (count + 1).
+3. If you already used question #N in any language (English, Ukrainian, German, etc.), that number is CONSUMED forever. You cannot reuse it.
+
+Example:
+- 1st on-topic response → use pool question #1
+- 2nd on-topic response → use pool question #2  
+- 3rd on-topic response → use pool question #3
+
+VERIFICATION STEP: Before finalizing your response, check conversation_history. If the follow-up question you're about to use appears anywhere in previous assistant messages (even in a different language), STOP and use the next available number instead.
 
 Pool (adapt to user's language):
 1. "What else would you like to ask?"
@@ -194,12 +207,17 @@ Pool (adapt to user's language):
 9. "What interests you most about your portrait?"
 10. "Want to talk about the strengths of your work?"
 
-After #10, create new unique questions in the same tone. Never reuse any question from this conversation.
+After #10, create new unique questions in the same tone. Before creating a new question, verify it doesn't match any question already used in conversation_history (check all languages).
 Do NOT add a follow-up question after off-topic responses (they already contain their own question).
 
 ---
 
 ### Response Rules
+Before finalizing your response, perform this final check:
+1. Verify your follow-up question is NOT already in conversation_history (check all languages).
+2. Count on-topic assistant messages and ensure you're using the correct sequential number.
+3. If you find a duplicate follow-up question, replace it with the next available number.
+
 Respond with a natural conversational reply only.
 Do not include JSON or technical formatting.
 Do not use bullet points, numbered lists, or formatted labels. Integrate all feedback naturally into flowing text.
@@ -211,56 +229,56 @@ Only provide the final answer to the user.
 
 # Default QA scores JSON
 DEFAULT_QA_SCORES_JSON = {
-  "Composition and Design": {
-    "score": 6.2,
-    "feedback": "The face is centered, but the background feels empty and does not support the composition.",
-    "advanced_feedback": "The composition would benefit from a more intentional use of space. Currently, the portrait is placed centrally without interaction with the background. Adding subtle tonal variation or simple background elements could enhance balance and visual interest."
-  },
-  "Proportions and Anatomy": {
-    "score": 4.8,
-    "feedback": "The eyes are slightly uneven in size, and the nose appears a bit too long compared to the lower part of the face.",
-    "advanced_feedback": "There are minor proportional inconsistencies. The left eye is slightly larger than the right, and the vertical distance between the nose and mouth could be shortened. Using construction lines would help improve anatomical alignment."
-  },
-  "Perspective and Depth": {
-    "score": 5.1,
-    "feedback": "The portrait appears somewhat flat due to limited contrast in shading.",
-    "advanced_feedback": "Depth is reduced because midtones dominate the face. Increasing contrast between light and shadow, especially along the jawline and temples, would improve the three-dimensional effect."
-  },
-  "Use of Light and Shadow": {
-    "score": 4.5,
-    "feedback": "The light direction is unclear, and shadows are too soft.",
-    "advanced_feedback": "The shading lacks a consistent light source. Defining a clear light direction and strengthening cast shadows under the nose and chin would create stronger form definition."
-  },
-  "Color Theory and Application": {
-    "score": 7.4,
-    "feedback": "Color choices are harmonious and pleasant.",
-    "advanced_feedback": "The color palette is balanced and works well together. Subtle variations in skin tones could further enhance realism."
-  },
-  "Brushwork and Technique": {
-    "score": 6.8,
-    "feedback": "Brush strokes are visible but controlled.",
-    "advanced_feedback": "The technique shows confidence, though transitions between tones could be smoother in certain facial areas."
-  },
-  "Expression and Emotion": {
-    "score": 6.0,
-    "feedback": "The expression is neutral but lacks intensity.",
-    "advanced_feedback": "The facial expression feels calm but could benefit from stronger emphasis around the eyes and eyebrows to convey clearer emotion."
-  },
-  "Creativity and Originality": {
-    "score": 7.0,
-    "feedback": "The portrait shows personal style.",
-    "advanced_feedback": "There is a recognizable stylistic approach. Exploring more unique background or lighting choices could increase originality."
-  },
-  "Attention to Detail": {
-    "score": 5.3,
-    "feedback": "Some areas like eyelashes and hair texture are not fully developed.",
-    "advanced_feedback": "Fine details around the eyes and hair could be refined to enhance realism and overall polish."
-  },
-  "Overall Impact": {
-    "score": 6.1,
-    "feedback": "The portrait has a solid foundation but needs refinement.",
-    "advanced_feedback": "While technically competent, the portrait would benefit from stronger contrast and improved proportions to create a more striking overall impression."
-  }
+    "Composition and Design": {
+        "score": 6.2,
+        "feedback": "The face is centered, but the background feels empty and does not support the composition.",
+        "advanced_feedback": "The composition would benefit from a more intentional use of space. Currently, the portrait is placed centrally without interaction with the background. Adding subtle tonal variation or simple background elements could enhance balance and visual interest."
+    },
+    "Proportions and Anatomy": {
+        "score": 4.8,
+        "feedback": "The eyes are slightly uneven in size, and the nose appears a bit too long compared to the lower part of the face.",
+        "advanced_feedback": "There are minor proportional inconsistencies. The left eye is slightly larger than the right, and the vertical distance between the nose and mouth could be shortened. Using construction lines would help improve anatomical alignment."
+    },
+    "Perspective and Depth": {
+        "score": 5.1,
+        "feedback": "The portrait appears somewhat flat due to limited contrast in shading.",
+        "advanced_feedback": "Depth is reduced because midtones dominate the face. Increasing contrast between light and shadow, especially along the jawline and temples, would improve the three-dimensional effect."
+    },
+    "Use of Light and Shadow": {
+        "score": 4.5,
+        "feedback": "The light direction is unclear, and shadows are too soft.",
+        "advanced_feedback": "The shading lacks a consistent light source. Defining a clear light direction and strengthening cast shadows under the nose and chin would create stronger form definition."
+    },
+    "Color Theory and Application": {
+        "score": 7.4,
+        "feedback": "Color choices are harmonious and pleasant.",
+        "advanced_feedback": "The color palette is balanced and works well together. Subtle variations in skin tones could further enhance realism."
+    },
+    "Brushwork and Technique": {
+        "score": 6.8,
+        "feedback": "Brush strokes are visible but controlled.",
+        "advanced_feedback": "The technique shows confidence, though transitions between tones could be smoother in certain facial areas."
+    },
+    "Expression and Emotion": {
+        "score": 6.0,
+        "feedback": "The expression is neutral but lacks intensity.",
+        "advanced_feedback": "The facial expression feels calm but could benefit from stronger emphasis around the eyes and eyebrows to convey clearer emotion."
+    },
+    "Creativity and Originality": {
+        "score": 7.0,
+        "feedback": "The portrait shows personal style.",
+        "advanced_feedback": "There is a recognizable stylistic approach. Exploring more unique background or lighting choices could increase originality."
+    },
+    "Attention to Detail": {
+        "score": 5.3,
+        "feedback": "Some areas like eyelashes and hair texture are not fully developed.",
+        "advanced_feedback": "Fine details around the eyes and hair could be refined to enhance realism and overall polish."
+    },
+    "Overall Impact": {
+        "score": 6.1,
+        "feedback": "The portrait has a solid foundation but needs refinement.",
+        "advanced_feedback": "While technically competent, the portrait would benefit from stronger contrast and improved proportions to create a more striking overall impression."
+    }
 }
 
 # ============================================
@@ -273,19 +291,21 @@ TOOLS = []
 # PROMPT BUILDING
 # ============================================
 
+
 def build_system_prompt(qa_scores_json: dict, conversation_history: list) -> str:
     """Build system prompt from portrait_qa_conversational_assistant template."""
     prompt = portrait_qa_conversational_assistant
     # Template is f-string so {{x}} became {x}; replace single-brace placeholders
-    prompt = prompt.replace("{qa_scores_json}", json.dumps(qa_scores_json, ensure_ascii=False, indent=2))
-    prompt = prompt.replace("{conversation_history}", json.dumps(conversation_history, ensure_ascii=False, indent=2))
+    prompt = prompt.replace("{qa_scores_json}", json.dumps(
+        qa_scores_json, ensure_ascii=False, indent=2))
+    prompt = prompt.replace("{conversation_history}", json.dumps(
+        conversation_history, ensure_ascii=False, indent=2))
     return prompt
 
 
 # ============================================
 # AZURE OPENAI API CALL
 # ============================================
-
 
 
 def get_azure_client() -> AzureOpenAI:
@@ -349,13 +369,14 @@ def init_session_state():
 def get_download_json() -> str:
     """Get conversation in download format: system + assistant/user messages."""
     # Rebuild system prompt with current data to ensure it contains all substituted values
-    qa_scores_json = st.session_state.get("qa_scores_json", DEFAULT_QA_SCORES_JSON)
+    qa_scores_json = st.session_state.get(
+        "qa_scores_json", DEFAULT_QA_SCORES_JSON)
     conversation_history = [
         {"role": m["role"], "content": m["content"]}
         for m in st.session_state.messages
     ]
     current_prompt = build_system_prompt(qa_scores_json, conversation_history)
-    
+
     download_msgs = [
         {"role": "system", "content": current_prompt}
     ]
@@ -525,8 +546,9 @@ def main():
         disabled = st.session_state.conversation_started
 
         qa_scores_json_str = st.text_area(
-            "QA Scores JSON", 
-            value=json.dumps(st.session_state.qa_scores_json if "qa_scores_json" in st.session_state else DEFAULT_QA_SCORES_JSON, ensure_ascii=False, indent=2), 
+            "QA Scores JSON",
+            value=json.dumps(
+                st.session_state.qa_scores_json if "qa_scores_json" in st.session_state else DEFAULT_QA_SCORES_JSON, ensure_ascii=False, indent=2),
             height=400, disabled=disabled, key="cfg_qa")
 
         st.markdown("---")
@@ -608,8 +630,9 @@ def main():
                     st.stop()
 
                 conversation_history = []
-                
-                prompt = build_system_prompt(qa_scores_json, conversation_history)
+
+                prompt = build_system_prompt(
+                    qa_scores_json, conversation_history)
                 st.session_state.system_prompt = prompt
 
                 api_messages = [{"role": "system", "content": prompt}]
@@ -661,21 +684,23 @@ def main():
                     "role": "user",
                     "content": user_input
                 })
-                
+
                 # Get current QA scores JSON from session state or use default
-                qa_scores_json = st.session_state.get("qa_scores_json", DEFAULT_QA_SCORES_JSON)
-                
+                qa_scores_json = st.session_state.get(
+                    "qa_scores_json", DEFAULT_QA_SCORES_JSON)
+
                 # Build conversation history from messages
                 conversation_history = [
                     {"role": m["role"], "content": m["content"]}
                     for m in st.session_state.messages
                 ]
-                
+
                 # Rebuild system prompt with updated conversation history
-                prompt = build_system_prompt(qa_scores_json, conversation_history)
+                prompt = build_system_prompt(
+                    qa_scores_json, conversation_history)
                 # Update session state with current prompt
                 st.session_state.system_prompt = prompt
-                
+
                 # Build full message list for API
                 api_messages = [
                     {"role": "system", "content": prompt}
