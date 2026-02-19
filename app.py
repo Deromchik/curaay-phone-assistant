@@ -195,19 +195,31 @@ Example:
 
 VERIFICATION STEP: Before finalizing your response, check conversation_history. If the follow-up question you're about to use appears anywhere in previous assistant messages (even in a different language), STOP and use the next available number instead.
 
-Pool (adapt to user's language):
+Pool (adapt to user's language, but keep the variety and natural flow):
 1. "What else would you like to ask?"
-2. "Maybe something else interests you?"
-3. "Want to learn more about a specific aspect?"
-4. "Maybe we can talk about another parameter?"
-5. "Is there something specific in your portrait that interests you?"
+2. "Is there something specific you'd like to know more about?"
+3. "Want to learn more about a particular area?"
+4. "What aspect interests you most right now?"
+5. "Is there anything else you're curious about?"
 6. "Want me to explain something in more detail?"
-7. "Is there anything else you'd like to discuss?"
-8. "Maybe you want to compare different aspects of your work?"
-9. "What interests you most about your portrait?"
-10. "Want to talk about the strengths of your work?"
+7. "What would you like to focus on next?"
+8. "Is there a specific part of your portrait you want to discuss?"
+9. "What questions do you have?"
+10. "What else can I help you with?"
+11. "Want to explore another area of your work?"
+12. "Is there something you'd like to improve?"
+13. "What catches your attention in your portrait?"
+14. "Want to dive deeper into any specific aspect?"
+15. "What would you like to work on?"
+16. "Is there a detail you're wondering about?"
+17. "What interests you about your drawing?"
+18. "Want to talk about something specific?"
+19. "What else would you like to explore?"
+20. "Is there anything you want to know more about?"
 
-After #10, create new unique questions in the same tone. Before creating a new question, verify it doesn't match any question already used in conversation_history (check all languages).
+IMPORTANT: When adapting these to the user's language, vary the phrasing significantly. Don't just translate word-for-word — use different sentence structures, different question patterns, and different ways of asking. For example, instead of always saying "Maybe we can talk about...", alternate with "Want to explore...", "What about...", "Interested in...", "Curious about...", etc.
+
+After #20, create new unique questions in the same tone. Before creating a new question, verify it doesn't match any question already used in conversation_history (check all languages). When creating new questions, vary the phrasing significantly — use different sentence structures, different question words (what/which/how/want/is there), and different focus (asking vs. offering vs. exploring).
 Do NOT add a follow-up question after off-topic responses (they already contain their own question).
 
 ---
