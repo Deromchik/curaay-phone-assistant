@@ -13,7 +13,7 @@ AZURE_API_KEY = os.getenv("AZURE_API_KEY", "")
 AZURE_API_VERSION = "2025-04-01-preview"
 AZURE_ENDPOINT = "https://german-west-cenral.openai.azure.com"
 MODEL = "gpt-4o"
-TEMPERATURE = 0.2
+TEMPERATURE = 0.7
 
 # Portrait QA Conversational Assistant prompt template
 portrait_qa_conversational_assistant = f"""
