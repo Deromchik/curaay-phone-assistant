@@ -1,574 +1,437 @@
 # ============================================
-# CONFIGURATION VARIABLES
+# EXAI Prompt Tester — Streamlit Application
 # ============================================
-from openai import AzureOpenAI
-from datetime import datetime
-import os
+import asyncio
 import json
+import os
+import sys
+from datetime import datetime
+from pathlib import Path
+from typing import Any
+
 import streamlit as st
 
-# Azure OpenAI API configuration
-# Get API key from environment variable (can be overridden in main() from Streamlit secrets)
-AZURE_API_KEY = os.getenv("AZURE_API_KEY", "")
-AZURE_API_VERSION = "2025-04-01-preview"
-AZURE_ENDPOINT = "https://german-west-cenral.openai.azure.com"
-MODEL = "gpt-4o"
-TEMPERATURE = 0.2
+# Allow imports from repository root (default_prompt, browser_prompt, llm_client)
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
-# Portrait QA Conversational Assistant prompt template
-portrait_qa_conversational_assistant = f"""
+from browser_prompt import answer_generator_browser
+from default_prompt import answer_generator
+from llm_client import collect_stream
 
-### Role & Scope
-You are a Portrait QA Conversational Assistant — a chatbot that helps users understand their portrait evaluation.
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+OPENROUTER_DEFAULT_MODEL = os.getenv(
+    "OPENROUTER_DEFAULT_MODEL", "google/gemini-2.5-flash"
+)
 
-You receive:
-- A full QA evaluation JSON of a portrait (qa_scores_json)
-- Conversation history (conversation_history)
-
-Your task is to:
-- Answer the user's questions about their portrait evaluation.
-- Explain scores and feedback in simple words when asked.
-- Give clear, short, practical improvement advice ONLY when the user asks for it.
-
-You must not re-evaluate the portrait, modify scores, or explain internal scoring mechanics.
-Reply only to the user's last message in the conversation history.
-Base every statement ONLY on the provided qa_scores_json.
-
-Do not invent, add, or suggest improvements that are not explicitly described in the evaluation.
-If something was not evaluated, say it was not part of this review.
-Do not expand beyond the meaning of the original feedback.
-Do not compare the portrait to external artworks or famous artists.
-Do not add praise or positive judgments that are not supported by the evaluation.
-
-The 10 QA categories are:
-1. Composition and Design
-2. Proportions and Anatomy
-3. Perspective and Depth
-4. Use of Light and Shadow
-5. Color Theory and Application
-6. Brushwork and Technique
-7. Expression and Emotion
-8. Creativity and Originality
-9. Attention to Detail
-10. Overall Impact
-
-Stay within what is described in the evaluation and do not add new interpretations.
-
----
-
-### Input
-qa_scores_json:
-{{qa_scores_json}}
-
-conversation_history:
-{{conversation_history}}
-
----
-
-### Style & Tone
-The reader is a young person (approximately 12-14 years old).
-
-Use simple, everyday language and short sentences.
-Write in a natural and friendly way, as if you are speaking directly to the user.
-Prefer direct statements over structured explanations.
-Break longer ideas into two short sentences instead of one complex sentence.
-Do not use abstract summary phrases like "This helps..." or "This will make it look better...". End improvement suggestions with a concrete visual result. Prefer short phrases like "Then you'll see the form better."
-Keep the wording soft, clear, and easy to read.
-
-The following examples show the preferred tone and structure. They are style references only. Do not copy them directly. Follow their simplicity and rhythm, but adapt the wording to the specific portrait feedback.
-Example 1: The shadows are still a bit soft. Make them a bit darker under the nose. Then you'll see the shape better. :)
-Example 2: The eyes are not quite the same size. Take another careful look and even them out a bit. Then the face will look calmer.
-Example 3: The background feels a bit empty. Maybe you can make it a bit more lively so the picture doesn't look so bare.
-Example 4: The details around the eyes are still missing a bit. Draw the eyelashes more clearly. Then the eyes will look sharper.
-
-Default answer length: 3-6 short sentences. Only extend beyond this if the user explicitly asks for more detail.
-Avoid contrast structures like "but..." in improvement responses. Use direct statements instead of contrasting clauses.
-
-ALWAYS respond in the same language the user is writing in. If the user writes in Ukrainian — respond entirely in Ukrainian. If in German — entirely in German. If in English — entirely in English. Never mix languages within a single reply. Never fall back to English unless the user writes in English.
-
-Never shame the user.
-Never imply lack of talent.
-Maintain a calm and supportive tone.
-
-You may use at most one simple, friendly emoji per response (e.g., :), :D, *).
-Do not use dramatic or exaggerated emojis.
-Do not replace explanations with emojis.
-
----
-
-### How to Handle the User's Message
-
-Before responding, classify the user's message into one of these types:
-
-**Type A — Information question** (asks about a score, a category, a reason, or assistant capabilities):
-Examples: "What is my score?", "Why is it low?", "What else can you do?", "What do you offer?", "What else do you offer with portrait?"
-Action: Answer the question. If asked about capabilities, briefly explain that you can analyze the 10 categories of their portrait or give specific advice.
-
-**Type B — Advice request** (asks what to improve, how to fix something):
-Examples: "What should I improve?", "How can I fix the shadows?", "Give me a tip for proportions."
-Action: Give improvement advice. Follow the Category Selection rules below.
-
-**Type C — Overall judgment or emotional reaction** (asks if the portrait is good/bad, expresses frustration or pride):
-Examples: "Is my picture bad?", "Am I talented?", "Am I doing well?", "Why are my scores so low? :("
-Action: Respond with calm, supportive reassurance. Do NOT add unsolicited improvement advice. Keep it short and warm. Do not use phrases like "not bad" or "well done". You may use a neutral opener like "Your portrait has a solid foundation." only for this type.
-
-**Type D — Off-topic** (strictly unrelated topics):
-Examples: "What's the weather?", "I was at a party yesterday", "Tell me a joke.", "Who is the president?"
-CRITICAL: If the user mentions "portrait", "drawing", "art", "sketch", "offer", "help", or asks what you can do — this is NOT off-topic. Treat it as Type A or Type B.
-Action: Follow the Off-topic Handling rules below.
-
-**Type E — Follow-up on current topic** (short reply, continuation, clarification):
-Examples: "And what about that?", "I don't understand", "Tell me more", "Why?"
-Action: Stay on the last discussed category. Expand or simplify. Do not switch topics.
-
-If the message doesn't clearly fit one type, treat it as Type E.
-
----
-
-### Category Selection (applies ONLY to Type B — advice requests)
-
-When the user asks for improvement advice:
-
-1. If the user names a specific category ("tell me about proportions", "how to fix the background"), select THAT category.
-2. If the user asks generally ("what should I improve?", "give me a tip"), select the category with the lowest numerical score in qa_scores_json that has NOT yet been discussed in the conversation.
-3. If all categories have already been discussed, select the one with the lowest score and offer a new angle or deeper detail.
-
-If multiple categories share the same lowest score, select only one.
-User opinions (e.g., "I think my eyes are worse") do NOT override category selection. Only explicit category requests do.
-
-When giving advice, limit each response to exactly ONE category and ONE specific action step. Focus on "what to do" rather than "what is wrong".
-
-Use "feedback" as the primary source.
-Use "advanced_feedback" only if the user explicitly asks for more detail.
-Advanced_feedback may expand the explanation but must not replace or contradict the main feedback.
-Never quote feedback or advanced_feedback directly. Always paraphrase and simplify.
-When simplifying advanced_feedback, preserve the core meaning and key improvement points.
-If all scores are 7.0 or higher, focus on refinement and small improvements instead of major corrections.
-
----
-
-### No-Repeat Rule
-Before generating each response, scan the full conversation_history.
-Do not repeat the same tip, the same explanation, or the same phrasing from earlier in the conversation.
-If the user asks about the same category again, give a DIFFERENT aspect of that category's feedback, or go deeper into a detail not yet mentioned.
-If you have exhausted all feedback points for a category, say you have already covered everything for that area and ask if the user wants to discuss another category.
-
----
-
-### Off-topic Handling
-If the user's message is strictly unrelated to the portrait, evaluation, art, or your role (e.g., weather, jokes, politics), it is off-topic.
-
-CRITICAL: If the message mentions "portrait", "drawing", "art", "sketch", "offer", "help", or asks what you can do — this is ON-TOPIC. Do NOT use the off-topic response. Instead, answer the question or offer help.
-
-Rules:
-- Respond in the SAME language the user used. This is mandatory.
-- Do NOT give any advice or information about the off-topic subject.
-- Do NOT repeat or reference the off-topic subject in your reply.
-- Do NOT add any improvement tips after off-topic responses.
-- Keep it to 1-2 short sentences: a light reaction + a gentle redirect to the portrait.
-- Each off-topic response must be worded differently from all previous ones in conversation_history.
-
-Tone: friendly, light, not dismissive. Acknowledge the user said something, then casually steer back. Avoid the pattern "[reaction] + but + [I do portraits] + [question]" — it sounds robotic when repeated.
-
-Style examples for guidance (do NOT copy these — create your own in the user's language):
-- "Oh, interesting! What about your portrait — any questions? :)"
-- "Haha, got it! Let's talk about your drawing instead — what do you want to know?"
-- "Wow, okay! :D But I'm here for portraits — what interests you?"
-- "Oh fun! Anyway — got any questions about your drawing? :)"
-- "Ha, fair enough :D So, anything about your portrait?"
-
----
-
-### Follow-Up Questions
-End every on-topic response (Types A, B, C, E) with ONE short follow-up question.
-Do NOT end off-topic responses with a follow-up question (they already have their own question).
-
-HARD RULE: Every follow-up question in this conversation MUST be unique. Read all previous assistant messages in conversation_history. Your new follow-up question must use DIFFERENT words and a DIFFERENT sentence structure than every previous one.
-
-BANNED patterns — NEVER use these or any close translation of them:
-- "Maybe something else interests you?"
-- "Maybe we can talk about another parameter?"
-- "Maybe we can talk about another aspect?"
-- "Maybe we can talk about something else?"
-- Any sentence starting with "Maybe we can..."
-
-Instead, use varied structures. Here are style examples (do NOT reuse these exact phrases — create your own each time):
-- "What part of your portrait are you most curious about?"
-- "Anything specific you want to dig into?"
-- "Which area would you like to hear about next?"
-- "Got any other questions for me?"
-- "What caught your eye in the evaluation?"
-- "Curious about anything else?"
-- "Want to pick another topic?"
-- "What's on your mind?"
-
-Keep it short (under 10 words), casual, and different every time.
-
----
-
-### Response Rules
-Respond with a natural conversational reply only.
-Do not include JSON or technical formatting.
-Do not use bullet points, numbered lists, or formatted labels. Integrate all feedback naturally into flowing text.
-Avoid mentioning scores unless the user explicitly asks.
-Do not provide general art advice beyond the evaluated portrait.
-No system explanations. No meta comments about the conversation.
-Only provide the final answer to the user.
-"""
-
-# Default QA scores JSON
-DEFAULT_QA_SCORES_JSON = {
-    "Composition and Design": {
-        "score": 6.2,
-        "feedback": "The face is centered, but the background feels empty and does not support the composition.",
-        "advanced_feedback": "The composition would benefit from a more intentional use of space. Currently, the portrait is placed centrally without interaction with the background. Adding subtle tonal variation or simple background elements could enhance balance and visual interest."
-    },
-    "Proportions and Anatomy": {
-        "score": 4.8,
-        "feedback": "The eyes are slightly uneven in size, and the nose appears a bit too long compared to the lower part of the face.",
-        "advanced_feedback": "There are minor proportional inconsistencies. The left eye is slightly larger than the right, and the vertical distance between the nose and mouth could be shortened. Using construction lines would help improve anatomical alignment."
-    },
-    "Perspective and Depth": {
-        "score": 5.1,
-        "feedback": "The portrait appears somewhat flat due to limited contrast in shading.",
-        "advanced_feedback": "Depth is reduced because midtones dominate the face. Increasing contrast between light and shadow, especially along the jawline and temples, would improve the three-dimensional effect."
-    },
-    "Use of Light and Shadow": {
-        "score": 4.5,
-        "feedback": "The light direction is unclear, and shadows are too soft.",
-        "advanced_feedback": "The shading lacks a consistent light source. Defining a clear light direction and strengthening cast shadows under the nose and chin would create stronger form definition."
-    },
-    "Color Theory and Application": {
-        "score": 7.4,
-        "feedback": "Color choices are harmonious and pleasant.",
-        "advanced_feedback": "The color palette is balanced and works well together. Subtle variations in skin tones could further enhance realism."
-    },
-    "Brushwork and Technique": {
-        "score": 6.8,
-        "feedback": "Brush strokes are visible but controlled.",
-        "advanced_feedback": "The technique shows confidence, though transitions between tones could be smoother in certain facial areas."
-    },
-    "Expression and Emotion": {
-        "score": 6.0,
-        "feedback": "The expression is neutral but lacks intensity.",
-        "advanced_feedback": "The facial expression feels calm but could benefit from stronger emphasis around the eyes and eyebrows to convey clearer emotion."
-    },
-    "Creativity and Originality": {
-        "score": 7.0,
-        "feedback": "The portrait shows personal style.",
-        "advanced_feedback": "There is a recognizable stylistic approach. Exploring more unique background or lighting choices could increase originality."
-    },
-    "Attention to Detail": {
-        "score": 5.3,
-        "feedback": "Some areas like eyelashes and hair texture are not fully developed.",
-        "advanced_feedback": "Fine details around the eyes and hair could be refined to enhance realism and overall polish."
-    },
-    "Overall Impact": {
-        "score": 6.1,
-        "feedback": "The portrait has a solid foundation but needs refinement.",
-        "advanced_feedback": "While technically competent, the portrait would benefit from stronger contrast and improved proportions to create a more striking overall impression."
-    }
+DEFAULT_CONFIG: dict[str, Any] = {
+    "prompt_type": "default",
+    "language": "uk",
+    "database_occurances": [],
+    "knowledge_base": [],
+    "examples": [],
+    "special_context_chunks": [],
+    "file_chunks": [],
+    "learning_video_answer_text": "",
+    "expert_id": "",
+    "answer_model": OPENROUTER_DEFAULT_MODEL,
+    "is_brief_mode": False,
+    "is_expert_specific": False,
+    "image_data": False,
+    "screenshot_mode": False,
 }
 
-# ============================================
-# TOOLS FOR API CALLS
-# ============================================
 
-TOOLS = []
-
-# ============================================
-# PROMPT BUILDING
-# ============================================
-
-
-def build_system_prompt(qa_scores_json: dict, conversation_history: list) -> str:
-    """Build system prompt from portrait_qa_conversational_assistant template."""
-    prompt = portrait_qa_conversational_assistant
-    # Template is f-string so {{x}} became {x}; replace single-brace placeholders
-    prompt = prompt.replace("{qa_scores_json}", json.dumps(
-        qa_scores_json, ensure_ascii=False, indent=2))
-    prompt = prompt.replace("{conversation_history}", json.dumps(
-        conversation_history, ensure_ascii=False, indent=2))
-    return prompt
-
-
-# ============================================
-# AZURE OPENAI API CALL
-# ============================================
-
-
-def get_azure_client() -> AzureOpenAI:
-    """Initialize and return Azure OpenAI client."""
-    return AzureOpenAI(
-        api_key=AZURE_API_KEY,
-        api_version=AZURE_API_VERSION,
-        azure_endpoint=AZURE_ENDPOINT
-    )
-
-
-def call_azure_api(messages: list) -> str:
-    """
-    Call Azure OpenAI API with streaming.
-    Returns final text response.
-    """
-    client = get_azure_client()
-
-    try:
-        stream_params = {
-            "model": MODEL,
-            "messages": messages,
-            "temperature": TEMPERATURE,
-            "max_tokens": 3000,
-            "stream": True
-        }
-
-        stream = client.chat.completions.create(**stream_params)
-
-        full_content = ""
-
-        for chunk in stream:
-            if chunk.choices and len(chunk.choices) > 0:
-                delta = chunk.choices[0].delta
-
-                if delta.content:
-                    full_content += delta.content
-
-        return full_content
-
-    except Exception as e:
-        return f"[ERROR: {str(e)}]"
-
-
-# ============================================
-# STREAMLIT APPLICATION
-# ============================================
-
-def init_session_state():
-    """Initialize Streamlit session state variables."""
+def init_session_state() -> None:
     if "messages" not in st.session_state:
         st.session_state.messages = []
-    if "system_prompt" not in st.session_state:
-        st.session_state.system_prompt = ""
     if "conversation_started" not in st.session_state:
         st.session_state.conversation_started = False
-    if "qa_scores_json" not in st.session_state:
-        st.session_state.qa_scores_json = DEFAULT_QA_SCORES_JSON
+    if "last_user_prompt" not in st.session_state:
+        st.session_state.last_user_prompt = ""
+    if "last_system_prompt" not in st.session_state:
+        st.session_state.last_system_prompt = ""
+    for key, value in DEFAULT_CONFIG.items():
+        if key not in st.session_state:
+            st.session_state[key] = value
+
+
+def parse_json_field(raw: str, field_name: str) -> Any:
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"Invalid JSON in {field_name}: {exc}") from exc
+
+
+def validate_config_from_form(
+    database_occurances_str: str,
+    knowledge_base_str: str,
+    examples_str: str,
+    special_context_chunks_str: str,
+    file_chunks_str: str,
+) -> dict[str, Any]:
+    database_occurances = parse_json_field(
+        database_occurances_str, "Database occurances"
+    )
+    knowledge_base = parse_json_field(knowledge_base_str, "Knowledge base")
+    examples = parse_json_field(examples_str, "Examples")
+    special_context_chunks = parse_json_field(
+        special_context_chunks_str, "Special context chunks"
+    )
+    file_chunks = parse_json_field(file_chunks_str, "File chunks")
+
+    for name, value in [
+        ("Database occurances", database_occurances),
+        ("Examples", examples),
+        ("Special context chunks", special_context_chunks),
+        ("File chunks", file_chunks),
+    ]:
+        if not isinstance(value, list):
+            raise ValueError(f"{name} must be a JSON array")
+
+    if not isinstance(knowledge_base, (list, dict)):
+        raise ValueError("Knowledge base must be a JSON array or object")
+
+    return {
+        "database_occurances": database_occurances,
+        "knowledge_base": knowledge_base,
+        "examples": examples,
+        "special_context_chunks": special_context_chunks,
+        "file_chunks": file_chunks,
+    }
+
+
+def save_config_to_session(
+    prompt_type: str,
+    language: str,
+    learning_video_answer_text: str,
+    expert_id: str,
+    answer_model: str,
+    is_brief_mode: bool,
+    is_expert_specific: bool,
+    image_data: bool,
+    screenshot_mode: bool,
+    parsed: dict[str, Any],
+) -> None:
+    st.session_state.prompt_type = prompt_type
+    st.session_state.language = language
+    st.session_state.learning_video_answer_text = learning_video_answer_text
+    st.session_state.expert_id = expert_id or None
+    st.session_state.answer_model = answer_model.strip() or OPENROUTER_DEFAULT_MODEL
+    st.session_state.is_brief_mode = is_brief_mode
+    st.session_state.is_expert_specific = is_expert_specific
+    st.session_state.image_data = image_data
+    st.session_state.screenshot_mode = screenshot_mode
+    st.session_state.database_occurances = parsed["database_occurances"]
+    st.session_state.knowledge_base = parsed["knowledge_base"]
+    st.session_state.examples = parsed["examples"]
+    st.session_state.special_context_chunks = parsed["special_context_chunks"]
+    st.session_state.file_chunks = parsed["file_chunks"]
+
+
+async def generate_answer(user_question: str, conversation_history: list) -> str:
+    common_kwargs = {
+        "user_question": user_question,
+        "conversation_history": conversation_history,
+        "database_occurances": st.session_state.database_occurances,
+        "knowledge_base": st.session_state.knowledge_base,
+        "language": st.session_state.language,
+        "isStream": True,
+        "is_brief_mode": st.session_state.is_brief_mode,
+        "is_expert_specific": st.session_state.is_expert_specific,
+        "learning_video_answer_text": st.session_state.learning_video_answer_text,
+        "special_context_chunks": st.session_state.special_context_chunks,
+        "image_data": st.session_state.image_data,
+        "expert_id": st.session_state.expert_id,
+        "file_chunks": st.session_state.file_chunks,
+        "screenshot_mode": st.session_state.screenshot_mode,
+        "answer_model": st.session_state.answer_model,
+        "examples": st.session_state.examples,
+    }
+
+    if st.session_state.prompt_type == "browser":
+        stream = await answer_generator_browser(**common_kwargs)
+    else:
+        stream = await answer_generator(**common_kwargs)
+
+    return await collect_stream(stream)
+
+
+def run_answer_generator(user_question: str, conversation_history: list) -> str:
+    return asyncio.run(generate_answer(user_question, conversation_history))
 
 
 def get_download_json() -> str:
-    """Get conversation in download format: system + assistant/user messages."""
-    # Rebuild system prompt with current data to ensure it contains all substituted values
-    qa_scores_json = st.session_state.get(
-        "qa_scores_json", DEFAULT_QA_SCORES_JSON)
-    conversation_history = [
-        {"role": m["role"], "content": m["content"]}
-        for m in st.session_state.messages
-    ]
-    current_prompt = build_system_prompt(qa_scores_json, conversation_history)
-
-    download_msgs = [
-        {"role": "system", "content": current_prompt}
-    ]
-    for msg in st.session_state.messages:
-        download_msgs.append({"role": msg["role"], "content": msg["content"]})
-    return json.dumps(download_msgs, ensure_ascii=False, indent=2)
+    payload = {
+        "config": {
+            "prompt_type": st.session_state.prompt_type,
+            "language": st.session_state.language,
+            "database_occurances": st.session_state.database_occurances,
+            "knowledge_base": st.session_state.knowledge_base,
+            "examples": st.session_state.examples,
+            "special_context_chunks": st.session_state.special_context_chunks,
+            "file_chunks": st.session_state.file_chunks,
+            "learning_video_answer_text": st.session_state.learning_video_answer_text,
+            "expert_id": st.session_state.expert_id,
+            "answer_model": st.session_state.answer_model,
+            "is_brief_mode": st.session_state.is_brief_mode,
+            "is_expert_specific": st.session_state.is_expert_specific,
+            "image_data": st.session_state.image_data,
+            "screenshot_mode": st.session_state.screenshot_mode,
+        },
+        "messages": st.session_state.messages,
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
 def load_conversation_from_json(json_str: str) -> bool:
-    """Load conversation from JSON string. Returns True on success."""
     try:
         loaded = json.loads(json_str)
-        if not isinstance(loaded, list) or len(loaded) == 0:
-            st.error("Invalid format: expected a non-empty JSON array.")
-            return False
-
-        if loaded[0].get("role") == "system":
-            st.session_state.system_prompt = loaded[0]["content"]
-            st.session_state.messages = [
-                {"role": m["role"], "content": m["content"]}
-                for m in loaded[1:]
-                if m.get("role") in ("user", "assistant")
-            ]
-        else:
-            st.session_state.system_prompt = ""
+        if isinstance(loaded, list):
             st.session_state.messages = [
                 {"role": m["role"], "content": m["content"]}
                 for m in loaded
                 if m.get("role") in ("user", "assistant")
             ]
+        elif isinstance(loaded, dict):
+            config = loaded.get("config", {})
+            for key in DEFAULT_CONFIG:
+                if key in config:
+                    st.session_state[key] = config[key]
+            st.session_state.messages = [
+                {"role": m["role"], "content": m["content"]}
+                for m in loaded.get("messages", [])
+                if m.get("role") in ("user", "assistant")
+            ]
+        else:
+            st.error("Invalid format: expected a JSON object or array.")
+            return False
 
         st.session_state.conversation_started = True
         return True
-    except json.JSONDecodeError as e:
-        st.error(f"Invalid JSON: {e}")
+    except json.JSONDecodeError as exc:
+        st.error(f"Invalid JSON: {exc}")
         return False
-    except Exception as e:
-        st.error(f"Error loading conversation: {e}")
+    except Exception as exc:
+        st.error(f"Error loading conversation: {exc}")
         return False
 
 
-def main():
-    # Page configuration
+def reset_conversation() -> None:
+    st.session_state.messages = []
+    st.session_state.conversation_started = False
+    st.session_state.last_user_prompt = ""
+    st.session_state.last_system_prompt = ""
+    for key, value in DEFAULT_CONFIG.items():
+        st.session_state[key] = value
+
+
+def main() -> None:
     st.set_page_config(
-        page_title="Phone Assistant - Curaay",
-        page_icon="📞",
+        page_title="EXAI Prompt Tester",
+        page_icon="🤖",
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
 
-    # Custom CSS
-    st.markdown("""
+    st.markdown(
+        """
     <style>
-        .stApp {
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-        }
-
+        .stApp { background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%); }
         .chat-message {
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            color: #1a1a2e;
-            font-size: 1rem;
-            line-height: 1.6;
+            padding: 1.2rem; border-radius: 12px; margin-bottom: 1rem;
+            color: #1a1a2e; font-size: 1rem; line-height: 1.6;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
-
         .user-message {
             background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
             border-left: 4px solid #4a90a4;
         }
-
         .assistant-message {
             background: linear-gradient(135deg, #e8f4f8 0%, #d4e8f0 100%);
             border-left: 4px solid #2d6a7a;
         }
-
         .main-header {
-            color: #1a1a2e;
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            text-align: center;
-            padding: 1.2rem 0;
-            margin-bottom: 1rem;
+            color: #1a1a2e; font-size: 2.2rem; font-weight: 700;
+            text-align: center; padding: 1.2rem 0; margin-bottom: 1rem;
             border-bottom: 3px solid #2d6a7a;
         }
-
         .sub-header {
-            color: #2d4a5a;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        section[data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
-        }
-
-        section[data-testid="stSidebar"] .stMarkdown {
-            color: #1a1a2e;
-        }
-
-        .stButton > button {
-            background: linear-gradient(135deg, #2d6a7a 0%, #4a90a4 100%);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 0.6rem 1.2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .stButton > button:hover {
-            background: linear-gradient(135deg, #1d5a6a 0%, #3a8094 100%);
-            box-shadow: 0 4px 12px rgba(45, 106, 122, 0.3);
-        }
-
-        .stTextInput > div > div > input {
-            color: #1a1a2e;
-            background: #ffffff;
-            border: 2px solid #d0d8e0;
-            border-radius: 8px;
-        }
-
-        .stTextInput > div > div > input:focus {
-            border-color: #4a90a4;
-            box-shadow: 0 0 0 2px rgba(74, 144, 164, 0.2);
-        }
-
-        .stTextArea > div > div > textarea {
-            color: #1a1a2e;
-            background: #ffffff;
-        }
-
-        .streamlit-expanderHeader {
-            color: #1a1a2e;
-            background: #f0f4f8;
-            border-radius: 8px;
+            color: #2d4a5a; font-size: 1rem; text-align: center; margin-bottom: 1.5rem;
         }
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
-    # Try to get Azure API key from Streamlit secrets
-    global AZURE_API_KEY
+    global OPENROUTER_API_KEY, OPENROUTER_DEFAULT_MODEL
     try:
-        if hasattr(st, 'secrets') and 'AZURE_API_KEY' in st.secrets:
-            AZURE_API_KEY = st.secrets['AZURE_API_KEY']
-    except:
+        if hasattr(st, "secrets"):
+            if "OPENROUTER_API_KEY" in st.secrets:
+                OPENROUTER_API_KEY = st.secrets["OPENROUTER_API_KEY"]
+                os.environ["OPENROUTER_API_KEY"] = OPENROUTER_API_KEY
+            if "OPENROUTER_DEFAULT_MODEL" in st.secrets:
+                OPENROUTER_DEFAULT_MODEL = st.secrets["OPENROUTER_DEFAULT_MODEL"]
+                os.environ["OPENROUTER_DEFAULT_MODEL"] = OPENROUTER_DEFAULT_MODEL
+    except Exception:
         pass
 
-    if not AZURE_API_KEY:
-        st.error("⚠️ Azure API key is not configured. Please set AZURE_API_KEY in Streamlit secrets or environment variables.")
-        st.info("For local setup, create a `.streamlit/secrets.toml` file with the following content:\n```toml\nAZURE_API_KEY = \"your-api-key-here\"\n```\n\nOr set an environment variable:\n```bash\nexport AZURE_API_KEY=\"your-api-key-here\"\n```")
+    if not OPENROUTER_API_KEY:
+        st.error(
+            "OpenRouter API key is not configured. Set OPENROUTER_API_KEY in "
+            "environment variables or `.streamlit/secrets.toml`."
+        )
+        st.info(
+            """Example `.streamlit/secrets.toml`:
+```toml
+OPENROUTER_API_KEY = "sk-or-..."
+OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
+```"""
+        )
         st.stop()
 
-    # Initialize session state
     init_session_state()
+    disabled = st.session_state.conversation_started
 
-    # Layout
     col_chat, col_side = st.columns([2, 1])
 
-    # ---- RIGHT COLUMN: Config, Download, Upload ----
     with col_side:
-        st.markdown("### ⚙️ QA Scores Configuration")
+        st.markdown("### Prompt Configuration")
 
-        disabled = st.session_state.conversation_started
+        prompt_type = st.radio(
+            "Prompt type",
+            options=["default", "browser"],
+            format_func=lambda x: "Default prompt" if x == "default" else "Browser prompt",
+            index=0 if st.session_state.prompt_type == "default" else 1,
+            disabled=disabled,
+            key="cfg_prompt_type",
+        )
 
-        qa_scores_json_str = st.text_area(
-            "QA Scores JSON",
+        language = st.text_input(
+            "Language",
+            value=st.session_state.language,
+            disabled=disabled,
+            key="cfg_language",
+        )
+
+        answer_model = st.text_input(
+            "Answer model (OpenRouter slug)",
+            value=st.session_state.answer_model or OPENROUTER_DEFAULT_MODEL,
+            disabled=disabled,
+            key="cfg_answer_model",
+            help="Used when Expert specific mode is off.",
+        )
+
+        expert_id = st.text_input(
+            "Expert ID (optional)",
+            value=st.session_state.expert_id or "",
+            disabled=disabled,
+            key="cfg_expert_id",
+        )
+
+        learning_video_answer_text = st.text_area(
+            "Learning video answer text",
+            value=st.session_state.learning_video_answer_text,
+            height=80,
+            disabled=disabled,
+            key="cfg_learning_video",
+        )
+
+        st.markdown("**Mode flags**")
+        is_brief_mode = st.checkbox(
+            "Brief mode",
+            value=st.session_state.is_brief_mode,
+            disabled=disabled,
+            key="cfg_brief_mode",
+        )
+        is_expert_specific = st.checkbox(
+            "Expert specific",
+            value=st.session_state.is_expert_specific,
+            disabled=disabled,
+            key="cfg_expert_specific",
+        )
+        image_data = st.checkbox(
+            "Image data",
+            value=st.session_state.image_data,
+            disabled=disabled,
+            key="cfg_image_data",
+        )
+        screenshot_mode = st.checkbox(
+            "Screenshot mode",
+            value=st.session_state.screenshot_mode,
+            disabled=disabled,
+            key="cfg_screenshot_mode",
+        )
+
+        st.markdown("**Context inputs (JSON)**")
+        database_occurances_str = st.text_area(
+            "Database occurances",
             value=json.dumps(
-                st.session_state.qa_scores_json if "qa_scores_json" in st.session_state else DEFAULT_QA_SCORES_JSON, ensure_ascii=False, indent=2),
-            height=400, disabled=disabled, key="cfg_qa")
+                st.session_state.database_occurances, ensure_ascii=False, indent=2
+            ),
+            height=120,
+            disabled=disabled,
+            key="cfg_database_occurances",
+        )
+        knowledge_base_str = st.text_area(
+            "Knowledge base",
+            value=json.dumps(
+                st.session_state.knowledge_base, ensure_ascii=False, indent=2
+            ),
+            height=100,
+            disabled=disabled,
+            key="cfg_knowledge_base",
+        )
+        examples_str = st.text_area(
+            "Examples",
+            value=json.dumps(st.session_state.examples, ensure_ascii=False, indent=2),
+            height=80,
+            disabled=disabled,
+            key="cfg_examples",
+        )
+        special_context_chunks_str = st.text_area(
+            "Special context chunks",
+            value=json.dumps(
+                st.session_state.special_context_chunks, ensure_ascii=False, indent=2
+            ),
+            height=100,
+            disabled=disabled,
+            key="cfg_special_context_chunks",
+        )
+        file_chunks_str = st.text_area(
+            "File chunks",
+            value=json.dumps(st.session_state.file_chunks, ensure_ascii=False, indent=2),
+            height=80,
+            disabled=disabled,
+            key="cfg_file_chunks",
+        )
 
         st.markdown("---")
 
-        # ---- Download Conversation ----
         if st.session_state.messages:
-            st.markdown("### 📥 Download Conversation")
+            st.markdown("### Download Conversation")
             st.download_button(
-                label="📥 Download JSON",
+                label="Download JSON",
                 data=get_download_json(),
                 file_name=f"conversation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
                 mime="application/json",
-                use_container_width=True
+                use_container_width=True,
             )
             st.markdown("---")
 
-        # ---- Load Existing Conversation ----
-        st.markdown("### 📤 Load Existing Conversation")
-
-        uploaded_file = st.file_uploader("Upload JSON file", type=[
-                                         "json"], key="file_upload")
-        if uploaded_file is not None:
-            if st.button("📂 Load from file", use_container_width=True):
-                content = uploaded_file.read().decode('utf-8')
-                if load_conversation_from_json(content):
-                    st.success("Conversation loaded!")
-                    st.rerun()
+        st.markdown("### Load Conversation")
+        uploaded_file = st.file_uploader("Upload JSON file", type=["json"], key="file_upload")
+        if uploaded_file is not None and st.button("Load from file", use_container_width=True):
+            content = uploaded_file.read().decode("utf-8")
+            if load_conversation_from_json(content):
+                st.success("Conversation loaded!")
+                st.rerun()
 
         paste_json = st.text_area(
-            "Or paste conversation JSON here", height=150, key="paste_json")
-        if st.button("📋 Load from pasted JSON", use_container_width=True):
+            "Or paste conversation JSON", height=120, key="paste_json"
+        )
+        if st.button("Load from pasted JSON", use_container_width=True):
             if paste_json.strip():
                 if load_conversation_from_json(paste_json):
                     st.success("Conversation loaded!")
@@ -577,135 +440,123 @@ def main():
                 st.warning("Please paste JSON first.")
 
         st.markdown("---")
+        if st.session_state.conversation_started and st.button(
+            "Reset Conversation", use_container_width=True
+        ):
+            reset_conversation()
+            st.rerun()
 
-        # ---- Reset ----
-        if st.session_state.conversation_started:
-            if st.button("🔄 Reset Conversation", use_container_width=True):
-                st.session_state.messages = []
-                st.session_state.system_prompt = ""
-                st.session_state.conversation_started = False
-                st.session_state.qa_scores_json = DEFAULT_QA_SCORES_JSON
-                st.rerun()
-
-        # ---- Show system prompt ----
-        if st.session_state.system_prompt:
-            with st.expander("📋 Current System Prompt"):
-                display_prompt = st.session_state.system_prompt
-                st.text(
-                    display_prompt[:1000] + "..." if len(display_prompt) > 1000 else display_prompt)
-
-    # ---- LEFT COLUMN: Chat ----
     with col_chat:
         st.markdown(
-            '<div class="main-header">🎨 Portrait QA Conversational Assistant</div>', unsafe_allow_html=True)
+            '<div class="main-header">EXAI Prompt Tester</div>',
+            unsafe_allow_html=True,
+        )
         st.markdown(
-            '<div class="sub-header">Curaay - Portrait Evaluation Assistant</div>', unsafe_allow_html=True)
+            '<div class="sub-header">Test default_prompt and browser_prompt via OpenRouter</div>',
+            unsafe_allow_html=True,
+        )
 
-        # Start conversation section
         if not st.session_state.conversation_started:
-            # Field for first message
             first_message = st.text_input(
-                "💬 First message:",
-                placeholder="e.g., Explain what I should improve",
-                key="first_message_input"
+                "First message:",
+                placeholder="Enter your question...",
+                key="first_message_input",
             )
 
-            if st.button("🎬 Start Conversation", use_container_width=True):
+            if st.button("Start Conversation", use_container_width=True):
                 try:
-                    qa_scores_json = json.loads(qa_scores_json_str)
-                    st.session_state.qa_scores_json = qa_scores_json
-                except json.JSONDecodeError as e:
-                    st.error(f"Invalid JSON in QA Scores: {e}")
+                    parsed = validate_config_from_form(
+                        database_occurances_str,
+                        knowledge_base_str,
+                        examples_str,
+                        special_context_chunks_str,
+                        file_chunks_str,
+                    )
+                    save_config_to_session(
+                        prompt_type,
+                        language,
+                        learning_video_answer_text,
+                        expert_id,
+                        answer_model,
+                        is_brief_mode,
+                        is_expert_specific,
+                        image_data,
+                        screenshot_mode,
+                        parsed,
+                    )
+                except ValueError as exc:
+                    st.error(str(exc))
                     st.stop()
 
-                conversation_history = []
+                if not first_message.strip():
+                    st.warning("Please enter a first message.")
+                    st.stop()
 
-                prompt = build_system_prompt(
-                    qa_scores_json, conversation_history)
-                st.session_state.system_prompt = prompt
+                st.session_state.messages.append(
+                    {"role": "user", "content": first_message.strip()}
+                )
 
-                api_messages = [{"role": "system", "content": prompt}]
+                conversation_history = [
+                    {"role": m["role"], "content": m["content"]}
+                    for m in st.session_state.messages[:-1]
+                ]
 
-                # Add first message from user if provided
-                if first_message.strip():
-                    api_messages.append({
-                        "role": "user",
-                        "content": first_message.strip()
-                    })
-                    st.session_state.messages.append({
-                        "role": "user",
-                        "content": first_message.strip()
-                    })
+                with st.spinner("Generating answer..."):
+                    try:
+                        response = run_answer_generator(
+                            first_message.strip(), conversation_history
+                        )
+                    except Exception as exc:
+                        st.error(f"API error: {exc}")
+                        st.session_state.messages.pop()
+                        st.stop()
 
-                with st.spinner("Starting conversation..."):
-                    response = call_azure_api(api_messages)
-
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": response
-                })
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": response}
+                )
                 st.session_state.conversation_started = True
                 st.rerun()
 
-        # Display chat messages (always show if there are messages)
         if st.session_state.messages:
-            chat_container = st.container()
-            with chat_container:
-                for msg in st.session_state.messages:
-                    if msg["role"] == "user":
-                        st.markdown(f'''
-                        <div class="chat-message user-message">
-                            <strong>👤 User:</strong><br>{msg["content"]}
-                        </div>
-                        ''', unsafe_allow_html=True)
-                    elif msg["role"] == "assistant":
-                        st.markdown(f'''
-                        <div class="chat-message assistant-message">
-                            <strong>🤖 Assistant:</strong><br>{msg["content"]}
-                        </div>
-                        ''', unsafe_allow_html=True)
+            for msg in st.session_state.messages:
+                if msg["role"] == "user":
+                    st.markdown(
+                        f'<div class="chat-message user-message">'
+                        f"<strong>User:</strong><br>{msg['content']}</div>",
+                        unsafe_allow_html=True,
+                    )
+                elif msg["role"] == "assistant":
+                    st.markdown(
+                        f'<div class="chat-message assistant-message">'
+                        f"<strong>Assistant:</strong><br>{msg['content']}</div>",
+                        unsafe_allow_html=True,
+                    )
 
-        # User input (only show when conversation has started)
         if st.session_state.conversation_started:
             user_input = st.chat_input("Type your message...")
             if user_input:
-                st.session_state.messages.append({
-                    "role": "user",
-                    "content": user_input
-                })
+                st.session_state.messages.append(
+                    {"role": "user", "content": user_input}
+                )
 
-                # Get current QA scores JSON from session state or use default
-                qa_scores_json = st.session_state.get(
-                    "qa_scores_json", DEFAULT_QA_SCORES_JSON)
-
-                # Build conversation history from messages
                 conversation_history = [
                     {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
+                    for m in st.session_state.messages[:-1]
                 ]
-
-                # Rebuild system prompt with updated conversation history
-                prompt = build_system_prompt(
-                    qa_scores_json, conversation_history)
-                # Update session state with current prompt
-                st.session_state.system_prompt = prompt
-
-                # Build full message list for API
-                api_messages = [
-                    {"role": "system", "content": prompt}
-                ]
-                api_messages.extend([
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ])
 
                 with st.spinner("Thinking..."):
-                    response = call_azure_api(api_messages)
+                    try:
+                        response = run_answer_generator(
+                            user_input, conversation_history
+                        )
+                    except Exception as exc:
+                        st.error(f"API error: {exc}")
+                        st.session_state.messages.pop()
+                        st.stop()
 
-                st.session_state.messages.append({
-                    "role": "assistant",
-                    "content": response
-                })
+                st.session_state.messages.append(
+                    {"role": "assistant", "content": response}
+                )
                 st.rerun()
 
 
