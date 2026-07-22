@@ -1,6 +1,11 @@
 # ============================================
 # EXAI Prompt Tester — Streamlit Application
 # ============================================
+from preset_loader import PRESET_KEYS, load_preset
+from llm_logger import register_llm_exchange
+from llm_client import collect_stream
+from default_prompt import answer_generator
+from browser_prompt import answer_generator_browser
 import asyncio
 import json
 import os
@@ -20,11 +25,6 @@ if str(ROOT_DIR) not in sys.path:
 if str(APP_DIR) not in sys.path:
     sys.path.insert(0, str(APP_DIR))
 
-from browser_prompt import answer_generator_browser
-from default_prompt import answer_generator
-from llm_client import collect_stream
-from llm_logger import register_llm_exchange
-from preset_loader import PRESET_KEYS, load_preset
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_DEFAULT_MODEL = os.getenv(
@@ -52,6 +52,7 @@ def _base_config() -> dict[str, Any]:
         "is_expert_specific": False,
         "image_data": False,
         "screenshot_mode": False,
+        "is_voice_mode": False,
     }
 
 
@@ -89,6 +90,7 @@ def sync_form_widgets_from_session() -> None:
     st.session_state.cfg_expert_specific = st.session_state.is_expert_specific
     st.session_state.cfg_image_data = st.session_state.image_data
     st.session_state.cfg_screenshot_mode = st.session_state.screenshot_mode
+    st.session_state.cfg_voice_mode = st.session_state.is_voice_mode
     st.session_state.cfg_database_occurances = json.dumps(
         st.session_state.database_occurances, ensure_ascii=False, indent=2
     )
@@ -168,6 +170,7 @@ def save_config_to_session(
     is_expert_specific: bool,
     image_data: bool,
     screenshot_mode: bool,
+    is_voice_mode: bool,
     parsed: dict[str, Any],
 ) -> None:
     st.session_state.prompt_type = prompt_type
@@ -179,6 +182,7 @@ def save_config_to_session(
     st.session_state.is_expert_specific = is_expert_specific
     st.session_state.image_data = image_data
     st.session_state.screenshot_mode = screenshot_mode
+    st.session_state.is_voice_mode = is_voice_mode
     st.session_state.database_occurances = parsed["database_occurances"]
     st.session_state.knowledge_base = parsed["knowledge_base"]
     st.session_state.examples = parsed["examples"]
@@ -202,6 +206,7 @@ async def generate_answer(user_question: str, conversation_history: list) -> str
         "expert_id": st.session_state.expert_id,
         "file_chunks": st.session_state.file_chunks,
         "screenshot_mode": st.session_state.screenshot_mode,
+        "is_voice_mode": st.session_state.is_voice_mode,
         "answer_model": st.session_state.answer_model,
         "examples": st.session_state.examples,
     }
@@ -425,6 +430,12 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
             disabled=disabled,
             key="cfg_brief_mode",
         )
+        is_voice_mode = st.checkbox(
+            "Voice mode",
+            value=st.session_state.is_voice_mode,
+            disabled=disabled,
+            key="cfg_voice_mode",
+        )
         is_expert_specific = st.checkbox(
             "Expert specific",
             value=st.session_state.is_expert_specific,
@@ -465,7 +476,8 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
         )
         examples_str = st.text_area(
             "Examples",
-            value=json.dumps(st.session_state.examples, ensure_ascii=False, indent=2),
+            value=json.dumps(st.session_state.examples,
+                             ensure_ascii=False, indent=2),
             height=80,
             disabled=disabled,
             key="cfg_examples",
@@ -481,7 +493,8 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
         )
         file_chunks_str = st.text_area(
             "File chunks",
-            value=json.dumps(st.session_state.file_chunks, ensure_ascii=False, indent=2),
+            value=json.dumps(st.session_state.file_chunks,
+                             ensure_ascii=False, indent=2),
             height=80,
             disabled=disabled,
             key="cfg_file_chunks",
@@ -512,7 +525,8 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
         st.markdown("---")
 
         st.markdown("### Load Conversation")
-        uploaded_file = st.file_uploader("Upload JSON file", type=["json"], key="file_upload")
+        uploaded_file = st.file_uploader("Upload JSON file", type=[
+                                         "json"], key="file_upload")
         if uploaded_file is not None and st.button("Load from file", use_container_width=True):
             content = uploaded_file.read().decode("utf-8")
             if load_conversation_from_json(content):
@@ -593,6 +607,7 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
                         is_expert_specific,
                         image_data,
                         screenshot_mode,
+                        is_voice_mode,
                         parsed,
                     )
                 except ValueError as exc:
@@ -615,7 +630,8 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
 
                 with st.spinner("Generating answer..."):
                     try:
-                        response = run_answer_generator(question, conversation_history)
+                        response = run_answer_generator(
+                            question, conversation_history)
                     except Exception as exc:
                         st.error(f"API error: {exc}")
                         st.session_state.messages.pop()

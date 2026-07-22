@@ -19,6 +19,7 @@ PRESET_KEYS = [
     "is_expert_specific",
     "image_data",
     "screenshot_mode",
+    "is_voice_mode",
 ]
 
 

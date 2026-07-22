@@ -17,6 +17,7 @@ async def answer_generator(
     expert_id=None,
     file_chunks=None,
     screenshot_mode=False,
+    is_voice_mode=False,
     answer_model=None,
     examples=None,
 ):
@@ -167,6 +168,38 @@ async def answer_generator(
             "2. If the retrieved sources (`database_occurances`, `special_context_chunks`, `knowledge_base`) are empty, sparse, or do not directly answer the user’s latest question, **do not** repeat verbatim the substance of the **last assistant message** in this thread. Instead, use whatever **is** available in the sources to offer a **different useful angle**: adjacent steps, related fields, checks, or constraints that still fit the same on-screen situation—without inventing facts.\n"
             "3. If the only honest answer is that documentation is missing, say so briefly **once**, and still add any **alternative** guidance strictly grounded in the provided fragments (e.g. generic validation or posting rules that appear in the sources), clearly scoped to what the sources support.\n"
             "4. On follow-up turns, prioritize answering the **latest** `user_question` while staying consistent with visible UI/error context implied by the thread; avoid generic repetition of the first reply.\n"
+        )
+
+    if is_voice_mode:
+        system_prompt += (
+            "\n\n# CONFIG\n"
+            "VOICE_MODE: ON\n"
+            "\n## Voice Mode (Hard Constraints)\n"
+            "Follow these rules EXACTLY when VOICE_MODE is ON. "
+            "They override Rule 4 length/comprehensiveness guidance and Rule 7–8 Markdown formatting above.\n"
+            "1. Output plain spoken text only — NO Markdown, NO headings, NO bullet or numbered lists, "
+            "NO tables, NO bold/italic, NO backticks, NO pipe characters.\n"
+            f"2. Keep answers short: 2–5 sentences by default. "
+            "If BRIEF_MODE is also ON, keep 3–4 sentences maximum.\n"
+            f"3. Sound like a live voice conversation in `<{language}>`:\n"
+            "   - Use short sentences and a natural spoken flow, as if talking directly to the user.\n"
+            "   - Prefer simple everyday words; use domain terms only when necessary and present in the sources.\n"
+            "   - When evidence is partial or uncertain, phrase cautiously without inventing facts.\n"
+            "   - Light conversational connectors are OK when natural — use sparingly, not in every sentence.\n"
+            '     Examples: "well", "in short", "roughly like this", "as far as I can see".\n'
+            '     German examples: "also", "kurz gesagt", "ungefähr so", "soweit ich sehe".\n'
+            '4. If the sources include steps or a procedure, say them inline inside sentences: '
+            '"First…, then…, and finally…" — never as a formatted list.\n'
+            "5. End with one short spoken check-in asking whether the answer is sufficient or more detail is wanted. "
+            "Vary the phrasing and avoid repeating the exact same closing used in the last 5 assistant messages "
+            "(consult conversation_history). Examples:\n"
+            '   - "Is that enough, or should I go into more detail?"\n'
+            '   - "Passt das so, oder soll ich mehr erklären?"\n'
+            '   - "Does that work, or should I go into more detail?"\n'
+            "   Keep it to a single sentence.\n"
+            "6. Evidence Discipline and Terminology Constraints still apply fully.\n"
+            "7. Before responding, silently verify the answer contains no Markdown, reads naturally aloud, "
+            "and every factual claim is still grounded in the provided sources.\n"
         )
 
     user_prompt = build_user_prompt(

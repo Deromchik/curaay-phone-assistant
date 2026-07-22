@@ -1233,5 +1233,6 @@
   "is_brief_mode": false,
   "is_expert_specific": true,
   "image_data": false,
-  "screenshot_mode": false
+  "screenshot_mode": false,
+  "is_voice_mode": false
 }
