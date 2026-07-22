@@ -1,6 +1,7 @@
 # ============================================
 # EXAI Prompt Tester — Streamlit Application
 # ============================================
+from git_info import render_git_sync_indicator
 from preset_loader import PRESET_KEYS, load_preset
 from llm_logger import register_llm_exchange
 from llm_client import collect_stream
@@ -381,6 +382,9 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
     col_chat, col_side = st.columns([2, 1])
 
     with col_side:
+        render_git_sync_indicator(APP_DIR)
+
+        st.markdown("---")
         st.markdown("### Prompt Configuration")
 
         prompt_type = st.radio(
