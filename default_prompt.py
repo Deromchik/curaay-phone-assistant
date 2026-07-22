@@ -19,7 +19,6 @@ async def answer_generator(
     screenshot_mode=False,
     answer_model=None,
     examples=None,
-    llm_log=None,
 ):
     if special_context_chunks is None:
         special_context_chunks = []
@@ -187,54 +186,26 @@ async def answer_generator(
     )
 
     if is_expert_specific:
-        model = "google/gemini-3-flash-preview"
-        request_params = {
-            "temperature": 0.1,
-            "max_tokens": 50000,
-            "top_p": 1.0,
-        }
-    else:
-        model = resolve_answer_llm_model(answer_model, expert_id)
-        request_params = {
-            "temperature": 0.4,
-            "reasoning": {"effort": "none"},
-        }
+        response = await generate_response(
+            system_prompt=system_prompt,
+            user_prompt=user_prompt,
+            model="google/gemini-3-flash-preview",
+            temperature=0.1,
+            max_tokens=50000,
+            top_p=1.0,
+            is_stream=isStream,
+        )
+        return response
 
-    if llm_log is not None:
-        llm_log.update({
-            "generator": "answer_generator",
-            "model": model,
-            "request_params": request_params,
-            "inputs": {
-                "user_question": user_question,
-                "conversation_history": conversation_history,
-                "database_occurances": database_occurances,
-                "knowledge_base": knowledge_base,
-                "language": language,
-                "is_brief_mode": is_brief_mode,
-                "is_expert_specific": is_expert_specific,
-                "learning_video_answer_text": learning_video_answer_text,
-                "special_context_chunks": special_context_chunks,
-                "image_data": image_data,
-                "expert_id": expert_id,
-                "file_chunks": file_chunks,
-                "screenshot_mode": screenshot_mode,
-                "answer_model": answer_model,
-                "examples": examples,
-            },
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": user_prompt},
-            ],
-        })
-
+    model = resolve_answer_llm_model(answer_model, expert_id)
     print("[model]", model)
     response = await generate_response(
         system_prompt=system_prompt,
         user_prompt=user_prompt,
-        model=model,
         is_stream=isStream,
-        **request_params,
+        model=model,
+        reasoning={"effort": "none"},
+        temperature=0.4,
     )
 
     return response

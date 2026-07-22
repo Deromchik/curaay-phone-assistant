@@ -3,6 +3,8 @@ from typing import Any, AsyncIterator, Optional
 
 from openai import AsyncOpenAI
 
+from llm_logger import build_request_record, set_pending_request
+
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_MODEL = os.getenv("OPENROUTER_DEFAULT_MODEL", "google/gemini-2.5-flash")
 
@@ -71,6 +73,24 @@ async def generate_response(
         if include_reasoning and reasoning is not None:
             params["extra_body"] = {"reasoning": reasoning}
         return params
+
+    request_params = {
+        "temperature": temperature,
+    }
+    if max_tokens is not None:
+        request_params["max_tokens"] = max_tokens
+    if top_p is not None:
+        request_params["top_p"] = top_p
+    if reasoning is not None:
+        request_params["reasoning"] = reasoning
+
+    set_pending_request(
+        build_request_record(
+            model=model,
+            messages=messages,
+            request_params=request_params,
+        )
+    )
 
     if is_stream:
         try:

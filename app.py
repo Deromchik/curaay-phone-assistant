@@ -23,6 +23,7 @@ if str(APP_DIR) not in sys.path:
 from browser_prompt import answer_generator_browser
 from default_prompt import answer_generator
 from llm_client import collect_stream
+from llm_logger import register_llm_exchange
 from preset_loader import PRESET_KEYS, load_preset
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
@@ -186,7 +187,6 @@ def save_config_to_session(
 
 
 async def generate_answer(user_question: str, conversation_history: list) -> str:
-    llm_log: dict[str, Any] = {}
     common_kwargs = {
         "user_question": user_question,
         "conversation_history": conversation_history,
@@ -204,8 +204,13 @@ async def generate_answer(user_question: str, conversation_history: list) -> str
         "screenshot_mode": st.session_state.screenshot_mode,
         "answer_model": st.session_state.answer_model,
         "examples": st.session_state.examples,
-        "llm_log": llm_log,
     }
+
+    generator = (
+        "answer_generator_browser"
+        if st.session_state.prompt_type == "browser"
+        else "answer_generator"
+    )
 
     if st.session_state.prompt_type == "browser":
         stream = await answer_generator_browser(**common_kwargs)
@@ -214,14 +219,18 @@ async def generate_answer(user_question: str, conversation_history: list) -> str
 
     response = await collect_stream(stream)
 
-    st.session_state.llm_logs.append({
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-        "turn": len(st.session_state.messages) + 1,
-        "user_question": user_question,
-        "conversation_history": conversation_history,
-        "assistant_response": response,
-        **llm_log,
-    })
+    register_llm_exchange(
+        st.session_state.llm_logs,
+        assistant_response=response,
+        generator=generator,
+        inputs={
+            "prompt_type": st.session_state.prompt_type,
+            **common_kwargs,
+        },
+        turn=len(st.session_state.messages) + 1,
+        user_question=user_question,
+        conversation_history=conversation_history,
+    )
 
     return response
 
@@ -479,29 +488,28 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
         )
 
         st.markdown("---")
-
-        if st.session_state.messages or st.session_state.llm_logs:
-            st.markdown("### Download")
-            if st.session_state.messages:
-                st.download_button(
-                    label="Download conversation JSON",
-                    data=get_download_json(),
-                    file_name=f"conversation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-                    mime="application/json",
-                    use_container_width=True,
-                )
-            if st.session_state.llm_logs:
-                st.download_button(
-                    label="Download LLM logs JSON",
-                    data=get_llm_logs_json(),
-                    file_name=(
-                        f"{st.session_state.prompt_type}_llm_logs_"
-                        f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-                    ),
-                    mime="application/json",
-                    use_container_width=True,
-                )
-            st.markdown("---")
+        st.markdown("### Export")
+        st.download_button(
+            label="Download LLM logs JSON",
+            data=get_llm_logs_json(),
+            file_name=(
+                f"{st.session_state.prompt_type}_llm_logs_"
+                f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+            ),
+            mime="application/json",
+            use_container_width=True,
+            disabled=not st.session_state.llm_logs,
+            help="Full LLM request/response log for every turn in this session.",
+        )
+        if st.session_state.messages:
+            st.download_button(
+                label="Download conversation JSON",
+                data=get_download_json(),
+                file_name=f"conversation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                mime="application/json",
+                use_container_width=True,
+            )
+        st.markdown("---")
 
         st.markdown("### Load Conversation")
         uploaded_file = st.file_uploader("Upload JSON file", type=["json"], key="file_upload")
@@ -538,6 +546,22 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
             '<div class="sub-header">Test default_prompt and browser_prompt via OpenRouter</div>',
             unsafe_allow_html=True,
         )
+
+        if st.session_state.conversation_started:
+            log_count = len(st.session_state.llm_logs)
+            st.caption(f"LLM calls logged this session: {log_count}")
+            st.download_button(
+                label="⬇️ Download LLM logs JSON",
+                data=get_llm_logs_json(),
+                file_name=(
+                    f"{st.session_state.prompt_type}_llm_logs_"
+                    f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+                ),
+                mime="application/json",
+                use_container_width=True,
+                disabled=log_count == 0,
+                key="chat_download_llm_logs",
+            )
 
         if not st.session_state.conversation_started:
             user_question = st.text_area(
