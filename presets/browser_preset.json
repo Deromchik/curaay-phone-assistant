@@ -1,0 +1,1237 @@
+{
+  "prompt_type": "browser",
+  "language": "German",
+  "database_occurances": [
+    {
+      "bb_evidence": [
+        {
+          "rank": 1,
+          "uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972:Page:130409",
+          "name": "AL Test Objects To Select",
+          "type": "Page",
+          "summary": "The 'AL Test Objects To Select' page serves as a user interface for displaying a list of test objects within Business Central. It includes functionality to drill down into records and perform actions related to test code units. Additionally, it handles record retrieval and ensures proper management of user interactions through defined triggers.",
+          "score": 0.9432855413940944,
+          "repo_uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972",
+          "page_anatomy": {
+            "page": "AL Test Objects To Select",
+            "fast_tabs": [
+              {
+                "name": "General",
+                "fields": [
+                  {
+                    "name": "Type",
+                    "caption": "Object Type",
+                    "source_table_field": null,
+                    "mandatory": false,
+                    "readonly": false,
+                    "is_lookup": false,
+                    "lookup_page": null,
+                    "options": null
+                  },
+                  {
+                    "name": "ID",
+                    "caption": "Object ID",
+                    "source_table_field": null,
+                    "mandatory": false,
+                    "readonly": false,
+                    "is_lookup": false,
+                    "lookup_page": null,
+                    "options": null
+                  },
+                  {
+                    "name": "Name",
+                    "caption": "Object Name",
+                    "source_table_field": null,
+                    "mandatory": false,
+                    "readonly": false,
+                    "is_lookup": false,
+                    "lookup_page": null,
+                    "options": null
+                  },
+                  {
+                    "name": "App Package ID",
+                    "caption": "App Package ID",
+                    "source_table_field": null,
+                    "mandatory": false,
+                    "readonly": false,
+                    "is_lookup": false,
+                    "lookup_page": null,
+                    "options": null
+                  }
+                ]
+              }
+            ],
+            "actions": [],
+            "subpages": []
+          }
+        },
+        {
+          "rank": 2,
+          "uid": "repo:mumdat:businesscentralapps:10fcedfc-1400-4dde-b0dd-5cda709a5603:Page:696",
+          "name": "All Objects",
+          "type": "Page",
+          "summary": "The 'All Objects' page in AL provides a comprehensive overview of all available objects within the Business Central environment. It is designed to display object details in a structured layout, enabling users to easily navigate through and manage the objects. The page also includes actionable commands that facilitate interactions with the listed objects.",
+          "score": 0.8315054913940942,
+          "repo_uid": "repo:mumdat:businesscentralapps:10fcedfc-1400-4dde-b0dd-5cda709a5603",
+          "page_anatomy": {
+            "page": "All Objects",
+            "fast_tabs": [
+              {
+                "name": "General",
+                "fields": [
+                  {
+                    "name": "Object Type",
+                    "caption": "Object Type",
+                    "source_table_field": null,
+                    "mandatory": false,
+                    "readonly": false,
+                    "is_lookup": false,
+                    "lookup_page": null,
+                    "options": null
+                  },
+                  {
+                    "name": "Object ID",
+                    "caption": "Object ID",
+                    "source_table_field": null,
+                    "mandatory": false,
+                    "readonly": false,
+                    "is_lookup": false,
+                    "lookup_page": null,
+                    "options": null
+                  },
+                  {
+                    "name": "Object Name",
+                    "caption": "Object Name",
+                    "source_table_field": null,
+                    "mandatory": false,
+                    "readonly": false,
+                    "is_lookup": false,
+                    "lookup_page": null,
+                    "options": null
+                  }
+                ]
+              }
+            ],
+            "actions": [],
+            "subpages": []
+          }
+        },
+        {
+          "rank": 3,
+          "uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972:Page:669",
+          "name": "Table Objects",
+          "type": "Page",
+          "summary": "The 'Table Objects' page in Business Central AL is designed to display and manage the layout and actions related to various table objects. It provides a user interface for users to interact with these table structures and perform operations as defined in the actions section.",
+          "score": 0.6008951813940944,
+          "repo_uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972"
+        },
+        {
+          "rank": 4,
+          "uid": "repo:mumdat:businesscentralapps:75f1590f-55c5-4501-ae63-bada5504e852:Codeunit:149111",
+          "name": "BCPT Open Item List",
+          "type": "Codeunit",
+          "summary": "The BCPT Open Item List codeunit is a test codeunit designed to validate the functionality of generating and displaying a list of open items. It includes procedures for managing the header and processing the open item list, ensuring that the relevant data is accurately represented during testing.",
+          "score": 0.5713192906319461,
+          "repo_uid": "repo:mumdat:businesscentralapps:75f1590f-55c5-4501-ae63-bada5504e852"
+        },
+        {
+          "rank": 5,
+          "uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972:Page:5096",
+          "name": "Task List",
+          "type": "Page",
+          "summary": "The Task List page in AL is designed to display and manage a list of tasks for the user. It includes layout definitions, various actions for user interaction, and page triggers that handle specific events such as record retrieval and formatting. The page enhances user experience by allowing efficient navigation and management of tasks.",
+          "score": 0.552969793799722,
+          "repo_uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972"
+        },
+        {
+          "rank": 6,
+          "uid": "repo:mumdat:businesscentralapps:75f1590f-55c5-4501-ae63-bada5504e852:Codeunit:149112",
+          "name": "BCPT Open Purch. Invoice List",
+          "type": "Codeunit",
+          "summary": "This codeunit is designed to test the functionality of opening a list of purchase invoices within Business Central. It includes a procedure named OpenPurchaseInvoices, which likely facilitates the retrieval and display of purchase invoices for review or processing. The test subtype indicates that its primary purpose is to verify the correctness of this functionality.",
+          "score": 0.5415993906319461,
+          "repo_uid": "repo:mumdat:businesscentralapps:75f1590f-55c5-4501-ae63-bada5504e852"
+        },
+        {
+          "rank": 7,
+          "uid": "repo:mumdat:al-nacharbeit:6dbd52e1-10e6-49e1-9d1b-adbf3e4a75c7:Page:5400155",
+          "name": "MuM RW Rework Dialog",
+          "type": "Page",
+          "summary": "The 'MuM RW Rework Dialog' page is designed to facilitate the rework process by providing a user interface to manage rework entries, validate inputs, and handle related records. It includes functionalities for initializing new records, saving dialogue inputs, and applying filters based on item journal types. This page also ensures that mandatory fields are filled and manages the interaction with rework lines effectively.",
+          "score": 0.5,
+          "repo_uid": "repo:mumdat:al-nacharbeit:6dbd52e1-10e6-49e1-9d1b-adbf3e4a75c7"
+        },
+        {
+          "rank": 8,
+          "uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972:Report:1115",
+          "name": "Resource - Price List",
+          "type": "Report",
+          "summary": "The 'Resource - Price List' report in AL is designed to generate a detailed pricing list for resources, allowing users to view and manage pricing information effectively. It includes data handling through various report triggers to manage records and data items, as well as procedures for initializing requests and finding work types.",
+          "score": 0.474773833799722,
+          "repo_uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972"
+        },
+        {
+          "rank": 9,
+          "uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972:Page:221",
+          "name": "Resource Allocated per Job",
+          "type": "Page",
+          "summary": "The 'Resource Allocated per Job' page in AL is designed to manage and display resource allocations linked to specific jobs, allowing users to validate inputs and trigger actions related to the allocation process. It includes various procedures for handling matrix columns and job filters, ensuring that users can interact effectively with the resource data.",
+          "score": 0.4625531,
+          "repo_uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972"
+        },
+        {
+          "rank": 10,
+          "uid": "repo:mumdat:al-nacharbeit:6dbd52e1-10e6-49e1-9d1b-adbf3e4a75c7:Page:5400158",
+          "name": "MuM RW Rework FactBox",
+          "type": "Page",
+          "summary": "The 'MuM RW Rework FactBox' page is designed to display rework-related information and facilitate user interactions through a drill-down feature. It initializes the fact box with relevant data and allows for the insertion and transfer of temporary entries to the main record, enhancing the user's ability to manage rework processes effectively.",
+          "score": 0.43684086,
+          "repo_uid": "repo:mumdat:al-nacharbeit:6dbd52e1-10e6-49e1-9d1b-adbf3e4a75c7"
+        },
+        {
+          "rank": 11,
+          "uid": "repo:mumdat:businesscentralapps:75f1590f-55c5-4501-ae63-bada5504e852:Codeunit:149114",
+          "name": "BCPT Open Sales Invoice List",
+          "type": "Codeunit",
+          "summary": "The BCPT Open Sales Invoice List codeunit is a test codeunit designed to facilitate the verification of the functionality related to displaying open sales invoices. It likely contains procedures that check the accuracy and performance of the sales invoice list feature in the Business Central application. Its primary purpose is to ensure that the open sales invoices are correctly generated and listed for users.",
+          "score": 0.4178511906319461,
+          "repo_uid": "repo:mumdat:businesscentralapps:75f1590f-55c5-4501-ae63-bada5504e852"
+        },
+        {
+          "rank": 12,
+          "uid": "repo:mumdat:businesscentralapps:5d86850b-0d76-4eca-bd7b-951ad998e997:Table:132515",
+          "name": "Table With Wrong Relation",
+          "type": "Table",
+          "summary": "The 'Table With Wrong Relation' AL object defines a table within the Business Central environment but is likely to contain incorrect relations with other tables. It includes a header, field schemas, and keys that may need to be reviewed or corrected to ensure proper data integrity and relationship behavior.",
+          "score": 0.4041295,
+          "repo_uid": "repo:mumdat:businesscentralapps:5d86850b-0d76-4eca-bd7b-951ad998e997"
+        },
+        {
+          "rank": 13,
+          "uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972:Codeunit:1506",
+          "name": "Open Deposit List Page",
+          "type": "Codeunit",
+          "summary": "The 'Open Deposit List Page' codeunit is designed to manage the opening of the deposit list within the Business Central application. It includes a header section and a procedure named 'OnOpenDepositListPage' that likely contains the logic executed when the deposit list page is opened.",
+          "score": 0.4017666906319461,
+          "repo_uid": "repo:mumdat:businesscentralapps:437dbf0e-84ff-417a-965d-ed2bb9650972"
+        }
+      ]
+    },
+    {
+      "redmine_evidence": [
+        {
+          "rank": 1,
+          "ticket_id": 29880,
+          "title": "Lagerort in der Materialdisposition ausschließen",
+          "tracker": "Fehler",
+          "status": "Abgeschlossen",
+          "is_closed": true,
+          "priority": "Normal",
+          "project": "MECU Metallhalbzeug GmbH & Co. KG",
+          "release": "MC2.11.00",
+          "knowledge_label": "noise",
+          "confidence": 0,
+          "score": 0.760026,
+          "excerpt": "it is important we get the version customer is using in production related table 5160146. Then, I can compare and see if there are some changes in his production environment that they aren't in ours\n\n[2026-06-05 — Hans-Dieter Müller]\nMaterial.FOB vom Kunden PRODUKTIV System durch Herrn Förster exportieren lassen.\n\n[2026-06-05 — Hans-Dieter Müller]\nDer Kunde hat das Objekt per Mail übersendet.\nDie Prüfung ergibt, dass Objekte nicht in das Produktivsystem eingespielt worden sind.\nObjekte ...",
+          "summary": "it is important we get the version customer is using in production related table 5160146. Then, I can compare and see if there are some changes in his production environment that they aren't in ours\n\n[2026-06-05 — Hans-Dieter Müller]\nMaterial.FOB vom Kunden PRODUKTIV System durch Herrn Förster exportieren lassen.\n\n[2026-06-05 — Hans-Dieter Müller]\nDer Kunde hat das Objekt per Mail übersendet.\nDie Prüfung ergibt, dass Objekte nicht in das Produktivsystem eingespielt worden sind.\nObjekte als TXT in das Ticket eingefügt.\n\nEs muss eine Abstimmung erfolgen.\n\nE-Mail an den Kunden.\n\n[Bild: 1. Der Screenshot zeigt eine E-Mail-Ansicht, die Teil eines Redmine Tickets ist. 2. Wichtige sichtbare Werte sind der Betreff \"Redmine Ticket #29880 Lagerort in der Materialdisposition ausschließen\", der Absender \"Hans-Dieter Müller\" und der Empfänger \"Steffen Förster\". Die E-Mail enthält den Text: \"Hallo Herr Förster, nochmal vielen Dank für die Übersendung des Objektes. Leider haben wir eine Inkonsistenz, es wurde ihnen wahrscheinlich in 2025 Objekte übermittelt, welche noch nicht in Ihrem Produktivsystem eingespielt wurden. Von daher kann ich das Objekt nicht ausliefern. Das muss bei Ihnen vor Ort geprüft werden. Ich werde mich am kommenden Montag bei Ihnen melden. Mit freundlichen Grüßen Hans-Dieter Müller\". 3. Es gibt keine farbigen Markierungen, Rahmen oder Pfeile im Screenshot. 4. Die Kernaussage ist, dass die vom Kunden übermittelten Objekte (vermutlich AL-Erweiterungen) nicht in das Produktivsystem eingespielt wurden, was eine Auslieferung verhindert. Eine Prüfung vor Ort beim Kunden ist notwendig.]\n\n[2026-06-05 — Hans-Dieter Müller]\nObjekte müssen mit dem Kunden abgeglichen werden.\n\n[2026-06-11 — Angel Luis Correa]\n[Bild: 1. Es ist ein Ausschnitt aus einem Chat- oder Kommentarfeld zu sehen. 2. Wichtige sichtbare Werte/Feldnamen: \"Related ticket Bug #29880: Exclude storage location in material scheduling - MECU Metallhalbzeug GmbH & Co. KG\". Der Text erwähnt, dass Objekte verglichen wurden und ein Objekt aus der Entwicklungsumgebung verwendet werden kann. Der Absender ist \"QS guy related to MECU\" und bittet darum, den Status auf QS zu ändern und ihm zuzuweisen, wenn der Test erfolgreich ist, um das Objekt zur Installation bereitzustellen. Es wird darauf hingewiesen, dass beim Import des Objekts in die Kundendatenbank nicht zusammengeführt, sondern ersetzt werden soll. 3. Es gibt keine farbigen Markierungen, Rahmen oder Pfeile. 4. Der Screenshot zeigt eine interne Kommunikation, die sich auf das Ticket \"Lagerort in der Materialdisposition ausschließen\" bezieht. Es wird vorgeschlagen, ein bestehendes Entwicklungsobjekt zu verwenden und dieses nach erfolgreichem Test in der Kundendatenbank zu installieren, wobei ein Ersetzen statt eines Zusammenführens der Objekte empfohlen wird.]\n\n[2026-06-11 — Hans-Dieter Müller]\nthe File \"MECU_20260609.fob\" are from the customer.\n\nI think the Objekt must be merge.",
+          "object_refs": [
+            5160146
+          ],
+          "source_url": "http://portal.mumdat.de:37707/issues/29880",
+          "created_at": "2026-03-30T12:09:48Z",
+          "updated_at": "2026-06-29T13:05:22Z",
+          "closed_at": "2026-06-29T13:05:22Z",
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 2,
+          "ticket_id": 29618,
+          "title": "Kalkulationsvorlagen Vorgaben",
+          "tracker": "Testautomatisierung",
+          "status": "Storniert",
+          "is_closed": true,
+          "priority": "Normal",
+          "project": "markmann+müller datensysteme gmbh",
+          "release": "Release-AL-vNext",
+          "knowledge_label": "process",
+          "confidence": 0,
+          "score": 0.67720366,
+          "excerpt": "Kalkulationsvorlagen Vorgaben\n\nUser Story\n\nThe Coatinc Company (TCC) verwendet Debitorenpreisgruppen. Diese Zuordnung benötigt die TCC als Auswahlkriterium in der Spalte Vorlagenart der Seite Kalkulationsvorlagenvorgaben. Diese Anforderung basiert auf dem Redmine-Ticket #29256.\n\nAnforderung:\n\n* In der Seite der „Kalkulationsvorlagevorgaben“ muss im Lookup-Feld „Vorlagenart“ die Art „Debitorenpreisgruppe“ hinzugefügt werden.\n* Wird im neuen Lookup-Feld „Vorlagenart“ die Art „D...",
+          "summary": "Kalkulationsvorlagen Vorgaben\n\nUser Story\n\nThe Coatinc Company (TCC) verwendet Debitorenpreisgruppen. Diese Zuordnung benötigt die TCC als Auswahlkriterium in der Spalte Vorlagenart der Seite Kalkulationsvorlagenvorgaben. Diese Anforderung basiert auf dem Redmine-Ticket #29256.\n\nAnforderung:\n\n* In der Seite der „Kalkulationsvorlagevorgaben“ muss im Lookup-Feld „Vorlagenart“ die Art „Debitorenpreisgruppe“ hinzugefügt werden.\n* Wird im neuen Lookup-Feld „Vorlagenart“ die Art „Debitorenpreisgruppe“ ausgewählt, muss es im Feld „Debitorennr.“ einen Lookup auf die Liste der Debitorenpreisgruppen geben.\n* Hat ein Debitor eine Debitorenpreisgruppe und dieser Debitor ist der Empfänger eines Verkaufsauftrags, und ist für eine Kalkulationsvorlage die gleiche Debitorenpreisgruppe definiert, muss bei der Erstellung der Kalkulation für die Verkaufsauftragszeile(n) diese definierte Debitorenpreisgruppe verwendet werden.\n* Hierbei gibt es eine Logikhierarchie bei der Präzisierung der Auswahl der Kalkulationsvorlagen im Sinne der Kalkulationsvorlagevorgaben:\n* „Debitor“ hat höhere Priorität als „Debitorenpreisgruppe“\n* „Debitorenpreisgruppe“ hat höhere Priorität als „Alle Debitoren“\n\n* Es muss in er Kalkulationsvorlagevorgabe geprüft werden, ob es Dubletten gibt.\n* Wenn es eine Dublette gibt, muss mittels Business Central Standard-Error-Meldung darauf hingewiesen werden. Diese Seite nicht ohne das Auflösen der Error-Meldung oder der Korrektur einer Dublette geschlossen werden.\n\nAkzeptanzkriterien\n\nReport, Pages & Tables:?\n\nObjekte:\n\n* MuM CA Calc. Templ. Defaults [Kalkulationsvorlagevorgaben] (Page 5590582 | Table 5590577)\n* Customer Price Groups [Debitorenpreisgruppen] (Page 7 | Table 6)\n\nImportant Notice\n\n* Alle Entwicklungen müssen auch in die deutsche Sprache übersetzt werden.\n* All developments must be translated into German language.\n\nTest Case / Testszenario\n\nPrecondition / Voraussetzung:\n* Debitorenpreisgruppe muss vorhanden sein.\n* Kalkulationsvorlage muss vorhanden sein.\n* Kalkulationseinrichtung muss vorhanden sein.\n\nTesting:\n* Wird in der Seite Kalkulationsvorlagevorgabe im Feld „Vorlagenart“ die Art „Debitorenpreisgruppe“ ausgewählt, muss im Feld „Debitorennr.“ ein Lookup auf die Seite der Debitorenpreisgruppen gegeben sein.\n* Haben Verkaufsauftragsdebitor und Kalkulationsvorlage die gleiche Debitorenpreisgruppe, muss für die Kalkulation der Verkaufsauftragszeile diese Debitorenpreisgruppe verwendet werden.\n* Es muss getestet werden, ob die Logikhierarchie zwischen Vorlagenarten greift. Hierbei muss folgendes Ergebnis erfolgen:\n* „Debitor“ > „Debitorenpreisgruppe“ > „Alle Debitoren“.\n\n* In der Seite der Kalkulationsvorlagevorgaben muss auf Dubletten geprüft werden.\n\n=== KOMMENTARE ===\n[2026-06-17 — Miguel Angel Cornejo]\nwas merged with ticket #31311 that has complete testcases\n\nthe pr was abandoned and before was merged with the prs of 31311 ticket",
+          "object_refs": [
+            5590582,
+            5590577,
+            7,
+            6
+          ],
+          "source_url": "http://portal.mumdat.de:37707/issues/29618",
+          "created_at": "2026-03-19T09:18:06Z",
+          "updated_at": "2026-06-17T08:22:03Z",
+          "closed_at": "2026-06-17T08:21:36Z",
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 3,
+          "ticket_id": 18847,
+          "title": "Anzeigereihenfolge der Eigenschaften",
+          "tracker": "Fehler",
+          "status": "Storniert",
+          "is_closed": true,
+          "priority": "Normal",
+          "project": "markmann+müller datensysteme gmbh",
+          "release": null,
+          "knowledge_label": "noise",
+          "confidence": 0,
+          "score": 0.5763588,
+          "excerpt": "Anzeigereihenfolge der Eigenschaften\n\nDatenbank:        KASTENSKNAUER-DEV\n\nMandant:           Schulung TEST\n\nTestcase:\n\n:        AL GUSS GEFRÄST\n:              A00003360 Eloxcast-M beidseitig plangefräst + EN AW-5754\n\nAuf der Materialartenkarte [Seite: MuM MP Material Type Card (5399862, Card); Tabelle: MuM MP Material Type (5399856)] der Materialart „AL GUSS GEFRÄST“ wurde eine Anzeigereihenfolge der Eigenschaften festgelegt.\n\n\n\nDiese Reihenfolge mus...",
+          "summary": "Anzeigereihenfolge der Eigenschaften\n\nDatenbank:        KASTENSKNAUER-DEV\n\nMandant:           Schulung TEST\n\nTestcase:\n\n:        AL GUSS GEFRÄST\n:              A00003360 Eloxcast-M beidseitig plangefräst + EN AW-5754\n\nAuf der Materialartenkarte [Seite: MuM MP Material Type Card (5399862, Card); Tabelle: MuM MP Material Type (5399856)] der Materialart „AL GUSS GEFRÄST“ wurde eine Anzeigereihenfolge der Eigenschaften festgelegt.\n\n\n\nDiese Reihenfolge muss in der Factbox Eigenschaften [Seite: MuM MP Record Prop. FactBox (5399863, ListPart); Tabelle: MuM MP Record Property (5399851)] auf der Artikelkarte umgesetzt werden. D.h. die Eigenschaften müssen in der Reihenfolge angezeigt werden, in der diese in der Materialartenkarte definiert wurden.\n\nDies ist offensichtlich nicht der Fall.\n\nIn der zugehörigen Tabelle Eigenschaften editieren [Seite: MuM MP Record Properties (5399851, ListPart); Tabelle: MuM MP Record Property (5399851)] müssen die Eigenschaften ebenfalls in der definierten Anzeigereihenfolge angezeigt werden.\n\nDies trifft auch hier nicht zu.\n\nAkzeptanzkriterien:\n\n- Die in der Anzeigenreihenfolge definierte Reihenfolge der Eigenschaften auf der Materialartenkarte [Seite: MuM MP Material Type Card (5399862, Card); Tabelle: MuM MP Material Type (5399856)] muss auf den folgenden Seiten so angezeigt werden:\n - Factbox Eigenschaften [Seite: MuM MP Record Prop. FactBox (5399863, ListPart); Tabelle: MuM MP Record Property (5399851)] auf der Artikelkarte\n - Tabelle Eigenschaften editieren [Seite: MuM MP Record Properties (5399851, ListPart); Tabelle: MuM MP Record Property (5399851)]\n\n=== KOMMENTARE ===\n[2024-11-26 — Moritz Geimer]\nWieder ein doppeltes Ticket. Das andere habe ich schon beendet.\nSoll dieses Ticket auch beendet werden, oder soll es lieber gelöscht werden?\n\n[2024-11-29 — Moritz Geimer]\nTicket hatte sich erledigt als ein neuer Mandant erstellt wurde, in den die Konfigurationspakete frisch eingespielt wurden.\nWar also allem Anschein nach ein Fehler beim Importieren der Konfigurationspakete.",
+          "object_refs": [
+            5399856,
+            5399851
+          ],
+          "source_url": "http://portal.mumdat.de:37707/issues/18847",
+          "created_at": "2024-11-13T09:53:19Z",
+          "updated_at": "2024-11-29T07:29:38Z",
+          "closed_at": "2024-11-29T07:29:38Z",
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 4,
+          "ticket_id": 21187,
+          "title": "Page",
+          "tracker": "Anforderung",
+          "status": "Storniert",
+          "is_closed": true,
+          "priority": "Normal",
+          "project": "markmann+müller datensysteme gmbh",
+          "release": null,
+          "knowledge_label": "task",
+          "confidence": 0,
+          "score": 0.55694276,
+          "excerpt": "Could you please add all fields which we have created in below linked tickets also visible in page:\n\nPurchase Credit Memo (52, Document)\n\nPurch. Cr. Memo Subform (98, ListPart)\n\n\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5199\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5200",
+          "summary": "Could you please add all fields which we have created in below linked tickets also visible in page:\n\nPurchase Credit Memo (52, Document)\n\nPurch. Cr. Memo Subform (98, ListPart)\n\n\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5199\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5200",
+          "object_refs": [],
+          "source_url": "http://portal.mumdat.de:37707/issues/21187",
+          "created_at": "2024-11-13T13:40:52Z",
+          "updated_at": "2024-11-18T07:07:32Z",
+          "closed_at": "2024-11-15T10:37:22Z",
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 5,
+          "ticket_id": 25768,
+          "title": "Erw. Textmodul Platzhalter ",
+          "tracker": "Fehler",
+          "status": "Rücksprache",
+          "is_closed": false,
+          "priority": "Normal",
+          "project": "markmann+müller datensysteme gmbh",
+          "release": "Release-AL-vNext",
+          "knowledge_label": "noise",
+          "confidence": 0,
+          "score": 0.5481612,
+          "excerpt": "Module with Material Properties 26.0.364061.2\n\n[2025-09-25 — Daniel Senkic]\nHi Angel, I'm testing it in ALL. But it doesn't work in the released production order. Maybe we can take a quick look at it together?\n\n[2025-10-07 — Angel Luis Correa]\n@dsenkic . The issue was solved in ticket #27068. Please, take a look at it\n\n[2025-12-18 — Daniel Senkic]\nHey Angel, what about this ticket? If you remember, we already discussed it some time ago. The other ticket did not solve this problem. We can t...",
+          "summary": "Module with Material Properties 26.0.364061.2\n\n[2025-09-25 — Daniel Senkic]\nHi Angel, I'm testing it in ALL. But it doesn't work in the released production order. Maybe we can take a quick look at it together?\n\n[2025-10-07 — Angel Luis Correa]\n@dsenkic . The issue was solved in ticket #27068. Please, take a look at it\n\n[2025-12-18 — Daniel Senkic]\nHey Angel, what about this ticket? If you remember, we already discussed it some time ago. The other ticket did not solve this problem. We can talk about it again if you want. It's easy to explain.\n\n[2025-12-18 — Angel Luis Correa]\n@dsenkic\n\nReady for test again.\n\nIt seems that the version was not updated. You can test now in ALL DB\n\n[2026-02-02 — Daniel Senkic]\nHey Angel, i tested it in the latest Version. Still doesnt works. Maybe we can take a look together?",
+          "object_refs": [],
+          "source_url": "http://portal.mumdat.de:37707/issues/25768",
+          "created_at": "2025-06-06T13:52:43Z",
+          "updated_at": "2026-02-02T08:45:23Z",
+          "closed_at": null,
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 6,
+          "ticket_id": 31308,
+          "title": "FA-Arbeitsplan Regelablauf",
+          "tracker": "Fehler",
+          "status": "Release",
+          "is_closed": false,
+          "priority": "Hoch",
+          "project": "markmann+müller datensysteme gmbh",
+          "release": "Release-AL-vNext",
+          "knowledge_label": "process",
+          "confidence": 0,
+          "score": 0.5247862,
+          "excerpt": "Es wurde wahrscheinlich der Bug bei Coatinc behoben, jedoch nicht in der ALL.\nDie Arbeitsplanzeilen werden nicht korrekt gesetzt wenn die Eigenschaften in der Warenannahme gesetzt werden.\nBeispiel:\n\n[Bild: 1. Die Maske/Seite ist der \"FA-Arbeitsplan\" mit dem Reiter \"Regelablauf\". 2. Wichtige sichtbare Werte/Feldnamen: * Ablauf: \"Regel \"AG TRAVERSIEREN\"\", \"Wenn (1 NTV = EG VERZINKEN) dann\", \"Regel \"AG BEIZEN\"\", \"Regel \"AG ZINK NTV\"\", \"Ende\", \"Regel \"AG RÜCKMELDUNG\"\". * Zeilenart: \"Regel\", \"Wenn (...",
+          "summary": "Es wurde wahrscheinlich der Bug bei Coatinc behoben, jedoch nicht in der ALL.\nDie Arbeitsplanzeilen werden nicht korrekt gesetzt wenn die Eigenschaften in der Warenannahme gesetzt werden.\nBeispiel:\n\n[Bild: 1. Die Maske/Seite ist der \"FA-Arbeitsplan\" mit dem Reiter \"Regelablauf\". 2. Wichtige sichtbare Werte/Feldnamen: * Ablauf: \"Regel \"AG TRAVERSIEREN\"\", \"Wenn (1 NTV = EG VERZINKEN) dann\", \"Regel \"AG BEIZEN\"\", \"Regel \"AG ZINK NTV\"\", \"Ende\", \"Regel \"AG RÜCKMELDUNG\"\". * Zeilenart: \"Regel\", \"Wenn (Vergleich)\", \"Regel\", \"Regel\", \"Ende\", \"Regel\". * Regelcode: \"AG TRAVERSIEREN\", \"AG BEIZEN\", \"AG ZINK NTV\", \"AG RÜCKMELDUNG\". * Variable: \"1 NTV\". * Vergleichszeichen: \"=\". * Vergleichsregelcode: \"EG VERZINKEN\". * Wertart: \"Text\". 3. Es gibt keine farbigen Markierungen, Rahmen oder Pfeile im Screenshot. 4. Der Screenshot zeigt die Konfiguration eines Regelablaufs für einen FA-Arbeitsplan, der bedingte Schritte basierend auf der Eigenschaft \"1 NTV\" und dem Wert \"EG VERZINKEN\" enthält. Dies ist die Referenzkonfiguration, die im Ticket als funktionierend bei Coatinc beschrieben wird und als Vorlage für die Behebung des Fehlers in der ALL-Umgebung dienen soll.]\n\n---\n\n[Bild: 1. Die Maske/Seite ist \"Eigenschaften editieren\", aufgerufen aus dem Kontext \"Warenannahme\". 2. Wichtige sichtbare Werte/Feldnamen: * Eigenschaftscode: \"VERZINKEN\" * Eigenschaftsname: \"Verzinken\" * Wert: \"1 NTV\" * Eigenschaftswertname: \"NTV\" * Buttons: \"Neue Zeile\", \"Zeile löschen\", \"Kategorien von Prod]\n\n---\nEin Arbeitsgang fehlt. Das Beispiel ist wie bei der Datenbank von Coatinc aufgebaut und dort funktioniert es.\n\n[Bild: 1. Die Maske/Seite ist der \"FA-Arbeitsplan\" für den Artikel \"101201 Test Regelwerk MATSER\". 2. Sichtbare Werte/Feldnamen: * Arbeitsgang Nr.: 010, 020 * Art: Arbeitsplatz * Nr.: TRAVERSIEREN, RÜCKMELDUNG * Beschreibung: Traversieren, RÜCKMELDUNG * Einstandspreis pro Einheit: 0,00 * Startdatum/-zeit: 05.05.2025 23:00 * Enddatum/-zeit: 05.05.2025 23:00 * Rüstzeit, Bearbeitungszeit, Wartezeit, Transportzeit: 0 * Oben rechts steht \"✓ Gespeichert\". 3. Es gibt keine farbigen Markierungen, Rahmen oder Pfeile im Screenshot. 4. Der Screenshot zeigt einen Arbeitsplan mit zwei Arbeitsgängen (010 Traversieren, 020 Rückmeldung), wobei laut Ticketbeschreibung ein Arbeitsgang fehlt, obwohl die Konfiguration der Datenbank der von Coatinc entspricht, wo es funktioniert.]\n\nhttp://srv-bc-2025w2:8080/ALL/?company=m%2Bm%20Master%20Bugfix\n\n=== KOMMENTARE ===\n[2026-06-15 — Daniel Senkic]\n@pfuhg Hallo Herr Fuhg, bitte dringen einplanen. Miguel weiß schon Bescheid. Stellen das nächste Woche bei Dörrenberg vor. Ist beim einrichten aufgefallen.\n\n[2026-06-16 — Daniel Senkic]\nTermin für morgen eingestellt (17.06.2026).\n\n[2026-06-18 — Miguel Angel Cornejo]\ninstalled in ALL\n\nm+m Aided Data Management Markmann + Müller Datensysteme GmbH 28.0.370876.1\n\n@dsenkic is fixed but the compare line must be configured as: Variable and the variable must be as variable type = Item Property",
+          "object_refs": [],
+          "source_url": "http://portal.mumdat.de:37707/issues/31308",
+          "created_at": "2026-06-15T14:35:09Z",
+          "updated_at": "2026-07-15T07:16:13Z",
+          "closed_at": null,
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 7,
+          "ticket_id": 8060,
+          "title": "Merge der Easy Schnittstellenobjekte in die MECU-DEV Datenbank   WAIT TICKET ",
+          "tracker": "Anforderung",
+          "status": "Storniert",
+          "is_closed": true,
+          "priority": "Normal",
+          "project": "MECU Metallhalbzeug GmbH & Co. KG",
+          "release": null,
+          "knowledge_label": "task",
+          "confidence": 0,
+          "score": 0.524647,
+          "excerpt": "Die Datenbank NAV14CU9-MECU-EASY muss in de NAV14CU9-MECU-DEV gebracht werden. (Nur Easy Objekte)\n\nDa in den mittlerweile ca. 1,5 Jahren Verzug des Projektes ist entsprechender Mehraufwand beim Zusammenführen der beiden Datenbanken erforderlich.\n#7927 hat noch verfügbares Kontingent und daraus wird der Mehraufwand genommen.",
+          "summary": "Die Datenbank NAV14CU9-MECU-EASY muss in de NAV14CU9-MECU-DEV gebracht werden. (Nur Easy Objekte)\n\nDa in den mittlerweile ca. 1,5 Jahren Verzug des Projektes ist entsprechender Mehraufwand beim Zusammenführen der beiden Datenbanken erforderlich.\n#7927 hat noch verfügbares Kontingent und daraus wird der Mehraufwand genommen.",
+          "object_refs": [],
+          "source_url": "http://portal.mumdat.de:37707/issues/8060",
+          "created_at": "2021-09-29T14:16:18Z",
+          "updated_at": "2024-12-16T08:10:13Z",
+          "closed_at": "2023-08-22T16:16:02Z",
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 8,
+          "ticket_id": 21188,
+          "title": "Add fields to Page",
+          "tracker": "Anforderung",
+          "status": "Abgeschlossen",
+          "is_closed": true,
+          "priority": "Normal",
+          "project": "markmann+müller datensysteme gmbh",
+          "release": "23.0.109420.0",
+          "knowledge_label": "task",
+          "confidence": 0,
+          "score": 0.5061208,
+          "excerpt": "Could you please add all fields which we have created in below linked tickets also visible in page:\n\nPurchase Credit Memo (52, Document)\n\nPurch. Cr. Memo Subform (98, ListPart)\n\n\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5199\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5200\n\n=== KOMMENTARE ===\n[2024-06-03 — Anonym]\n@pesparterolopez  Tested and Ok\n\n[2024-06-03 — Pablo Espartero Lopez]\n@mhoelscher  do...",
+          "summary": "Could you please add all fields which we have created in below linked tickets also visible in page:\n\nPurchase Credit Memo (52, Document)\n\nPurch. Cr. Memo Subform (98, ListPart)\n\n\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5199\n\n\nhttps://dev.azure.com/mumdat/Produkt/\\_backlogs/backlog/Produkt%20Team/Epics/?workitem=5200\n\n=== KOMMENTARE ===\n[2024-06-03 — Anonym]\n@pesparterolopez  Tested and Ok\n\n[2024-06-03 — Pablo Espartero Lopez]\n@mhoelscher  done\n\n[2024-06-03 — Pablo Espartero Lopez]\nTask 5199: Purch. Inv. Header (122) - Boards (azure.com)\nTask 5200: Purch. Inv. Line (123) - Boards (azure.com)",
+          "object_refs": [
+            122,
+            123
+          ],
+          "source_url": "http://portal.mumdat.de:37707/issues/21188",
+          "created_at": "2024-11-13T13:40:52Z",
+          "updated_at": "2024-11-18T09:13:45Z",
+          "closed_at": "2024-11-13T13:40:52Z",
+          "relations": [],
+          "pr_links": [],
+          "source": "search_redmine_tickets"
+        },
+        {
+          "rank": 9,
+          "ticket_id": 31275,
+          "title": "Sprint Veredelung - Warenannahme-Status „Abholung“ + Planung in Versandplanungszuordnung und Versandplanung ",
+          "tracker": "Aufgabe (m+m)",
+          "status": "Geplant",
+          "is_closed": false,
+          "priority": "Normal",
+          "project": "markmann+müller datensysteme gmbh",
+          "release": "Sprint 2",
+          "knowledge_label": "process",
+          "confidence": 0,
+          "score": null,
+          "excerpt": "",
+          "summary": "User Story\nDer Kunde möchte, dass Warenannahmen mit dem neuen Status „Abholung“ in der Versandplanungszuordnung und Lagersteuerung sichtbar und planbar sind und anschließend auch in der Versandplanung als Zeilen auftauchen, damit eine Tour sowohl Abholungen beim Kunden (Warenannahmen) als auch Auslieferungen (VK-/Umlagerungsaufträge) in einem Routenlauf kombinieren kann. Dadurch kann der Fahrer in einer Tour beides erledigen.\n\nUmsetzung (Beschreibung)\n1) Neuer Status „Abholung“ in der Warenannahme\n• In der Warenannahme wird ein zusätzlicher Status ergänzt: „Abholung“.\nObjekte Warenannahme\n• Seite: MuM GR Whse. Receipt (5214423, Document)\n• Tabelle: MuM GR Whse. Receipt Header (5214423)\n\n[Bild: 1. Die Maske zeigt die Seite \"Warenannahme\" (MuM GR Whse. Receipt, 5214423, Document) in Business Central. 2. Sichtbare Werte/Feldnamen sind u.a. \"Nr.\" (WAA0000061), \"Verk. an Deb.-Nr.\" (01454545), \"Verk. an Name\" (New Concepts Furniture), \"Belegdatum\" (06.05.2025), \"Eingangsdatum\" (06.05.2025) und \"Status\" (Offen). Im Bereich \"Status ändern\" sind die Aktionen \"Freigeben\", \"Avisieren\", \"In Bearbeitung\" und \"Status zurücksetzen\" zu sehen. 3. Der rote Rahmen markiert einen leeren Bereich neben der Aktion \"Status zurücksetzen\" im Reiter \"Status ändern\". Hier soll der neue Status \"Abholung\" als Aktion ergänzt werden. 4. Der Screenshot zeigt die aktuelle Oberfläche einer Warenannahme, auf der im Rahmen des Tickets ein neuer Status \"Abholung\" hinzugefügt werden soll, um Abholungen beim Kunden in der Versandplanung berücksichtigen zu können.]\n\n2) Versandplanungszuordnung und Lagersteuerung: neues Register „Abholung – Warenannahmen“\nIn der Versandplanungszuordnung und Lagersteuerung wird unten ein neues Register ergänzt:\n• Registername: „Abholung – Warenannahmen“\n• Inhalt: Alle Warenannahmen / Warenannahmezeilen, deren Warenannahme-Status = „Abholung“.\nObjekte Versandplanungszuordnung und Lagersteuerung\n• Seite: MuM AS Shp Pln Ass a. Inv Cont (5399811, Document)\n• Tabelle: MuM AS Shipment Planning Buff (5399784)\n\nRegister ergänzt:\n• Registername: „Abholung – Warenannahmen“\n• Inhalt: Alle Warenannahmen / Warenannahmezeilen, deren Warenannahme-Status = „Abholung“.\nObjekte Versandplanungszuordnung und Lagersteuerung\n• Seite: MuM AS Shp Pln Ass a. Inv Cont (5399811, Document)\n• Tabelle: MuM AS Shipment Planning Buff (5399784)\n\n[Bild: 1. Die Maske ist die \"Versandplanungszuordnung und Lagersteuerung\" (Seite 5399811, MuM AS Shp Pln Ass a. Inv Cont). Rechts ist der Bereich \"Seitenüberprüfung\" geöffnet, der Details zur aktuellen Seite und den zugrundeliegenden Tabellenfeldern anzeigt. 2. Sichtbare Werte sind eine Liste von \"Auftrag - VK-AU26-...\"-Einträgen, die vermutlich Verkaufsaufträge darstellen. Im Bereich \"Seitenüberprüfung\" sind Details zum Feld \"Grouping Name\" mit dem Wert \"Auftrag - VK-AU26-00000002\" und weitere technische Feldinformationen wie \"Record Type: Kopf\", \"Source Type: 37\", \"Source Subtype: 1\" und \"Source No.: VK-AU26-00000002\" zu sehen. Unten links ist der Text \"Arbeitsgangstatusanzeige\" und darunter \"Ausgewähltes Gesamt-Net...\" und \"Ausgewähltes Gesamt-Bru...\" mit Werten von \"0,00\" zu erkennen. 3. Ein roter Rahmen unten markiert den Bereich, in dem die Summen \"Ausgewähltes Gesamt-Net...\" und \"Ausgewähltes Gesamt-Bru...\" angezeigt werden. Ein roter Pfeil zeigt auf diesen Bereich. 4. Der Screenshot zeigt die bestehende \"Versandplanungszuordnung und Lagersteuerung\" mit einer Liste von Verkaufsaufträgen. Die Anforderung ist, hier ein neues Register für Warenannahmen mit dem Status \"Abholung\" hinzuzufügen, was auf diesem Screenshot noch nicht zu sehen ist.]\n\nInhalte/Spaltenlogik\n• Debitor kommt aus der Warenannahme (Kopf).\n• Adresse / Lieferdaten / Tourencode etc. werden aus dem Debitor gezogen:\no Wenn beim Debitor gepflegt → Felder werden gefüllt\no Wenn nicht → Felder bleiben leer\n• Wenn in der Warenannahme Artikelzeilen vorhanden sind, müssen diese Artikelzeilen auch in den neuen Abhol-Zeilen sichtbar sein.\n• Die Informationen aus Bild...",
+          "object_refs": [
+            5214423,
+            5399784,
+            5399775,
+            5399776,
+            5399811,
+            5399792
+          ],
+          "source_url": "http://portal.mumdat.de:37707/issues/31275",
+          "created_at": "2026-06-11T10:21:15Z",
+          "updated_at": "2026-07-17T06:45:04Z",
+          "closed_at": null,
+          "relations": [],
+          "pr_links": [],
+          "source": "get_redmine_ticket"
+        }
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6675859093666077,
+        "creationTimeUnix": "1750690474359",
+        "distance": 0.6648282,
+        "id": "0c6e8ac9-27e6-4b7a-be99-c6005d15ef24"
+      },
+      "content": "Q: Welche Funktion nutzen Sie im Alltag am häufigsten? A: In meiner Projekttätigkeit nutze ich häufig Outlook und unser Ticketsystem Redmine.",
+      "interview_id": "interview_221",
+      "interview_stage": 5,
+      "interview_step": 2,
+      "start_timestamp": 1750690474.3515313,
+      "tag": [
+        "Projekttätigkeit",
+        "Outlook",
+        "Ticketsystem"
+      ]
+    },
+    {
+      "content": "Deswegen müssen wir gucken, dass ein eine baut auf das andere auf. Ja, \nmüssen wir gucken, was wir davon erledigt bekommen bis Mittwoch.\nPeter 13:54\nWas heißt, wir haben, wir haben keinen Zeitplan, ich hab den wirklich \nauch Olli gebeten, wo ich ach sagen wir ja OK ah OKOK.\nJelena Maric 13:57\nDoch, doch, doch.\nAuch nach Prioritäten. Doch, doch, doch, das ist schon nach Prioritäten \nalles. Ist schon alles sortiert.\nPeter 14:02\nOh.\nOkay,\nJa, aber ihr klingt nicht so happy. Also die Frage, ich hab mich gefragt, \nwann geht die Kampagne online? War meine Frage.\nStar movie.\nJelena Maric 14:16\nJa, das ist also, ich würde ich ja, also er sagte ja, die Aufgaben, die er für \nuns eingeteilt hat, die sollen wir bitte bis Mittwoch erledigen, weil wir am \nDonnerstag gern da drüber sprechen. Und wenn ich\nPeter 14:18\nDas ist das Eigene.\nMhm.\nJelena Maric 14:31\nAlso, hier sind jetzt nicht in Wochen. Ich weiß nicht, auf diesem \nUrsprungsformular, wie war das noch mal, Lisa? Das war ja 'ne Excel Tabelle, ne? Und hier haben wir das halt in 01020304 für Prioritäten \ngesetzt. Aber ich sehe nicht, dass in dem Trello.\nElizaveta Ivchenko 14:39\nJa.\nJelena Maric 14:47\nAch so, doch das sind Fristen mit eingesetzt. Hier sind Fristen bis zum \n15.5. zum Beispiel drinne. Elizaveta Ivchenko 14:53\nAber das ist automatisch, das das das stellt Trello nicht dich.\nPeter 14:55\nWhat's on?\nJelena Maric 14:56\nI'm not.\nElizaveta Ivchenko 14:58\nDieses Ding, das ist eine Woche automatisch, bis du das änderst.\nJelena Maric 14:58\nAh, OK.\nOK.\nOK.\nKönnt ihr mich noch hören?\nElizaveta Ivchenko 15:25\nJa, ich hör dich.\nPeter 15:25\nJa.\nJelena Maric 15:26\nOK, ja.\nAlso ja, ich denke, dass wenn wir am Donnerstag mit dem.\nOlli, unser Gespräch haben, dass wir dann abklopfen können, wie wann \ndie Kampagne online geht. Müssen wir dann mit ihm sehen, wie weit wir \nmit all den Sachen gekommen sind, vor allem mit den Sachen?\nPeter 15:41\nMhm.\nJa, aber das meine ich mit Zeitplan. Jetzt gar nicht jetzt vorbereiten, \nsondern wann geht die Kampagne und das ist ja.\nJelena Maric 15:49\nJa, ja, ach so.\nIch glaube, das ist jetzt aktuell tatsächlich ein bisschen schwierig, aber wir",
+      "source_title": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.7043848633766174
+      }
+    },
+    {
+      "_additional": {
+        "certainty": 0.6468766927719116,
+        "creationTimeUnix": "1750873721613",
+        "distance": 0.7062466,
+        "id": "750e6617-247f-47fe-b4cb-97e1191fb813"
+      },
+      "content": "Q: Welche diagnostischen Methoden werden zur Identifikation von Problemen bei Materialdaten eingesetzt? A: Zur Diagnostik werden verschiedene Methoden genutzt, darunter der Einsatz von Excel zur Identifikation doppelter oder fehlender Eigenschaften, Feedbackgespräche mit den Kunden und der Vergleich von Quellensystemen mit speziellen Mapping-Tools.",
+      "interview_id": "new_interview_104",
+      "interview_stage": 6,
+      "interview_step": 1,
+      "start_timestamp": 1750873720.7989206,
+      "tag": [
+        "Materialdaten",
+        "Diagnostische Methoden",
+        "Problemidentifikation"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6439253687858582,
+        "creationTimeUnix": "1749149558946",
+        "distance": 0.71214926,
+        "id": "e1a59346-1f17-4019-b8b4-f0bd91ee2db1"
+      },
+      "content": "Q: Welche diagnostischen Schritte werden zur Problemidentifikation bei Materialverwaltung verwendet? A: Für verschiedene Probleme gibt es spezifische Prüfschritte: Bei nicht angezeigten Chargen wird die Matchcodeformel in der Beschreibungsvorlage überprüft. Bei nicht änderbaren Eigenschaften wird der Artikel gesperrt, die Änderung versucht und bei Fehlermeldungen werden die vorhandenen Artikelposten geprüft, um zu verstehen warum keine Anpassungen mehr möglich sind.",
+      "interview_id": "interview_147",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1749149558.9439163,
+      "tag": [
+        "Materialverwaltung",
+        "Problemdiagnose",
+        "Chargenprüfung"
+      ]
+    },
+    {
+      "content": "verstehen und die KI-Lösung darauf abzustimmen.\no\nDemo-Zugang und Test: Holger Krause und Peter baten um \neinen Link zur Demo-Umgebung, um die Interview- und \nKonsolidierungsfunktionen der KI-Lösung praktisch zu \nerproben.\no\nFolgegespräch und NDA: Peter schlug vor, vor dem \nAustausch sensibler Daten eine NDA zu unterzeichnen und in \neinem weiteren Call die Datenstruktur und Prozesse detailliert \nzu besprechen.\no\nSchnelle erste Ergebnisse: Dr. Michael Patrushev stellte in \nAussicht, dass nach dem Hochladen erster Daten und \nInterviews bereits kurzfristig E-Learning-Module und Ticketing-\nFunktionen getestet werden können. Folgeaufgaben:\n\nBereitstellung von Beispieldaten: Sende Beispielsdaten, eine \nBeispielsfrage aus dem Ticketing-System und Beispieldokumente zur\nweiteren Analyse an das Partnerteam. (Speaker 1)\n\nDemo-Zugang zur Interview-Umgebung: Sende einen Link zur \nDemo-Umgebung, damit das Team einen Einblick in die Interview-\nFunktionalität erhält. (Dr. Michael Patrushev)",
+      "source_title": "3f95a3f2-b26c-4fa5-859a-27076b593405.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.713935375213623
+      }
+    },
+    {
+      "_additional": {
+        "certainty": 0.6397683024406433,
+        "creationTimeUnix": "1750873672694",
+        "distance": 0.7204634,
+        "id": "9f939033-579d-497c-9fc3-5d0b25d38255"
+      },
+      "content": "Q: Wie werden Probleme während der Implementierung des Materialpasses diagnostiziert? A: Diagnostische Pfade umfassen die Erkennung von Systemmeldungen beim Datenimport und die Durchführung einer Konsistenzprüfung während der Prozesssimulation.",
+      "interview_id": "new_interview_057",
+      "interview_stage": 6,
+      "interview_step": 1,
+      "start_timestamp": 1750873671.8813171,
+      "tag": [
+        "Materialpass",
+        "Problemdiagnose",
+        "Implementierung",
+        "Konsistenzprüfung"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6361476182937622,
+        "creationTimeUnix": "1749136130386",
+        "distance": 0.72770476,
+        "id": "8fd936ac-5365-4726-a64b-4c97a71d2958"
+      },
+      "content": "Q: Welche typischen Probleme treten bei der Materialpass-Integration auf und wie werden sie diagnostiziert? A: Typische Probleme sind doppelte Artikel mit gleichen Eigenschaften, unvollständige Materialdaten, fehlende Konzeptansätze bei der Materialpassstruktur und Dateninkonsistenzen zwischen Quellen. Zur Diagnostik wird Excel zur Identifikation doppelter oder fehlender Eigenschaften genutzt, Feedbackgespräche mit Kunden geführt und Quellensysteme mit Mapping-Tools verglichen.",
+      "interview_id": "interview_104",
+      "interview_stage": 6,
+      "interview_step": 1,
+      "start_timestamp": 1749136130.3792343,
+      "tag": [
+        "Materialpass-Integration",
+        "Datendiagnostik",
+        "Systemprobleme"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.635408490896225,
+        "creationTimeUnix": "1750874014897",
+        "distance": 0.729183,
+        "id": "fb6b141f-7e1b-40fb-9804-65381c53f16e"
+      },
+      "content": "Q: Welche Methode wird empfohlen, um einen neu erstellten Materialpass abteilungsübergreifend zu prüfen und abzustimmen? A: Es wird empfohlen, einen sogenannten 'Rampe-Rampe-Test' durchzuführen. Dabei prüfen ausgewählte Key-User aus den relevanten Fachbereichen (Verkauf, Einkauf, Lager, Produktion) den Materialpass. Bei festgestellten Unstimmigkeiten müssen diese mit den anderen Key-Usern abgestimmt und der Materialpass daraufhin geändert werden.",
+      "interview_id": "new_interview_212",
+      "interview_stage": 4,
+      "interview_step": 3,
+      "start_timestamp": 1750874014.067137,
+      "tag": [
+        "Materialpass",
+        "Rampe-Rampe-Test",
+        "Abteilungsübergreifende Prüfung"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6336732804775238,
+        "creationTimeUnix": "1749136125342",
+        "distance": 0.73265344,
+        "id": "b038c530-575b-40f3-bb4d-87f9003f3541"
+      },
+      "content": "Q: Wie identifiziert man fehlende Konzeptansätze bei der Materialpassstruktur und Dateninkonsistenzen zwischen Quellen? A: Fehlende Konzeptansätze bei der Materialpassstruktur - Dies erkennt man im Gespräch oder vom Feedback vom Kunden, wenn die Anzahl der Daten sehr gering sind. Dateninkonsistenzen zwischen Quellen – Quellensysteme vergleichen, Abweichungen mit Mapping-Tools analysieren.",
+      "interview_id": "interview_104",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1749136125.3349357,
+      "tag": [
+        "Materialpassstruktur",
+        "Dateninkonsistenzen",
+        "Mapping-Tools"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6304181814193726,
+        "creationTimeUnix": "1749136126082",
+        "distance": 0.73916364,
+        "id": "9d5a1bea-2c04-4c19-9674-595fef41d2f7"
+      },
+      "content": "Q: Welche zentralen Diagnoseschritte gibt es für Materialdaten-Problemfelder? A: Die zentralen Problemfelder umfassen doppelte Artikel mit gleichen Eigenschaften, unvollständige Materialdaten, fehlende Konzeptansätze bei der Materialpassstruktur und Dateninkonsistenzen zwischen Quellen.",
+      "interview_id": "interview_104",
+      "interview_stage": 4,
+      "interview_step": 3,
+      "start_timestamp": 1749136126.0740724,
+      "tag": [
+        "Materialdaten",
+        "Diagnoseschritte",
+        "Datenqualität"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6296614706516266,
+        "creationTimeUnix": "1750874059402",
+        "distance": 0.74067706,
+        "id": "9edc74aa-7ff9-4a28-8674-ea37b8926ddf"
+      },
+      "content": "Q: Welche Methode wird angewendet, um blinde Flecken und falsche Eigenschaften bei der Erstellung eines Materialpasses zu beheben? A: Blinde Flecken und falsche Eigenschaften werden durch iterative Workshops gelöst. Zudem wird der Kunde an seine Aufgaben erinnert.",
+      "interview_id": "new_interview_217",
+      "interview_stage": 4,
+      "interview_step": 1,
+      "start_timestamp": 1750874058.5822837,
+      "tag": [
+        "Materialpass",
+        "Fehlerbehebung",
+        "Iterative Workshops"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6285641491413116,
+        "creationTimeUnix": "1750874022401",
+        "distance": 0.7428717,
+        "id": "645bc917-fe80-49d1-b5cf-5bff187069d1"
+      },
+      "content": "Q: Was sind die Hauptprobleme und diagnostischen Ansätze bei der Verwaltung von Materialeigenschaften? A: Zu den Hauptproblemen gehört die Unterscheidung zwischen Auswahlfeldern und frei definierbaren Werten. Lösungsansätze umfassen die Integration von Eigenschaften in den Matchcode für eine schnelle Suche und die Nutzung von Tools wie PowerBI für präzisere Auswertungen.",
+      "interview_id": "new_interview_212",
+      "interview_stage": 7,
+      "interview_step": 1,
+      "start_timestamp": 1750874021.5783877,
+      "tag": [
+        "Materialeigenschaften",
+        "Datenmanagement",
+        "Datensuche",
+        "Datenanalyse"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6284882426261902,
+        "creationTimeUnix": "1750873665887",
+        "distance": 0.7430235,
+        "id": "ae3a599e-b7ac-4a31-84fd-f89f8ee547a3"
+      },
+      "content": "Q: Wie werden Probleme bei der Datenintegration und dem Import von Materialpass-Daten identifiziert? A: Probleme werden entweder bereits beim Import durch verschiedene Meldungen vom System festgestellt, zum Beispiel falls die Daten nicht in der richtigen Reihenfolge importiert werden, oder teilweise erst in der weiteren Prozesssimulation, wenn gewisse Daten nicht konsistent sind.",
+      "interview_id": "new_interview_057",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1750873665.0735698,
+      "tag": [
+        "Datenintegration",
+        "Datenimport",
+        "Fehlererkennung",
+        "Datenkonsistenz"
+      ]
+    },
+    {
+      "content": "Elizaveta Ivchenko 18:34\nAudience OK.\nMhm.\nJelena Maric 18:44\nMhm.\nOlli 18:47\nAh, OK, vielleicht ist er auch da. Einfach da, OK.\nJa, dann müssen wir die Landingpage entsprechend.\nAber wenn wir WordPress haben, dann können wir wahrscheinlich auch \nviel einfach selber.\nAlso, WordPress hat auch ganz viele Plugins.\nJelena Maric 19:06\nAlso, wenn wir das haben, glaube ich, also ich habe damit noch keine \nErfahrung, aber Lisa meinte schon, dass es relativ einfach ist. Da \nbrauchen wir den Mike. Ja, dass wir den Mike dann nicht brauchen.\nElizaveta Ivchenko 19:06\nOkay.\nBisschen Erfahrung hab ich, yeah, your Michael taqueren.\nOlli 19:17\nJa, also auf jeden Fall viel weniger, genau.\nElizaveta Ivchenko 19:19\nMhm.\nJelena Maric 19:20\nYeah.\nJa.\nElizaveta Ivchenko 19:24\nWas noch? Also, ich verwende auch ein paar Tools für Buchhaltung, aber \ndas ist nicht relevant.\nIch glaube was.\nLinkedIn verwenden wir, aber das ist, also ist. Jelena Maric 19:36\nTrello benutzen wir, ist schon aufgeführt.\nElizaveta Ivchenko 19:37\nkommt ah, Trello Trello ist ja kostenfrei Version von Trello. Legal hat \nLinkedIn Premium. Ich hab ein normale LinkedIn. Outlook für E-Mails. Was \nnoch haben wir?\nOlli 19:41\nJa, genau.\nJa, klar.\nElizaveta Ivchenko 19:52\nAlso, hab Sport, Starter, was noch?\nWer ist eigentlich Timio?\nYeah.\nOlli 20:03\nIch hab auch eine, ich hab das diese To-Dos hier auch so erstellen lassen, \ndass es hier direkt einen Trello Import gibt.\nDass man hier einmal im Trello Board die importieren kann, damit man die\nnicht abtippen muss.\nElizaveta Ivchenko 20:19\nMhm.\nOlli 20:22\nDas könnte dann vielleicht einer von euch.\nMal austesten, ob das klappt. Ansonsten, wenn das nicht geht, gibt es hier\nnoch eine Copy-Paste-Anleitung für Trello.\nElizaveta Ivchenko 20:28\nCut.\nOlli 20:33\nAber hier wär eigentlich hier Trello Board anlegen mit List so und dann \nimport to Trello bei Blue Cat installieren und dann diese C.S.V. hier, also diesen den Reiter C.S.V. importieren. Ja, und dann wären hier gleich \ntheoretisch diese To-Dos alle richtig drin.",
+      "source_title": "9a95c2d1-7204-491b-bedb-0b7680230392.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.7461024522781372
+      }
+    },
+    {
+      "_additional": {
+        "certainty": 0.6265686452388763,
+        "creationTimeUnix": "1749579839875",
+        "distance": 0.7468627,
+        "id": "4879f19e-7698-45cb-afc2-436eaaef0206"
+      },
+      "content": "Q: Welche Hauptprobleme und Einschränkungen gibt es bei der Materialpass-Entwicklung? A: Die Hauptprobleme umfassen: Unterscheidung zwischen Auswahlfeldern und frei definierbaren Werten, Integration von Eigenschaften in den Matchcode für schnelle Suche, und die Nutzung von Tools wie PowerBI für präzisere Auswertungen. Fehlende oder ungenaue Materialpässe können die Produktion und Auswertung erschweren, und Anpassungen können zu Performance-Problemen oder erhöhtem Arbeitsaufwand in anderen Fachbereichen führen.",
+      "interview_id": "interview_212",
+      "interview_stage": 7,
+      "interview_step": 1,
+      "start_timestamp": 1749579839.8659167,
+      "tag": [
+        "Materialpass-Entwicklung",
+        "Systemintegration",
+        "Performance-Probleme"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6253242194652557,
+        "creationTimeUnix": "1750873997099",
+        "distance": 0.74935156,
+        "id": "0597c73a-4fd6-4d29-b6a0-d85966a98157"
+      },
+      "content": "Q: Können Sie ein konkretes Beispiel für einen IDMC und die dahinterliegenden Materialdaten geben? A: Ein Beispiel ist der Code `IDMC017751734D$6000`. Er steht für das Material \"Stahl Rund S235JR gewalzt - 5 mm HL 6000 mm | gewalzt warmgewalzt\" und beinhaltet spezifische Eigenschaften wie Werkstoffbezeichnung (S235JR), Produktionsart (gewalzt), Außendurchmesser (5 mm), Länge (6000 mm), Werkstoffnummer (10.038) und diverse zugehörige Normen (z.B. EN 10025-2).",
+      "interview_id": "new_interview_212",
+      "interview_stage": 1,
+      "interview_step": 3,
+      "start_timestamp": 1750873996.2748272,
+      "tag": [
+        "IDMC",
+        "Materialdaten",
+        "Werkstoffeigenschaften",
+        "Stahl"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6252239942550659,
+        "creationTimeUnix": "1749618768814",
+        "distance": 0.749552,
+        "id": "9d62dcf9-964d-4412-9478-3bb58380a73c"
+      },
+      "content": "Q: Welche diagnostischen Schritte verwenden Sie zur Identifikation und Lösung von Materialproblemen? A: Ganz allgemein gesprochen, bekommt man diese Punkte am einfachsten gefasst, indem man sehr nah am Kunden ist. Indem der Berater den Kunden auf der einen Seite immer wieder an seine Aufgabe erinnert, und auf der anderen Seite diese Aufgaben Einhaltung auch kontrolliert. Und auch mal reinschaut, was der Kunde bis dato erarbeitet hat. Dazu muss er aber wissen, was konzeptionell auf dem Berater und den Kunden zukommt. Ist eben nicht damit getan, einmal den Materialpass zu schulen, und dann darauf zu hoffen, dass der Materialpass beim Kunden sich alleine einrichtet. Das wird nicht passieren.",
+      "interview_id": "interview_217",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1749618768.807114,
+      "tag": [
+        "Materialprobleme",
+        "Kundenbetreuung",
+        "Beratungsprozess"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.624408483505249,
+        "creationTimeUnix": "1749136122679",
+        "distance": 0.75118303,
+        "id": "0ee51ebc-af79-41b5-a5d6-5ebfebe1def4"
+      },
+      "content": "Q: Welche häufigen Probleme treten bei der Analyse von Materialstrukturen und Datenintegration auf? A: Häufige Probleme sind: Doppelte Artikel mit gleichen Eigenschaften - gelöst durch Datenbereinigung und Zusammenfassung zu einem Artikel. Unvollständige Materialdaten – gelöst durch Datenbereinigung und Ergänzung fehlender Informationen. Fehlende Konzeptansätze bei der Materialpassstruktur - gelöst durch Beispielansätze von anderen Materialpassstrukturen mit gleichen Materialarten. Dateninkonsistenzen zwischen Quellen – gelöst durch einheitliche Datenformate und Mapping-Strategien.",
+      "interview_id": "interview_104",
+      "interview_stage": 4,
+      "interview_step": 1,
+      "start_timestamp": 1749136122.6712458,
+      "tag": [
+        "Materialstrukturen",
+        "Datenintegration",
+        "Datenbereinigung"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6243681311607361,
+        "creationTimeUnix": "1749136123430",
+        "distance": 0.75126374,
+        "id": "c140adb0-ce06-4901-a2db-486419be1d45"
+      },
+      "content": "Q: Wie löst man fehlende Konzeptansätze und Dateninkonsistenzen bei Materialpassstrukturen? A: Fehlende Konzeptansätze bei der Materialpassstruktur werden durch Beispielansätze von anderen Materialpassstrukturen mit gleichen Materialarten gelöst. Dateninkonsistenzen zwischen Quellen werden durch einheitliche Datenformate und Mapping-Strategien behoben.",
+      "interview_id": "interview_104",
+      "interview_stage": 4,
+      "interview_step": 1,
+      "start_timestamp": 1749136123.4226193,
+      "tag": [
+        "Materialpassstruktur",
+        "Dateninkonsistenzen",
+        "Mapping-Strategien"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6240708231925964,
+        "creationTimeUnix": "1749149558322",
+        "distance": 0.75185835,
+        "id": "1b3250eb-b3cf-4a8c-9a71-4ea867951cf3"
+      },
+      "content": "Q: Wie löst man das Problem, dass Chargen in der Artikelsuche nicht angezeigt werden? A: Ich öffne die betroffene Materialart, gehe in das Aktionsmenü Chargen Seriennummern, dann zur Beschreibungsvorlage. Anschließend gehe ich auf das Menü Charge und prüfe die Beschreibungsformel. Ist dort eine Matchcodeformel hinterlegt? Falls keine Matchcodeformel hinterlegt ist, hinterlege ich eine und versuche dann anschließend noch mal die Materialsuche für die Charge auszuwählen.",
+      "interview_id": "interview_147",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1749149558.319363,
+      "tag": [
+        "Chargensuche",
+        "Materialverwaltung",
+        "Matchcodeformel"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6238208413124084,
+        "creationTimeUnix": "1749579823254",
+        "distance": 0.7523583,
+        "id": "3a022e02-95a8-4e7e-8973-4c6ecd5ebea8"
+      },
+      "content": "Q: Welche Hauptprozesse werden im täglichen Workflow zur korrekten Zuordnung und Strukturierung von Materialeigenschaften im Stahl- und Metallbereich angewendet? A: Als Erstes werden alle Materialien, die der Kunde im Einsatz hat, gesichtet. Und eine Liste meistens mit Excel oder anderen Handhabungen erstellt, die die Eigenschaften wiedergeben. Diese werden harmonisiert sodass man daraus die einzelnen Materialien ableiten kann, und die Eigenschaften, die man den Materialarten zuordnet.",
+      "interview_id": "interview_212",
+      "interview_stage": 3,
+      "interview_step": 1,
+      "start_timestamp": 1749579823.2481303,
+      "tag": [
+        "Materialmanagement",
+        "Workflow-Prozesse",
+        "Stahl-Metallbereich"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6227547526359558,
+        "creationTimeUnix": "1750873717287",
+        "distance": 0.7544905,
+        "id": "159b1b42-8db7-4246-9fbc-0c3f737b4212"
+      },
+      "content": "Q: Welchen diagnostischen Schritt unternehmen Sie, um unvollständige Materialdaten in MS Dynamics zu erkennen? A: Zur Diagnose von unvollständigen Materialdaten wird die Artikelstruktur nach Excel überführt, um dort nach fehlenden Eigenschaften zu suchen.",
+      "interview_id": "new_interview_104",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1750873716.4661994,
+      "tag": [
+        "Unvollständige Materialdaten",
+        "MS Dynamics",
+        "Datenprüfung",
+        "Excel-Analyse"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6220881044864655,
+        "creationTimeUnix": "1749579830755",
+        "distance": 0.7558238,
+        "id": "a8a2c31c-5f26-4e63-9b81-786b94ad698f"
+      },
+      "content": "Q: Unter welchen Bedingungen ist eine Anpassung der Materialeigenschaften notwendig und wie vermeidet man Konflikte? A: Während des Aufbaus des Materialpasses kann es passieren, dass der komplette Materialpass überarbeitet werden muss. Oft hilft hier nur ein Neuaufsatz. Daher ist es besonders wichtig, dass der Anwender den Materialpass so genau wie möglich aufsetzt. Ein Hinzufügen von Eigenschaften in ein bestehendes Konstrukt ist kein Problem. Ein Entfernen einer Eigenschaft ist nur dann möglich, wenn diese nicht in Verwendung ist. Das Ergänzen von Lookup-Werten (Auswahlwerten) ist kein Problem. Ein Entfernen von Auswahlwerten ist nur dann möglich, wenn diese nicht in Verwendung sind.",
+      "interview_id": "interview_212",
+      "interview_stage": 4,
+      "interview_step": 3,
+      "start_timestamp": 1749579830.7480614,
+      "tag": [
+        "Materialpass",
+        "Eigenschaftsverwaltung",
+        "Systemkonfiguration"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6217404901981354,
+        "creationTimeUnix": "1750873917025",
+        "distance": 0.756519,
+        "id": "b1bbc08e-4dfe-43e7-aac1-395b122ae56d"
+      },
+      "content": "Q: Wie werden Probleme wie fehlerhafte Materialdisposition in Excel oder fehlende Nachverfolgbarkeit gelöst? A: Solche Probleme werden durch die Implementierung eines voll integrierten ERP-Systems wie Microsoft Business Central und einer spezifischen Branchenlösung eliminiert. Dadurch werden Insellösungen wie Excel-Dateien für die Materialdisposition abgelöst und die Nachverfolgbarkeit direkt im System abgebildet.",
+      "interview_id": "new_interview_146",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1750873916.2086194,
+      "tag": [
+        "ERP-Systeme",
+        "Materialdisposition",
+        "Nachverfolgbarkeit",
+        "Insellösungen"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6216332912445068,
+        "creationTimeUnix": "1750847431431",
+        "distance": 0.7567334,
+        "id": "a1308286-11a9-49ee-aa88-4102a6df4c6d"
+      },
+      "content": "Q: Welche Probleme im Bereich Materialpass und Materialeigenschaften als MS Dynamics Modul sind besonders kritisch? A: Als besonders kritische Probleme werden die Datenintegration und Import von Materialpass-Daten sowie die Entscheidung, welche Eigenschaften benötigt werden, um eine Materialart zu beschreiben, identifiziert.",
+      "interview_id": "interview_57",
+      "interview_stage": 4,
+      "interview_step": 3,
+      "start_timestamp": 1750847431.4238992,
+      "tag": [
+        "Materialpass",
+        "MS Dynamics",
+        "Datenintegration"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6213930547237396,
+        "creationTimeUnix": "1749136125013",
+        "distance": 0.7572139,
+        "id": "867c2930-31b1-405d-84ab-73337dcf75db"
+      },
+      "content": "Q: Wie erkennt man unvollständige Materialdaten in MS Dynamics? A: Unvollständige Materialdaten - Überführung der Artikelstruktur nach Excel um darin nach fehlenden Eigenschaften zu suchen.",
+      "interview_id": "interview_104",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1749136125.0057077,
+      "tag": [
+        "MS Dynamics",
+        "Materialdaten",
+        "Excel-Export",
+        "Datenvalidierung"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6211166381835938,
+        "creationTimeUnix": "1750873963741",
+        "distance": 0.7577667,
+        "id": "4122377c-c955-4756-aa9b-eff61fb2d9c6"
+      },
+      "content": "Q: Wie kann das Problem behoben werden, dass Chargen bei der Materialsuche nicht angezeigt werden? A: Wenn Chargen in der Materialsuche nicht erscheinen, liegt es häufig daran, dass für die Materialart der Charge kein 'Chargemed Code' definiert ist. Die Lösung besteht darin, eine Formel für den Chargemed Code zu hinterlegen. Danach wird die Charge korrekt in der Materialsuche angezeigt.",
+      "interview_id": "new_interview_147",
+      "interview_stage": 4,
+      "interview_step": 1,
+      "start_timestamp": 1750873962.9238038,
+      "tag": [
+        "Materialsuche",
+        "Chargenanzeige",
+        "Chargemed Code"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6209263205528259,
+        "creationTimeUnix": "1749135521906",
+        "distance": 0.75814736,
+        "id": "4315ca2d-c9ab-472e-985e-e514c902c938"
+      },
+      "content": "Q: Welche Probleme im Bereich Materialpass und Materialeigenschaften als MS Dynamics Modul sind besonders kritisch? A: Als besonders kritische Probleme werden die Datenintegration und Import von Materialpass-Daten sowie die Entscheidung, welche Eigenschaften benötigt werden, um eine Materialart zu beschreiben, identifiziert.",
+      "interview_id": "interview_100",
+      "interview_stage": 4,
+      "interview_step": 3,
+      "start_timestamp": 1749135521.897096,
+      "tag": [
+        "Materialpass",
+        "MS Dynamics",
+        "Datenintegration"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6206713318824768,
+        "creationTimeUnix": "1750873717770",
+        "distance": 0.75865734,
+        "id": "0d53e22e-14ff-4028-a6c3-e1c0d0cb4833"
+      },
+      "content": "Q: Wie gehen Sie bei der Diagnose von Dateninkonsistenzen zwischen verschiedenen Quellensystemen vor? A: Um Dateninkonsistenzen zwischen Quellen zu diagnostizieren, werden die Quellensysteme verglichen und die Abweichungen mit Mapping-Tools analysiert.",
+      "interview_id": "new_interview_104",
+      "interview_stage": 4,
+      "interview_step": 2,
+      "start_timestamp": 1750873716.956955,
+      "tag": [
+        "Dateninkonsistenzen",
+        "Diagnose",
+        "Quellensysteme",
+        "Datenvergleich"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6205776929855347,
+        "creationTimeUnix": "1750873666141",
+        "distance": 0.7588446,
+        "id": "484d81d4-b5f3-42a9-bc0e-804ffac02be8"
+      },
+      "content": "Q: Welche Probleme werden in der Praxis als besonders kritisch im Bereich 'Materialpass und Materialeigenschaften als Modul im MS Dynamics' angesehen? A: In der Praxis werden vor allem zwei Probleme als kritisch angesehen: die 'Datenintegration und der Import von Materialpass-Daten' sowie die 'Entscheidung, welche Eigenschaften benötigt werden, um eine Materialart zu beschreiben'.",
+      "interview_id": "new_interview_057",
+      "interview_stage": 4,
+      "interview_step": 3,
+      "start_timestamp": 1750873665.3140728,
+      "tag": [
+        "MS Dynamics",
+        "Materialpass",
+        "Datenintegration",
+        "Materialeigenschaften"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6205455958843231,
+        "creationTimeUnix": "1750847435144",
+        "distance": 0.7589088,
+        "id": "97e7d9f3-966e-430a-b115-f561bbc3931c"
+      },
+      "content": "Q: Welche typischen Probleme treten bei der Materialpass-Implementierung auf und wie werden sie gelöst? A: Typische Probleme beinhalten die Datenintegration und den Import von Materialpass-Daten sowie die Entscheidung über benötigte Materialeigenschaften. Die Lösungsansätze umfassen diagnostische Pfade zur Erkennung von Systemmeldungen beim Import und Konsistenzprüfungen während der Prozesssimulation.",
+      "interview_id": "interview_57",
+      "interview_stage": 6,
+      "interview_step": 1,
+      "start_timestamp": 1750847435.1374555,
+      "tag": [
+        "Materialpass-Implementierung",
+        "Datenintegration",
+        "Prozesssimulation"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.619765043258667,
+        "creationTimeUnix": "1749149094289",
+        "distance": 0.7604699,
+        "id": "9cf74c98-5e96-495e-b200-3961f9d07d2c"
+      },
+      "content": "Q: Wie wird die Materialverfolgung in Microsoft Business Central im Stahlhandel bei komplexen Artikelstrukturen implementiert? A: Die Besonderheit ist, dass nicht nur Artikelnummern verwendet werden, sondern Artikel einer Materialart zugeordnet werden. Wenn beispielsweise Artikel 4711 die Materialart Flachstahl hat, kann dieser Artikel aus verschiedenen Eigenschaften definiert werden. Parallel dazu gibt es eine Duplikatsprüfung, die in den meisten Fällen aktiviert ist und verhindert, dass Artikel doppelt im System angelegt werden.",
+      "interview_id": "interview_146",
+      "interview_stage": 3,
+      "interview_step": 3,
+      "start_timestamp": 1749149094.28532,
+      "tag": [
+        "Materialverfügung",
+        "Business Central",
+        "Stahlhandel",
+        "Duplikatsprüfung"
+      ]
+    },
+    {
+      "_additional": {
+        "certainty": 0.6195287108421326,
+        "creationTimeUnix": "1750873969921",
+        "distance": 0.7609426,
+        "id": "3d8eca6f-3c55-4022-86e4-ee478e7c8509"
+      },
+      "content": "Q: Wer ist für das Testen und die Wartung von Individualanpassungen in einem ERP-System verantwortlich? A: Der Kunde wird zeitnah darüber informiert, dass er für das selbstständige Testen und die Wartung aller von ihm beauftragten Individualisierungen selbst zuständig ist.",
+      "interview_id": "new_interview_147",
+      "interview_stage": 5,
+      "interview_step": 3,
+      "start_timestamp": 1750873969.1048796,
+      "tag": [
+        "ERP-System",
+        "Individualanpassungen",
+        "Kundenverantwortung",
+        "Testen Wartung"
+      ]
+    },
+    {
+      "content": "Also ich probier den ja häufiger aus, der probiert der funktioniert häufig.\nNicht das ist echt ein Schwachpunkt. Ja, vielleicht sollte man. Ich habe \nauch gedacht, dass man sagt, man kann auch mit Kay Konik. Haben wir \ngesagt, nur mit Kay Konik Termine ausmachen? Nee, auch oder?\nJelena Maric 3:14\nOK.\nJa, sprecht mit ihm, steht in deinem Posting. Ja, OK, ich werde auf jeden \nFall Mike noch\nElizaveta Ivchenko 3:21\nJa.\nPeter 3:27\nJa, also vielleicht war das so. Ich würde sagen, ja.\nJelena Maric 3:31\nO. K., ich spreche noch mal mit ihm. Die Corporate Brain Images haben \nwir an die Grafikerin gesendet zwecks Überarbeitung. Jetzt braucht ihr \nnoch mal ein explizites, also die braucht ein Briefing jetzt erst mal, also \nwir haben es noch nicht geschickt, sie bekommt jetzt erst mal noch ein \nBriefing zwecks Änderung und was uns daran wichtig ist.\nAktuell bearbeiten die Lisa und ich prioritätsmäßig die Aufgaben im Trello \nvom Olli. Da sind einige Sachen noch zu tun, auf jeden Fall. Und am Donnerstag \nhaben wir wieder unser Follow-up-Termin mit ihm. Ansonsten, Mailing und \nWebinarteilnehmer. Das Mailing ist an Web an Teilnehmer und an No \nShows versendet werden mit der Webinaraufzeichnung.\nPeter 3:57\nAnd.\nI move.\nDropline.\nHm.\nJelena Maric 4:17\nEs ist auch alles raus. Über Hubspot haben wir das gemacht und Lisa hat \ndie Blogbeiträge und die sind online auf der Webseite und hat irgendwas \nnoch an an. Also, die Blogbeiträge sind noch an die Pressebox gesendet. Elizaveta Ivchenko 4:29\nPressable.\nPeter 4:33\nPossible.\nJelena Maric 4:35\nAnsonsten Visitenkarten sind die Bank.\nPeter 4:35\ngenau, weil ich hatte kurz mit dem Olli, ach so, ach so, nee, mach du \nerstmal, ich hab genau, sorry, nee, nee, weil auch nicht, find ich super, \ndass das jetzt so, weil Olli meinte nur, ja, mich am Wochenende, na ja, so\nJelena Maric 4:38\nIs out.\nTell me.\nPeter 4:48\nmal so 'n Plan sehen. Er meinte, er wird, wie er jetzt gesagt, ihr müsst das\nschaffen, weil da viel zu tun ist, wegen Webinar und Blogbeitrag. Da hab \nich so gehört, der Blogbeitrag, ich mein, ich hoffe, ne, das wär mir echt \nwichtig, dass ihr da auch mit Tools arbeitet. Das ist ja\nNicht lang und so ein Mailing ist ja auch nichts, weil ich kann mir gar nicht \nvorstellen, weil wir kommen nicht zur Kampagne wegen Blog und \nWebinar. Dann habe ich das falsch verstanden, habe ich mich ein bisschen\ngewundert.\nWeiß nicht, werde erstmal falsch verstanden.\nJelena Maric 5:16\nNee, also weiß ich nicht die.",
+      "source_title": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.7780512571334839
+      }
+    },
+    {
+      "content": "Jelena Maric 1:08:49\nOkay.\nOlli 1:08:50\nNa, das sollten wir uns also, das, das, das sollten wir uns dann einmal \nangucken.\nProf. Peter Gentsch 1:08:54\nund und und wichtig aus meiner Erfahrung heraus, was immer ganz \nwichtig ist, immer wer, weil es immer dieses wir müssten, ne, dann war ja \nso irgendjemand wird schon mal. Also meine Erfahrung ist nur, vielleicht \ndann als Follow-up, Olli, dass wir dem genau wissen, O. K., guck mal,\nOlli 1:08:55\nYeah.\nProf. Peter Gentsch 1:09:09\nJelly, mach das. Lisa, mach das. Peter, mach das. Olli, mach das. Ja, weil \nsonst ist es so. Ah ja, ja.\nOlli 1:09:10\nAh, yeah, I'm jedenfalls.\nJa, ja, absolut. Also habt ihr in irgendeiner Form ein Projektmanagement-\nTool gerade im Einsatz?\nAlso, so sagen wir mal, sowas wie ein Jira oder ein Trello oder ein Awork \nTrello.\nElizaveta Ivchenko 1:09:22\nEin bisschen.\nRight a little one this ****, yeah.\nJelena Maric 1:09:25\nTrennung haben wir.\nProf. Peter Gentsch 1:09:25 Hello, hello, genau, können wir, können wir Olli Zugang geben?\nJelena Maric 1:09:27\nTrello haben wir. Elizaveta Ivchenko 1:09:28\nDumm.\nÄhm, ja.\nJelena Maric 1:09:32\nJa, ich glaub schon.\nOlli 1:09:32\nJa, weil dann lass uns doch auch auch dafür also ich bin immer ein großer \nFreund davon von von so einem einfachen Prello Board reicht auch \nerstmal ne wo wir sagen das hat dann aktiv pausiert, wartet und und in \nUmsetzung und fertig irgendwie so 34 Phasen.\nJelena Maric 1:09:39\nJa.\nOlli 1:09:48\nUnd dann schieben wir uns da die Dinger da entsprechend hin, dass wir \neben auch genau wissen, wo welches To-Do ist.\nJelena Maric 1:09:56\nJa.\nOlli 1:09:56\nJa, weil weil dann ist es für mich immer ganz konkret. Sonst gehen wir \nnämlich immer aus dem Call raus und dann denkt so 'n bisschen, ja, der \neine macht das, der andere macht das. Hier jetzt gerade ist in aus meiner \nSicht eben noch nicht der Anspruch, dass jetzt jeder gerade losläuft, \nsondern ich hab jetzt noch besser verstanden,\nentsprechend, wo die Pain Points liegen. Ich habe jetzt mir diese 3",
+      "source_title": "9eb51ec0-b0b7-4344-967f-a608215090e7.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.7859717011451721
+      }
+    },
+    {
+      "content": "Olli 1:08:14\nDie, die ja auch Hebel haben, also Kampagne führt zu neuen Leads, die \naber auch nur dann gut werden, wenn wir, wenn wir das zweite Thema \nhalt haben, wenn wir wissen, wir haben ein Lead. Wie gehen wir mit dem \nentsprechend weiter um? Und da können wir uns auch Hubspot wiederum,\ndas eigentlich passen alle 3 gut zusammen.\nWeil auch Hubspot hat da wiederum Möglichkeiten, auch individuell auf \nden jeweiligen User zu reagieren und dann halt auch wiederum Mailings \nrauszuschicken oder noch mal eine Frage zu schicken, ne und oder nach \neinem Termin zu fragen. oder oder Das können wir ja in Hubspot auch \nabbilden, so ein Flow.\nProf. Peter Gentsch 1:08:47\nYeah. Jelena Maric 1:08:49\nOkay.\nOlli 1:08:50\nNa, das sollten wir uns also, das, das, das sollten wir uns dann einmal \nangucken.\nProf. Peter Gentsch 1:08:54\nund und und wichtig aus meiner Erfahrung heraus, was immer ganz \nwichtig ist, immer wer, weil es immer dieses wir müssten, ne, dann war ja \nso irgendjemand wird schon mal. Also meine Erfahrung ist nur, vielleicht \ndann als Follow-up, Olli, dass wir dem genau wissen, O. K., guck mal,\nOlli 1:08:55\nYeah.\nProf. Peter Gentsch 1:09:09\nJelly, mach das. Lisa, mach das. Peter, mach das. Olli, mach das. Ja, weil \nsonst ist es so. Ah ja, ja.\nOlli 1:09:10\nAh, yeah, I'm jedenfalls.\nJa, ja, absolut. Also habt ihr in irgendeiner Form ein Projektmanagement-\nTool gerade im Einsatz?\nAlso, so sagen wir mal, sowas wie ein Jira oder ein Trello oder ein Awork \nTrello.\nElizaveta Ivchenko 1:09:22\nEin bisschen.\nRight a little one this ****, yeah.\nJelena Maric 1:09:25\nTrennung haben wir.\nProf. Peter Gentsch 1:09:25 Hello, hello, genau, können wir, können wir Olli Zugang geben?\nJelena Maric 1:09:27\nTrello haben wir.",
+      "source_title": "9eb51ec0-b0b7-4344-967f-a608215090e7.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.7965995669364929
+      }
+    },
+    {
+      "content": "es nicht machen, ne?\nJelena Maric 17:32\nAlso.\nPeter 17:32\nWeil er wird es nicht machen, ne?\nJelena Maric 17:35\nJa.\nPeter 17:36\nDunedings insights for P28.\nElizaveta Ivchenko 17:39\nAlso ich persönlich finde es für mich, also meine Aufgabe sind kurz erklärt.\nAlso mir fällt es schwierig und auch unklar, was was genau ich mache. \nAlso Lidmagneten gehen, wo war das, das irgendwo hat er geschickt. Peter 17:49\nI do drive.\nElizaveta Ivchenko 17:55\nUnsere Chart mit Lidmagneten verwenden. Ah, das hast du gemacht. O.K.\nJelena Maric 17:56\nDas hab ich, das hab ich schon gemacht.\nJa, also ich habe jetzt solche Sachen gemacht, wo ich zwei hinterlegt war \nund auch andere Sachen, wo ich jetzt nicht hinterlegt war, weil ich auch \neinfach gesehen habe, dass die Verteilung er hat das ja auch alles nur mit \nChlord gemacht, in Anführungsstrichen. Das heißt, Chlord hat dann.\nElizaveta Ivchenko 18:01\nPulling.\nJelena Maric 18:16\nkennt ja weder Lisa noch mich. Das heißt, der hat jetzt einfach Lisa gefühlt\n97 Aufgaben gegeben und mir 2. Deswegen habe ich jetzt die Sachen, die \nich erledigen konnte, gestern und heute erledigt. Viel hat auch mit \nRecherche zu tun, was eben nicht eine kurze Aufgabe ist. Das ist dann so \n'ne Recherche mit\nGerichtsurteil in British Columbia, irgendein Tribunal sollen wir lesen und \ndie Schadenserhöhung. Und ich weiß nicht genau, OK, für was ist das am Ende des Tages, aber OK. Und die Recherche von irgendwelchen anderen \nerfundenen Präzedenzfällen.\nPeter 18:40\nTell me.\nMhm.\nJelena Maric 18:52\nDa dauert 'ne Recherche, Recherche und die Quellenangaben, um zu \ngucken, ob das alles richtig ist oder nicht, halt nicht eben 3 Minuten. Also \nnoch hab ich nicht genau verstanden, für was diese erfundenen \nPräzedenzfälle gut sein sollen, aber O. K.\nPeter 19:07\nNa gut, der Olli, ich mein das nur überlegen, ob wir das schön, ich mein,",
+      "source_title": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.7977962493896484
+      }
+    },
+    {
+      "content": "und so hat man einfach in dieser Entscheidung, wenn man eh schon so\nWie soll man sagen, hyped es über das Produkt, was ja so ist innerhalb \nvom Gespräch, dass es einfach innerhalb von Minuten bestätigt werden \nkann. Und deswegen brauchen wir diese Übersicht, wie du also ne, wie wir\nschon besprochen haben vor Ort, als wir im Büro uns gesehen haben.\nEinfach diese drei unterschiedlichen Pakete. Das beinhaltet das und das \nfertig.\nPeter 12:17\nIt. Jelena Maric 12:19\nJa, also der Mike hatte da drauf reagiert, das war Sonntag Abend oder \nirgendwann, das hat er mir noch mal gesagt, wie wir, wie es ändern kann. \nIch würde das jetzt seinen ganzen, das den Input, den er mir gegeben hat,\nauch noch mal transkribieren, in Cloud hochjagen, dass er mir\nPeter 12:20\nJa.\nSo, jetzt bin ich vergessen.\nJelena Maric 12:33\nDie 3 neuen angepassten Version macht, dass wir den Kunden nicht so \nüberfordern.\nPeter 12:38\nJa, ist gut.\nJelena Maric 12:40\nOK.\nSoll ich mal von oben runter lesen, was in deiner Liste war? Du hattest als \nersten Punkt Match Follow Up.\nPeter 12:46\nJa, ja, ja, ja.\nGenau.\nJelena Maric 12:55\nein aufgeschrieben, magst du da oder hast du da noch\nPeter 12:59\nnur, ob das alles klar ist. Ne, ob das, ob das dann immer gesprochen, ne, \naber nur fragen, ob das raus ist, ob die alles haben mit den Adressen. \nAlter, das muss ich unbedingt, dass ich mich da bedank. Schreibt das jetzt, muss man in meine To-Do-Liste, dass der uns so gegeben hat, ist ja \nmehr als.\nJelena Maric 13:01\nJa, ja.\nAlles raus. Ja, die haben alles.",
+      "source_title": "2a64300d-2b7c-4c11-9484-7488745ef378.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.7983289957046509
+      }
+    },
+    {
+      "content": "zu lange brauchen. Ich habe jetzt heute mal, während ich dieses Seminar \ngehört habe, habe ich ChatGPT einfach mal hier was erstellen lassen. Und \nzwar habe ich das Konzept, was ich.\nJelena Maric 6:49\nYeah.\nOlli 7:03\neuch ja auch geschickt hatte. Das habe ich jetzt genommen und hab \neinmal gesagt, am Beispiel des dieses Engels, ChatGBT lügt, so wie wir \ndas gestern, war das gestern, vorgestern, gestern, gestern. Wie wir das \ngestern kurz im Call besprochen hatten, habe ich einmal gesagt, OK, jetzt \nbricht das mal runter. Jelena Maric 7:13\nJa, gestern.\nElizaveta Ivchenko 7:13\nMhm, this song.\nOlli 7:19\nHab hier reingeschrieben, wen es so gibt. Also, das hier bin ich, das äh, \nähm, bist du, ähm, Jelly, ähm, das bist du, Lisa. Das ist deren Name, ich \nnicht weiß, ähm.\nHier die externe russische Grafikerin, das ist dann Mike, das ist Peter, den \nhab ich als einzigen mit Namen hier gerade versehen und hab dann \ngesagt: 'O. K., nimm mal diese ganzen To-Dos und mach mal detaillierte \nTo-Do-Liste daraus.'\nUnd erstell die halt einmal und da kam dann jetzt 71 To-Dos raus. Also, \ndie jetzt schon relativ kleinteilig sind und auch gleich mit Vorschlägen, \nwas davon\nJelena Maric 7:58\nMhm.\nOlli 8:07\nJa, wer machen könnte.\nJelena Maric 8:10\nMhm.\nOlli 8:12\nWir können also müssen überlegen, wie wir es halt am schlauesten \nmachen. Also, ich glaube tatsächlich, es wäre sinnvoll, wenn wir das hier \neinmal durchgehen, sozusagen, und wir hier einmal festlegen, ob die \nPerson, die hier steht, das wirklich machen kann. Jelena Maric 8:25\nMhm.\nOlli 8:25\nAlso, ich weiß nicht, ob du das im Nachgang vielleicht einmal machst,",
+      "source_title": "9a95c2d1-7204-491b-bedb-0b7680230392.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.8027544021606445
+      }
+    },
+    {
+      "content": "Peter 16:42\nJa.\nGenau so was ausgemacht.\nElizaveta Ivchenko 16:47\nOK, aber ich persönlich, also OK, mit Char GPT, wenn ich was mache, \nmacht mich kein Marketer oder also wir alle können Char GPT verwenden.\nPeter 16:55\nNa, er sagte, das war die Idee. Ich habe ja auch gesagt, ne, also ich \nmeine, ganz klar gesagt, es gab jetzt keine keine Marketing Experten an \nBord oder nee, nee, das macht er, macht das in kleinen Häppchen, da \nwäre es überhaupt kein Problem. Da habe ich gesagt, nur dann \nfunktioniert das, ja, weil wenn ihr jetzt sagt, wir können die Task gar nicht \nmachen, dann dann dann macht das Modell keinen Sinn, weil die Idee war,\nJa, ihr steuert, er hat viel Erfahrung, ne? Er sagt, was man, was man \nmachen muss in kleinen Häppchen. Und dann musst du eben kein \nMarketingguru sein. Er soll der Marketingguru sein, ne? Und er meint, es \nwäre eine einfache kleine Task. Wenn ihr sagt, sind aber nicht einfach und\nklein, dann haben wir ein Problem, weil dann müssen wir es, können wir es nicht machen, ne?\nJelena Maric 17:32\nAlso.\nPeter 17:32\nWeil er wird es nicht machen, ne?\nJelena Maric 17:35\nJa.\nPeter 17:36\nDunedings insights for P28.\nElizaveta Ivchenko 17:39\nAlso ich persönlich finde es für mich, also meine Aufgabe sind kurz erklärt.\nAlso mir fällt es schwierig und auch unklar, was was genau ich mache. \nAlso Lidmagneten gehen, wo war das, das irgendwo hat er geschickt. Peter 17:49\nI do drive.\nElizaveta Ivchenko 17:55\nUnsere Chart mit Lidmagneten verwenden. Ah, das hast du gemacht. O.K.\nJelena Maric 17:56\nDas hab ich, das hab ich schon gemacht.\nJa, also ich habe jetzt solche Sachen gemacht, wo ich zwei hinterlegt war \nund auch andere Sachen, wo ich jetzt nicht hinterlegt war, weil ich auch \neinfach gesehen habe, dass die Verteilung er hat das ja auch alles nur mit \nChlord gemacht, in Anführungsstrichen. Das heißt, Chlord hat dann.\nElizaveta Ivchenko 18:01\nPulling.\nJelena Maric 18:16\nkennt ja weder Lisa noch mich. Das heißt, der hat jetzt einfach Lisa gefühlt\n97 Aufgaben gegeben und mir 2. Deswegen habe ich jetzt die Sachen, die \nich erledigen konnte, gestern und heute erledigt. Viel hat auch mit \nRecherche zu tun, was eben nicht eine kurze Aufgabe ist. Das ist dann so \n'ne Recherche mit\nGerichtsurteil in British Columbia, irgendein Tribunal sollen wir lesen und \ndie Schadenserhöhung. Und ich weiß nicht genau, OK, für was ist das am",
+      "source_title": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "type": "file",
+      "_additional": {
+        "distance": 0.8091583847999573
+      }
+    },
+    {}
+  ],
+  "knowledge_base": [],
+  "examples": [
+    "1. Wie setze man am besten den Materialpass auf? [Kontextübergreifend]\n- Definition der Materialarten:\nZunächst sollte mit dem Kunden geklärt werden, welche Materialien er in seinem Bestand hat.\nOft wird hier als Materialart Stange, Blech, Coil angelegt.\n\n- Definition der Materialeigenschaften:\nGemeinsam mit dem Kunden sollen die Eigenschaften definiert werden, die das Material definieren.\nBei den oben genannten Materialarten sind dies bspw. Länge, Güte und Norm.\nAls nächstes sollte abgestimmt werden, welche Materialeigenschaften frei definierbar sind und welche über eine Auswahl nur erfasst werden können.\nFür die Auswahl muss auf der Eigenschaftskarte das Feld „Eigenschaftswerte verwenden“ aktiviert sein und über die Aktion „Eigenschaftswerte“ die zur Auswahl stehenden Begriffe definiert werden.\nBeispiel:\nEigenschaft: Norm\nMögliche Werte: DIN 17173, EN 10210\n\n- Zuweisung der Materialeigenschaften an die Materialart:\nNach der Definition der Eigenschaften müssen diese der jeweiligen Materialart zugewiesen werden.\nDabei können die Eigenschaften als Verkaufs-, Einkaufs- oder Chargenmerkmal definiert werden.\nVerkaufseigenschaften können über die Belegarten Angebot, Rahmenauftrag, Auftrag abgeändert werden.\nEinkaufseigenschaften können über die Belegarten Bestellung, Rahmenbestellung und Anfrage abgeändert werden. Bei einer Einkaufslieferung werden diese Merkmale an die Charge übertragen.\nChargenmerkmale können pro Charge abgeändert werden. Eigenschaften, die weder als Einkaufs- noch als Verkaufsmerkmal definiert werden, können auf der Charge nicht geändert werden. Diese werden vom Artikel vererbt.\n\n- Definition der Beschreibungsvorlage:\nIn der Beschreibungsvorlage definiert man die Beschreibung und Beschreibung 2 des Artikels/der Charge.\nOft werden hier die Eigenschaften verwendet, die die Abmessungen definieren.\n\n- Definition der Matchcodevorlage:\nDer Matchcode dient allgemein zur Schnellerfassung einer Belegzeile. Dieser wird über die Eigenschaften definiert. Oft wird hier die Güte, Norm sowie die Abmessungen verwendet.\n\n- Zuweisung der Materialarten an die Artikel:\nAuf den Artikeln gibt es das Feld Materialart. Bei der Eingabe der Materialart werden die Eigenschaften aus der Zuordnung an den Artikel übertragen. Über die Factbox können nun die Werte abgeändert werden, sodass der Artikel seine Ausprägungen erhält. Beim Schließen des Editors wird nun die Beschreibung und der Matchcode aktualisiert.\n\n2. Wozu dient der Matchcode? [Kontextbezogen]\nDer Matchcode ist eine Art der Schnellsuche, Schnelleingabe. Definiert wird er meist über Eigenschaftswerte, sodass man bspw. in einem Verkaufsauftrag in dem Feld „Matchcode“ mit den Business-Central-Suchfiltern (*,@) eine Übersicht der treffenden Artikel erhält und diese in der neuen Maske erfassen kann.\n\n3. Was ist die erw. Matchcodesuche? [Kontextbezogen]\nDie erweiterte Matchcodesuche bezieht sich unter anderem auf lagerortspezifischen Bestand und weist gleichzeitig die hinterlegten Chargen aus. Im Gegensatz zur normalen Matchcodesuche ist hier eine Mehrfacherfassung der Artikel möglich und es wird pro Artikel eine eigene Belegzeile angelegt. Zusätzlich ist es möglich, im Verkaufsauftrag direkt auf eine Bestellmenge zu reservieren und die Materialsuche zu verwenden.\n\n4. Was ist die Materialbelegsuche? [Kontextbezogen]\nÜber die Materialbelegsuche kann man alle Belege (Anfrage, Bestellung, Rahmenbestellung, Rechnung, Einkaufslieferung, Einkaufsrechnung, Fertigungsauftrag, Angebot, Auftrag, Rahmenauftrag, Verkaufsrechnung, Verkaufslieferung) ausgeben lassen, die die angegebenen Suchkriterien der Eigenschaften erfüllt.\n\n5. Welche Materialeigenschaften eignen sich am besten für Verkaufsmerkmale? [Kontextübergreifend]\nOft werden nur belegspezifische Eigenschaften angelegt. Beispiele sind Verpackungsgröße, Schnittanzahl, Länge und „Werkszeugnis notwendig“.\nDiese gelten nur für den jeweiligen Verkaufsprozess und werden nicht an den Artikel zurückgeschrieben. Ist das Verkaufsmerkmal gleichzeitig eine Chargeneigenschaft und wird produziert, so erhält die produzierte Charge ebenfalls diese Verkaufseigenschaften.\n\n6. Welche Materialeigenschaften sollte man als Chargenmerkmale definieren? [Kontextübergreifend]\nChargenmerkmale sind oft die Merkmale, die keine Artikelbildung benötigen, sodass Preise oder Bewertungen eingeschlossen werden müssen.\nDie Länge ist im Stahlbereich ein oft genommenes Chargenmerkmal.\n\n7. Was ist der Unterschied zwischen Basisartikel und Variantenartikel? [Kontextübergreifend]\nIn den früheren Business Central/Dynamics NAV Versionen wurde im Stahl-/Metallbereich die Artikelvariante verwendet, um die Beziehungen zu definieren. Ein großer Nachteil war, dass man Varianten keine eigenen Arbeitspläne oder Dimensionen zuweisen konnte. Mit Business Central wurde diese Logik auf die Artikelebene gezogen, sodass ein Variantenartikel immer von einem Basisartikel vererbt wird. An diesem Variantenartikel können je nach der Einrichtung „Fixe Werte nur am Basisartikel editierbar“ nur die Eigenschaften verändert werden, die nicht als Fix gekennzeichnet worden sind. Die damalige Struktur, welche Variantenartikel zu welchen Basisartikel gehören, kann man in der Materialbestandsliste anzeigen lassen.\n\n8. Wie lange braucht man, um das Modul Materialeigenschaften final zu definieren? [Kontextübergreifend]\nIn jedem Projekt wird der Aufbau des Moduls, später genannt Materialpass, mehrmals neu angelegt oder abgeändert. Bei den jeweiligen Prozessdurchläufen (Einkauf/Verkauf/Produktion/Lager) ergeben sich oft neue Gegebenheiten, die eine Änderung der Materialeigenschaftszuordnungen zur Folge hat.\nAuch das Thema der Auswertung und Bewertung spielt eine große Rolle, da über den Materialpass schlussendlich die Artikel und deren Anzahl definiert wird.\nDaher kann man nicht genau sagen, wie lange man zum finalen Aufbau braucht.\nIn der Regel wird der Materialpass 4- bis 5-mal neu aufgesetzt.\n\n9. Kann man den Materialpass branchenübergreifend (Stahl/Metall – Veredelung) aufbauen? [Kontextübergreifend]\nNein, auf Grund der unterschiedlichen Branchenanforderungen macht ein gemeinsamer Materialpass keinen Sinn.\nDer Materialpass sollte in eigene Materialarten mit eigenen Eigenschaften gegliedert werden."
+  ],
+  "special_context_chunks": [],
+  "file_chunks": [
+    {
+      "chunkId": "385e9e12-c721-4466-9d9c-32dfa837b970",
+      "text": "Peter 17:49\nI do drive.\nElizaveta Ivchenko 17:55\nUnsere Chart mit Lidmagneten verwenden. Ah, das hast du gemacht. O.K.\nJelena Maric 17:56\nDas hab ich, das hab ich schon gemacht.\nJa, also ich habe jetzt solche Sachen gemacht, wo ich zwei hinterlegt war \nund auch andere Sachen, wo ich jetzt nicht hinterlegt war, weil ich auch \neinfach gesehen habe, dass die Verteilung er hat das ja auch alles nur mit \nChlord gemacht, in Anführungsstrichen. Das heißt, Chlord hat dann.\nElizaveta Ivchenko 18:01\nPulling.\nJelena Maric 18:16\nkennt ja weder Lisa noch mich. Das heißt, der hat jetzt einfach Lisa gefühlt\n97 Aufgaben gegeben und mir 2. Deswegen habe ich jetzt die Sachen, die \nich erledigen konnte, gestern und heute erledigt. Viel hat auch mit \nRecherche zu tun, was eben nicht eine kurze Aufgabe ist. Das ist dann so \n'ne Recherche mit\nGerichtsurteil in British Columbia, irgendein Tribunal sollen wir lesen und \ndie Schadenserhöhung. Und ich weiß nicht genau, OK, für was ist das am",
+      "context": "es nicht machen, ne?\nJelena Maric 17:32\nAlso.\nPeter 17:32\nWeil er wird es nicht machen, ne?\nJelena Maric 17:35\nJa.\nPeter 17:36\nDunedings insights for P28.\nElizaveta Ivchenko 17:39\nAlso ich persönlich finde es für mich, also meine Aufgabe sind kurz erklärt.\nAlso mir fällt es schwierig und auch unklar, was was genau ich mache. \nAlso Lidmagneten gehen, wo war das, das irgendwo hat er geschickt. Peter 17:49\nI do drive.\nElizaveta Ivchenko 17:55\nUnsere Chart mit Lidmagneten verwenden. Ah, das hast du gemacht. O.K.\nJelena Maric 17:56\nDas hab ich, das hab ich schon gemacht.\nJa, also ich habe jetzt solche Sachen gemacht, wo ich zwei hinterlegt war \nund auch andere Sachen, wo ich jetzt nicht hinterlegt war, weil ich auch \neinfach gesehen habe, dass die Verteilung er hat das ja auch alles nur mit \nChlord gemacht, in Anführungsstrichen. Das heißt, Chlord hat dann.\nElizaveta Ivchenko 18:01\nPulling.\nJelena Maric 18:16\nkennt ja weder Lisa noch mich. Das heißt, der hat jetzt einfach Lisa gefühlt\n97 Aufgaben gegeben und mir 2. Deswegen habe ich jetzt die Sachen, die \nich erledigen konnte, gestern und heute erledigt. Viel hat auch mit \nRecherche zu tun, was eben nicht eine kurze Aufgabe ist. Das ist dann so \n'ne Recherche mit\nGerichtsurteil in British Columbia, irgendein Tribunal sollen wir lesen und \ndie Schadenserhöhung. Und ich weiß nicht genau, OK, für was ist das am Ende des Tages, aber OK. Und die Recherche von irgendwelchen anderen \nerfundenen Präzedenzfällen.\nPeter 18:40\nTell me.\nMhm.\nJelena Maric 18:52\nDa dauert 'ne Recherche, Recherche und die Quellenangaben, um zu \ngucken, ob das alles richtig ist oder nicht, halt nicht eben 3 Minuten. Also \nnoch hab ich nicht genau verstanden, für was diese erfundenen \nPräzedenzfälle gut sein sollen, aber O. K.\nPeter 19:07\nNa gut, der Olli, ich mein das nur überlegen, ob wir das schön, ich mein,",
+      "pageNumber": 17,
+      "finalScore": 0.5022037506103516,
+      "distance": 0.7977962493896484,
+      "hasContext": true,
+      "fileName": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "vectorScore": 0.20220375061035156,
+      "prevText": "es nicht machen, ne?\nJelena Maric 17:32\nAlso.\nPeter 17:32\nWeil er wird es nicht machen, ne?\nJelena Maric 17:35\nJa.\nPeter 17:36\nDunedings insights for P28.\nElizaveta Ivchenko 17:39\nAlso ich persönlich finde es für mich, also meine Aufgabe sind kurz erklärt.\nAlso mir fällt es schwierig und auch unklar, was was genau ich mache. \nAlso Lidmagneten gehen, wo war das, das irgendwo hat er geschickt.",
+      "nextText": "Ende des Tages, aber OK. Und die Recherche von irgendwelchen anderen \nerfundenen Präzedenzfällen.\nPeter 18:40\nTell me.\nMhm.\nJelena Maric 18:52\nDa dauert 'ne Recherche, Recherche und die Quellenangaben, um zu \ngucken, ob das alles richtig ist oder nicht, halt nicht eben 3 Minuten. Also \nnoch hab ich nicht genau verstanden, für was diese erfundenen \nPräzedenzfälle gut sein sollen, aber O. K.\nPeter 19:07\nNa gut, der Olli, ich mein das nur überlegen, ob wir das schön, ich mein,"
+    },
+    {
+      "chunkId": "b08bcecc-9fc9-437d-83fa-eb5c730b3533",
+      "text": "es nicht machen, ne?\nJelena Maric 17:32\nAlso.\nPeter 17:32\nWeil er wird es nicht machen, ne?\nJelena Maric 17:35\nJa.\nPeter 17:36\nDunedings insights for P28.\nElizaveta Ivchenko 17:39\nAlso ich persönlich finde es für mich, also meine Aufgabe sind kurz erklärt.\nAlso mir fällt es schwierig und auch unklar, was was genau ich mache. \nAlso Lidmagneten gehen, wo war das, das irgendwo hat er geschickt.",
+      "context": "Peter 16:42\nJa.\nGenau so was ausgemacht.\nElizaveta Ivchenko 16:47\nOK, aber ich persönlich, also OK, mit Char GPT, wenn ich was mache, \nmacht mich kein Marketer oder also wir alle können Char GPT verwenden.\nPeter 16:55\nNa, er sagte, das war die Idee. Ich habe ja auch gesagt, ne, also ich \nmeine, ganz klar gesagt, es gab jetzt keine keine Marketing Experten an \nBord oder nee, nee, das macht er, macht das in kleinen Häppchen, da \nwäre es überhaupt kein Problem. Da habe ich gesagt, nur dann \nfunktioniert das, ja, weil wenn ihr jetzt sagt, wir können die Task gar nicht \nmachen, dann dann dann macht das Modell keinen Sinn, weil die Idee war,\nJa, ihr steuert, er hat viel Erfahrung, ne? Er sagt, was man, was man \nmachen muss in kleinen Häppchen. Und dann musst du eben kein \nMarketingguru sein. Er soll der Marketingguru sein, ne? Und er meint, es \nwäre eine einfache kleine Task. Wenn ihr sagt, sind aber nicht einfach und\nklein, dann haben wir ein Problem, weil dann müssen wir es, können wir es nicht machen, ne?\nJelena Maric 17:32\nAlso.\nPeter 17:32\nWeil er wird es nicht machen, ne?\nJelena Maric 17:35\nJa.\nPeter 17:36\nDunedings insights for P28.\nElizaveta Ivchenko 17:39\nAlso ich persönlich finde es für mich, also meine Aufgabe sind kurz erklärt.\nAlso mir fällt es schwierig und auch unklar, was was genau ich mache. \nAlso Lidmagneten gehen, wo war das, das irgendwo hat er geschickt. Peter 17:49\nI do drive.\nElizaveta Ivchenko 17:55\nUnsere Chart mit Lidmagneten verwenden. Ah, das hast du gemacht. O.K.\nJelena Maric 17:56\nDas hab ich, das hab ich schon gemacht.\nJa, also ich habe jetzt solche Sachen gemacht, wo ich zwei hinterlegt war \nund auch andere Sachen, wo ich jetzt nicht hinterlegt war, weil ich auch \neinfach gesehen habe, dass die Verteilung er hat das ja auch alles nur mit \nChlord gemacht, in Anführungsstrichen. Das heißt, Chlord hat dann.\nElizaveta Ivchenko 18:01\nPulling.\nJelena Maric 18:16\nkennt ja weder Lisa noch mich. Das heißt, der hat jetzt einfach Lisa gefühlt\n97 Aufgaben gegeben und mir 2. Deswegen habe ich jetzt die Sachen, die \nich erledigen konnte, gestern und heute erledigt. Viel hat auch mit \nRecherche zu tun, was eben nicht eine kurze Aufgabe ist. Das ist dann so \n'ne Recherche mit\nGerichtsurteil in British Columbia, irgendein Tribunal sollen wir lesen und \ndie Schadenserhöhung. Und ich weiß nicht genau, OK, für was ist das am",
+      "pageNumber": 16,
+      "finalScore": 0.4908416152000427,
+      "distance": 0.8091583847999573,
+      "hasContext": true,
+      "fileName": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "vectorScore": 0.19084161520004272,
+      "prevText": "Peter 16:42\nJa.\nGenau so was ausgemacht.\nElizaveta Ivchenko 16:47\nOK, aber ich persönlich, also OK, mit Char GPT, wenn ich was mache, \nmacht mich kein Marketer oder also wir alle können Char GPT verwenden.\nPeter 16:55\nNa, er sagte, das war die Idee. Ich habe ja auch gesagt, ne, also ich \nmeine, ganz klar gesagt, es gab jetzt keine keine Marketing Experten an \nBord oder nee, nee, das macht er, macht das in kleinen Häppchen, da \nwäre es überhaupt kein Problem. Da habe ich gesagt, nur dann \nfunktioniert das, ja, weil wenn ihr jetzt sagt, wir können die Task gar nicht \nmachen, dann dann dann macht das Modell keinen Sinn, weil die Idee war,\nJa, ihr steuert, er hat viel Erfahrung, ne? Er sagt, was man, was man \nmachen muss in kleinen Häppchen. Und dann musst du eben kein \nMarketingguru sein. Er soll der Marketingguru sein, ne? Und er meint, es \nwäre eine einfache kleine Task. Wenn ihr sagt, sind aber nicht einfach und\nklein, dann haben wir ein Problem, weil dann müssen wir es, können wir",
+      "nextText": "Peter 17:49\nI do drive.\nElizaveta Ivchenko 17:55\nUnsere Chart mit Lidmagneten verwenden. Ah, das hast du gemacht. O.K.\nJelena Maric 17:56\nDas hab ich, das hab ich schon gemacht.\nJa, also ich habe jetzt solche Sachen gemacht, wo ich zwei hinterlegt war \nund auch andere Sachen, wo ich jetzt nicht hinterlegt war, weil ich auch \neinfach gesehen habe, dass die Verteilung er hat das ja auch alles nur mit \nChlord gemacht, in Anführungsstrichen. Das heißt, Chlord hat dann.\nElizaveta Ivchenko 18:01\nPulling.\nJelena Maric 18:16\nkennt ja weder Lisa noch mich. Das heißt, der hat jetzt einfach Lisa gefühlt\n97 Aufgaben gegeben und mir 2. Deswegen habe ich jetzt die Sachen, die \nich erledigen konnte, gestern und heute erledigt. Viel hat auch mit \nRecherche zu tun, was eben nicht eine kurze Aufgabe ist. Das ist dann so \n'ne Recherche mit\nGerichtsurteil in British Columbia, irgendein Tribunal sollen wir lesen und \ndie Schadenserhöhung. Und ich weiß nicht genau, OK, für was ist das am"
+    },
+    {
+      "chunkId": "93d3ab20-90ce-4036-95cf-4655b3beb825",
+      "text": "Hello, hello, genau, können wir, können wir Olli Zugang geben?\nJelena Maric 1:09:27\nTrello haben wir.",
+      "context": "Jelena Maric 1:08:49\nOkay.\nOlli 1:08:50\nNa, das sollten wir uns also, das, das, das sollten wir uns dann einmal \nangucken.\nProf. Peter Gentsch 1:08:54\nund und und wichtig aus meiner Erfahrung heraus, was immer ganz \nwichtig ist, immer wer, weil es immer dieses wir müssten, ne, dann war ja \nso irgendjemand wird schon mal. Also meine Erfahrung ist nur, vielleicht \ndann als Follow-up, Olli, dass wir dem genau wissen, O. K., guck mal,\nOlli 1:08:55\nYeah.\nProf. Peter Gentsch 1:09:09\nJelly, mach das. Lisa, mach das. Peter, mach das. Olli, mach das. Ja, weil \nsonst ist es so. Ah ja, ja.\nOlli 1:09:10\nAh, yeah, I'm jedenfalls.\nJa, ja, absolut. Also habt ihr in irgendeiner Form ein Projektmanagement-\nTool gerade im Einsatz?\nAlso, so sagen wir mal, sowas wie ein Jira oder ein Trello oder ein Awork \nTrello.\nElizaveta Ivchenko 1:09:22\nEin bisschen.\nRight a little one this ****, yeah.\nJelena Maric 1:09:25\nTrennung haben wir.\nProf. Peter Gentsch 1:09:25 Hello, hello, genau, können wir, können wir Olli Zugang geben?\nJelena Maric 1:09:27\nTrello haben wir. Elizaveta Ivchenko 1:09:28\nDumm.\nÄhm, ja.\nJelena Maric 1:09:32\nJa, ich glaub schon.\nOlli 1:09:32\nJa, weil dann lass uns doch auch auch dafür also ich bin immer ein großer \nFreund davon von von so einem einfachen Prello Board reicht auch \nerstmal ne wo wir sagen das hat dann aktiv pausiert, wartet und und in \nUmsetzung und fertig irgendwie so 34 Phasen.\nJelena Maric 1:09:39\nJa.\nOlli 1:09:48\nUnd dann schieben wir uns da die Dinger da entsprechend hin, dass wir \neben auch genau wissen, wo welches To-Do ist.\nJelena Maric 1:09:56\nJa.\nOlli 1:09:56\nJa, weil weil dann ist es für mich immer ganz konkret. Sonst gehen wir \nnämlich immer aus dem Call raus und dann denkt so 'n bisschen, ja, der \neine macht das, der andere macht das. Hier jetzt gerade ist in aus meiner \nSicht eben noch nicht der Anspruch, dass jetzt jeder gerade losläuft, \nsondern ich hab jetzt noch besser verstanden,\nentsprechend, wo die Pain Points liegen. Ich habe jetzt mir diese 3",
+      "pageNumber": 65,
+      "finalScore": 0.4640282988548279,
+      "distance": 0.7859717011451721,
+      "hasContext": true,
+      "fileName": "9eb51ec0-b0b7-4344-967f-a608215090e7.docx",
+      "vectorScore": 0.21402829885482788,
+      "prevText": "Jelena Maric 1:08:49\nOkay.\nOlli 1:08:50\nNa, das sollten wir uns also, das, das, das sollten wir uns dann einmal \nangucken.\nProf. Peter Gentsch 1:08:54\nund und und wichtig aus meiner Erfahrung heraus, was immer ganz \nwichtig ist, immer wer, weil es immer dieses wir müssten, ne, dann war ja \nso irgendjemand wird schon mal. Also meine Erfahrung ist nur, vielleicht \ndann als Follow-up, Olli, dass wir dem genau wissen, O. K., guck mal,\nOlli 1:08:55\nYeah.\nProf. Peter Gentsch 1:09:09\nJelly, mach das. Lisa, mach das. Peter, mach das. Olli, mach das. Ja, weil \nsonst ist es so. Ah ja, ja.\nOlli 1:09:10\nAh, yeah, I'm jedenfalls.\nJa, ja, absolut. Also habt ihr in irgendeiner Form ein Projektmanagement-\nTool gerade im Einsatz?\nAlso, so sagen wir mal, sowas wie ein Jira oder ein Trello oder ein Awork \nTrello.\nElizaveta Ivchenko 1:09:22\nEin bisschen.\nRight a little one this ****, yeah.\nJelena Maric 1:09:25\nTrennung haben wir.\nProf. Peter Gentsch 1:09:25",
+      "nextText": "Elizaveta Ivchenko 1:09:28\nDumm.\nÄhm, ja.\nJelena Maric 1:09:32\nJa, ich glaub schon.\nOlli 1:09:32\nJa, weil dann lass uns doch auch auch dafür also ich bin immer ein großer \nFreund davon von von so einem einfachen Prello Board reicht auch \nerstmal ne wo wir sagen das hat dann aktiv pausiert, wartet und und in \nUmsetzung und fertig irgendwie so 34 Phasen.\nJelena Maric 1:09:39\nJa.\nOlli 1:09:48\nUnd dann schieben wir uns da die Dinger da entsprechend hin, dass wir \neben auch genau wissen, wo welches To-Do ist.\nJelena Maric 1:09:56\nJa.\nOlli 1:09:56\nJa, weil weil dann ist es für mich immer ganz konkret. Sonst gehen wir \nnämlich immer aus dem Call raus und dann denkt so 'n bisschen, ja, der \neine macht das, der andere macht das. Hier jetzt gerade ist in aus meiner \nSicht eben noch nicht der Anspruch, dass jetzt jeder gerade losläuft, \nsondern ich hab jetzt noch besser verstanden,\nentsprechend, wo die Pain Points liegen. Ich habe jetzt mir diese 3"
+    },
+    {
+      "chunkId": "86f30453-dcc5-4dfe-a0ca-b5d42c84c174",
+      "text": "Jelena Maric 19:36\nTrello benutzen wir, ist schon aufgeführt.\nElizaveta Ivchenko 19:37\nkommt ah, Trello Trello ist ja kostenfrei Version von Trello. Legal hat \nLinkedIn Premium. Ich hab ein normale LinkedIn. Outlook für E-Mails. Was \nnoch haben wir?\nOlli 19:41\nJa, genau.\nJa, klar.\nElizaveta Ivchenko 19:52\nAlso, hab Sport, Starter, was noch?\nWer ist eigentlich Timio?\nYeah.\nOlli 20:03\nIch hab auch eine, ich hab das diese To-Dos hier auch so erstellen lassen, \ndass es hier direkt einen Trello Import gibt.\nDass man hier einmal im Trello Board die importieren kann, damit man die\nnicht abtippen muss.\nElizaveta Ivchenko 20:19\nMhm.\nOlli 20:22\nDas könnte dann vielleicht einer von euch.\nMal austesten, ob das klappt. Ansonsten, wenn das nicht geht, gibt es hier\nnoch eine Copy-Paste-Anleitung für Trello.\nElizaveta Ivchenko 20:28\nCut.\nOlli 20:33\nAber hier wär eigentlich hier Trello Board anlegen mit List so und dann \nimport to Trello bei Blue Cat installieren und dann diese C.S.V. hier, also",
+      "context": "Elizaveta Ivchenko 18:34\nAudience OK.\nMhm.\nJelena Maric 18:44\nMhm.\nOlli 18:47\nAh, OK, vielleicht ist er auch da. Einfach da, OK.\nJa, dann müssen wir die Landingpage entsprechend.\nAber wenn wir WordPress haben, dann können wir wahrscheinlich auch \nviel einfach selber.\nAlso, WordPress hat auch ganz viele Plugins.\nJelena Maric 19:06\nAlso, wenn wir das haben, glaube ich, also ich habe damit noch keine \nErfahrung, aber Lisa meinte schon, dass es relativ einfach ist. Da \nbrauchen wir den Mike. Ja, dass wir den Mike dann nicht brauchen.\nElizaveta Ivchenko 19:06\nOkay.\nBisschen Erfahrung hab ich, yeah, your Michael taqueren.\nOlli 19:17\nJa, also auf jeden Fall viel weniger, genau.\nElizaveta Ivchenko 19:19\nMhm.\nJelena Maric 19:20\nYeah.\nJa.\nElizaveta Ivchenko 19:24\nWas noch? Also, ich verwende auch ein paar Tools für Buchhaltung, aber \ndas ist nicht relevant.\nIch glaube was.\nLinkedIn verwenden wir, aber das ist, also ist. Jelena Maric 19:36\nTrello benutzen wir, ist schon aufgeführt.\nElizaveta Ivchenko 19:37\nkommt ah, Trello Trello ist ja kostenfrei Version von Trello. Legal hat \nLinkedIn Premium. Ich hab ein normale LinkedIn. Outlook für E-Mails. Was \nnoch haben wir?\nOlli 19:41\nJa, genau.\nJa, klar.\nElizaveta Ivchenko 19:52\nAlso, hab Sport, Starter, was noch?\nWer ist eigentlich Timio?\nYeah.\nOlli 20:03\nIch hab auch eine, ich hab das diese To-Dos hier auch so erstellen lassen, \ndass es hier direkt einen Trello Import gibt.\nDass man hier einmal im Trello Board die importieren kann, damit man die\nnicht abtippen muss.\nElizaveta Ivchenko 20:19\nMhm.\nOlli 20:22\nDas könnte dann vielleicht einer von euch.\nMal austesten, ob das klappt. Ansonsten, wenn das nicht geht, gibt es hier\nnoch eine Copy-Paste-Anleitung für Trello.\nElizaveta Ivchenko 20:28\nCut.\nOlli 20:33\nAber hier wär eigentlich hier Trello Board anlegen mit List so und dann \nimport to Trello bei Blue Cat installieren und dann diese C.S.V. hier, also diesen den Reiter C.S.V. importieren. Ja, und dann wären hier gleich \ntheoretisch diese To-Dos alle richtig drin.",
+      "pageNumber": 20,
+      "finalScore": 0.45389754772186275,
+      "distance": 0.7461024522781372,
+      "hasContext": true,
+      "fileName": "9a95c2d1-7204-491b-bedb-0b7680230392.docx",
+      "vectorScore": 0.2538975477218628,
+      "prevText": "Elizaveta Ivchenko 18:34\nAudience OK.\nMhm.\nJelena Maric 18:44\nMhm.\nOlli 18:47\nAh, OK, vielleicht ist er auch da. Einfach da, OK.\nJa, dann müssen wir die Landingpage entsprechend.\nAber wenn wir WordPress haben, dann können wir wahrscheinlich auch \nviel einfach selber.\nAlso, WordPress hat auch ganz viele Plugins.\nJelena Maric 19:06\nAlso, wenn wir das haben, glaube ich, also ich habe damit noch keine \nErfahrung, aber Lisa meinte schon, dass es relativ einfach ist. Da \nbrauchen wir den Mike. Ja, dass wir den Mike dann nicht brauchen.\nElizaveta Ivchenko 19:06\nOkay.\nBisschen Erfahrung hab ich, yeah, your Michael taqueren.\nOlli 19:17\nJa, also auf jeden Fall viel weniger, genau.\nElizaveta Ivchenko 19:19\nMhm.\nJelena Maric 19:20\nYeah.\nJa.\nElizaveta Ivchenko 19:24\nWas noch? Also, ich verwende auch ein paar Tools für Buchhaltung, aber \ndas ist nicht relevant.\nIch glaube was.\nLinkedIn verwenden wir, aber das ist, also ist.",
+      "nextText": "diesen den Reiter C.S.V. importieren. Ja, und dann wären hier gleich \ntheoretisch diese To-Dos alle richtig drin."
+    },
+    {
+      "chunkId": "c0dff11a-1b65-459b-8984-f4c4ec004413",
+      "text": "Jelena Maric 1:08:49\nOkay.\nOlli 1:08:50\nNa, das sollten wir uns also, das, das, das sollten wir uns dann einmal \nangucken.\nProf. Peter Gentsch 1:08:54\nund und und wichtig aus meiner Erfahrung heraus, was immer ganz \nwichtig ist, immer wer, weil es immer dieses wir müssten, ne, dann war ja \nso irgendjemand wird schon mal. Also meine Erfahrung ist nur, vielleicht \ndann als Follow-up, Olli, dass wir dem genau wissen, O. K., guck mal,\nOlli 1:08:55\nYeah.\nProf. Peter Gentsch 1:09:09\nJelly, mach das. Lisa, mach das. Peter, mach das. Olli, mach das. Ja, weil \nsonst ist es so. Ah ja, ja.\nOlli 1:09:10\nAh, yeah, I'm jedenfalls.\nJa, ja, absolut. Also habt ihr in irgendeiner Form ein Projektmanagement-\nTool gerade im Einsatz?\nAlso, so sagen wir mal, sowas wie ein Jira oder ein Trello oder ein Awork \nTrello.\nElizaveta Ivchenko 1:09:22\nEin bisschen.\nRight a little one this ****, yeah.\nJelena Maric 1:09:25\nTrennung haben wir.\nProf. Peter Gentsch 1:09:25",
+      "context": "Olli 1:08:14\nDie, die ja auch Hebel haben, also Kampagne führt zu neuen Leads, die \naber auch nur dann gut werden, wenn wir, wenn wir das zweite Thema \nhalt haben, wenn wir wissen, wir haben ein Lead. Wie gehen wir mit dem \nentsprechend weiter um? Und da können wir uns auch Hubspot wiederum,\ndas eigentlich passen alle 3 gut zusammen.\nWeil auch Hubspot hat da wiederum Möglichkeiten, auch individuell auf \nden jeweiligen User zu reagieren und dann halt auch wiederum Mailings \nrauszuschicken oder noch mal eine Frage zu schicken, ne und oder nach \neinem Termin zu fragen. oder oder Das können wir ja in Hubspot auch \nabbilden, so ein Flow.\nProf. Peter Gentsch 1:08:47\nYeah. Jelena Maric 1:08:49\nOkay.\nOlli 1:08:50\nNa, das sollten wir uns also, das, das, das sollten wir uns dann einmal \nangucken.\nProf. Peter Gentsch 1:08:54\nund und und wichtig aus meiner Erfahrung heraus, was immer ganz \nwichtig ist, immer wer, weil es immer dieses wir müssten, ne, dann war ja \nso irgendjemand wird schon mal. Also meine Erfahrung ist nur, vielleicht \ndann als Follow-up, Olli, dass wir dem genau wissen, O. K., guck mal,\nOlli 1:08:55\nYeah.\nProf. Peter Gentsch 1:09:09\nJelly, mach das. Lisa, mach das. Peter, mach das. Olli, mach das. Ja, weil \nsonst ist es so. Ah ja, ja.\nOlli 1:09:10\nAh, yeah, I'm jedenfalls.\nJa, ja, absolut. Also habt ihr in irgendeiner Form ein Projektmanagement-\nTool gerade im Einsatz?\nAlso, so sagen wir mal, sowas wie ein Jira oder ein Trello oder ein Awork \nTrello.\nElizaveta Ivchenko 1:09:22\nEin bisschen.\nRight a little one this ****, yeah.\nJelena Maric 1:09:25\nTrennung haben wir.\nProf. Peter Gentsch 1:09:25 Hello, hello, genau, können wir, können wir Olli Zugang geben?\nJelena Maric 1:09:27\nTrello haben wir.",
+      "pageNumber": 65,
+      "finalScore": 0.4534004330635071,
+      "distance": 0.7965995669364929,
+      "hasContext": true,
+      "fileName": "9eb51ec0-b0b7-4344-967f-a608215090e7.docx",
+      "vectorScore": 0.20340043306350708,
+      "prevText": "Olli 1:08:14\nDie, die ja auch Hebel haben, also Kampagne führt zu neuen Leads, die \naber auch nur dann gut werden, wenn wir, wenn wir das zweite Thema \nhalt haben, wenn wir wissen, wir haben ein Lead. Wie gehen wir mit dem \nentsprechend weiter um? Und da können wir uns auch Hubspot wiederum,\ndas eigentlich passen alle 3 gut zusammen.\nWeil auch Hubspot hat da wiederum Möglichkeiten, auch individuell auf \nden jeweiligen User zu reagieren und dann halt auch wiederum Mailings \nrauszuschicken oder noch mal eine Frage zu schicken, ne und oder nach \neinem Termin zu fragen. oder oder Das können wir ja in Hubspot auch \nabbilden, so ein Flow.\nProf. Peter Gentsch 1:08:47\nYeah.",
+      "nextText": "Hello, hello, genau, können wir, können wir Olli Zugang geben?\nJelena Maric 1:09:27\nTrello haben wir."
+    },
+    {
+      "chunkId": "344ea570-ef1b-4192-b98c-b770fd23713f",
+      "text": "Jelena Maric 12:19\nJa, also der Mike hatte da drauf reagiert, das war Sonntag Abend oder \nirgendwann, das hat er mir noch mal gesagt, wie wir, wie es ändern kann. \nIch würde das jetzt seinen ganzen, das den Input, den er mir gegeben hat,\nauch noch mal transkribieren, in Cloud hochjagen, dass er mir\nPeter 12:20\nJa.\nSo, jetzt bin ich vergessen.\nJelena Maric 12:33\nDie 3 neuen angepassten Version macht, dass wir den Kunden nicht so \nüberfordern.\nPeter 12:38\nJa, ist gut.\nJelena Maric 12:40\nOK.\nSoll ich mal von oben runter lesen, was in deiner Liste war? Du hattest als \nersten Punkt Match Follow Up.\nPeter 12:46\nJa, ja, ja, ja.\nGenau.\nJelena Maric 12:55\nein aufgeschrieben, magst du da oder hast du da noch\nPeter 12:59\nnur, ob das alles klar ist. Ne, ob das, ob das dann immer gesprochen, ne, \naber nur fragen, ob das raus ist, ob die alles haben mit den Adressen. \nAlter, das muss ich unbedingt, dass ich mich da bedank. Schreibt das",
+      "context": "und so hat man einfach in dieser Entscheidung, wenn man eh schon so\nWie soll man sagen, hyped es über das Produkt, was ja so ist innerhalb \nvom Gespräch, dass es einfach innerhalb von Minuten bestätigt werden \nkann. Und deswegen brauchen wir diese Übersicht, wie du also ne, wie wir\nschon besprochen haben vor Ort, als wir im Büro uns gesehen haben.\nEinfach diese drei unterschiedlichen Pakete. Das beinhaltet das und das \nfertig.\nPeter 12:17\nIt. Jelena Maric 12:19\nJa, also der Mike hatte da drauf reagiert, das war Sonntag Abend oder \nirgendwann, das hat er mir noch mal gesagt, wie wir, wie es ändern kann. \nIch würde das jetzt seinen ganzen, das den Input, den er mir gegeben hat,\nauch noch mal transkribieren, in Cloud hochjagen, dass er mir\nPeter 12:20\nJa.\nSo, jetzt bin ich vergessen.\nJelena Maric 12:33\nDie 3 neuen angepassten Version macht, dass wir den Kunden nicht so \nüberfordern.\nPeter 12:38\nJa, ist gut.\nJelena Maric 12:40\nOK.\nSoll ich mal von oben runter lesen, was in deiner Liste war? Du hattest als \nersten Punkt Match Follow Up.\nPeter 12:46\nJa, ja, ja, ja.\nGenau.\nJelena Maric 12:55\nein aufgeschrieben, magst du da oder hast du da noch\nPeter 12:59\nnur, ob das alles klar ist. Ne, ob das, ob das dann immer gesprochen, ne, \naber nur fragen, ob das raus ist, ob die alles haben mit den Adressen. \nAlter, das muss ich unbedingt, dass ich mich da bedank. Schreibt das jetzt, muss man in meine To-Do-Liste, dass der uns so gegeben hat, ist ja \nmehr als.\nJelena Maric 13:01\nJa, ja.\nAlles raus. Ja, die haben alles.",
+      "pageNumber": 6,
+      "finalScore": 0.4516710042953491,
+      "distance": 0.7983289957046509,
+      "hasContext": true,
+      "fileName": "2a64300d-2b7c-4c11-9484-7488745ef378.docx",
+      "vectorScore": 0.20167100429534912,
+      "prevText": "und so hat man einfach in dieser Entscheidung, wenn man eh schon so\nWie soll man sagen, hyped es über das Produkt, was ja so ist innerhalb \nvom Gespräch, dass es einfach innerhalb von Minuten bestätigt werden \nkann. Und deswegen brauchen wir diese Übersicht, wie du also ne, wie wir\nschon besprochen haben vor Ort, als wir im Büro uns gesehen haben.\nEinfach diese drei unterschiedlichen Pakete. Das beinhaltet das und das \nfertig.\nPeter 12:17\nIt.",
+      "nextText": "jetzt, muss man in meine To-Do-Liste, dass der uns so gegeben hat, ist ja \nmehr als.\nJelena Maric 13:01\nJa, ja.\nAlles raus. Ja, die haben alles."
+    },
+    {
+      "chunkId": "5b4ca88e-781c-479a-9c3e-80576ee36f47",
+      "text": "Jelena Maric 7:13\nJa, gestern.\nElizaveta Ivchenko 7:13\nMhm, this song.\nOlli 7:19\nHab hier reingeschrieben, wen es so gibt. Also, das hier bin ich, das äh, \nähm, bist du, ähm, Jelly, ähm, das bist du, Lisa. Das ist deren Name, ich \nnicht weiß, ähm.\nHier die externe russische Grafikerin, das ist dann Mike, das ist Peter, den \nhab ich als einzigen mit Namen hier gerade versehen und hab dann \ngesagt: 'O. K., nimm mal diese ganzen To-Dos und mach mal detaillierte \nTo-Do-Liste daraus.'\nUnd erstell die halt einmal und da kam dann jetzt 71 To-Dos raus. Also, \ndie jetzt schon relativ kleinteilig sind und auch gleich mit Vorschlägen, \nwas davon\nJelena Maric 7:58\nMhm.\nOlli 8:07\nJa, wer machen könnte.\nJelena Maric 8:10\nMhm.\nOlli 8:12\nWir können also müssen überlegen, wie wir es halt am schlauesten \nmachen. Also, ich glaube tatsächlich, es wäre sinnvoll, wenn wir das hier \neinmal durchgehen, sozusagen, und wir hier einmal festlegen, ob die \nPerson, die hier steht, das wirklich machen kann.",
+      "context": "zu lange brauchen. Ich habe jetzt heute mal, während ich dieses Seminar \ngehört habe, habe ich ChatGPT einfach mal hier was erstellen lassen. Und \nzwar habe ich das Konzept, was ich.\nJelena Maric 6:49\nYeah.\nOlli 7:03\neuch ja auch geschickt hatte. Das habe ich jetzt genommen und hab \neinmal gesagt, am Beispiel des dieses Engels, ChatGBT lügt, so wie wir \ndas gestern, war das gestern, vorgestern, gestern, gestern. Wie wir das \ngestern kurz im Call besprochen hatten, habe ich einmal gesagt, OK, jetzt \nbricht das mal runter. Jelena Maric 7:13\nJa, gestern.\nElizaveta Ivchenko 7:13\nMhm, this song.\nOlli 7:19\nHab hier reingeschrieben, wen es so gibt. Also, das hier bin ich, das äh, \nähm, bist du, ähm, Jelly, ähm, das bist du, Lisa. Das ist deren Name, ich \nnicht weiß, ähm.\nHier die externe russische Grafikerin, das ist dann Mike, das ist Peter, den \nhab ich als einzigen mit Namen hier gerade versehen und hab dann \ngesagt: 'O. K., nimm mal diese ganzen To-Dos und mach mal detaillierte \nTo-Do-Liste daraus.'\nUnd erstell die halt einmal und da kam dann jetzt 71 To-Dos raus. Also, \ndie jetzt schon relativ kleinteilig sind und auch gleich mit Vorschlägen, \nwas davon\nJelena Maric 7:58\nMhm.\nOlli 8:07\nJa, wer machen könnte.\nJelena Maric 8:10\nMhm.\nOlli 8:12\nWir können also müssen überlegen, wie wir es halt am schlauesten \nmachen. Also, ich glaube tatsächlich, es wäre sinnvoll, wenn wir das hier \neinmal durchgehen, sozusagen, und wir hier einmal festlegen, ob die \nPerson, die hier steht, das wirklich machen kann. Jelena Maric 8:25\nMhm.\nOlli 8:25\nAlso, ich weiß nicht, ob du das im Nachgang vielleicht einmal machst,",
+      "pageNumber": 8,
+      "finalScore": 0.44724559783935547,
+      "distance": 0.8027544021606445,
+      "hasContext": true,
+      "fileName": "9a95c2d1-7204-491b-bedb-0b7680230392.docx",
+      "vectorScore": 0.19724559783935547,
+      "prevText": "zu lange brauchen. Ich habe jetzt heute mal, während ich dieses Seminar \ngehört habe, habe ich ChatGPT einfach mal hier was erstellen lassen. Und \nzwar habe ich das Konzept, was ich.\nJelena Maric 6:49\nYeah.\nOlli 7:03\neuch ja auch geschickt hatte. Das habe ich jetzt genommen und hab \neinmal gesagt, am Beispiel des dieses Engels, ChatGBT lügt, so wie wir \ndas gestern, war das gestern, vorgestern, gestern, gestern. Wie wir das \ngestern kurz im Call besprochen hatten, habe ich einmal gesagt, OK, jetzt \nbricht das mal runter.",
+      "nextText": "Jelena Maric 8:25\nMhm.\nOlli 8:25\nAlso, ich weiß nicht, ob du das im Nachgang vielleicht einmal machst,"
+    },
+    {
+      "chunkId": "73bcafe7-185c-43c7-8764-bffe86399dfd",
+      "text": "Tabelle, ne? Und hier haben wir das halt in 01020304 für Prioritäten \ngesetzt. Aber ich sehe nicht, dass in dem Trello.\nElizaveta Ivchenko 14:39\nJa.\nJelena Maric 14:47\nAch so, doch das sind Fristen mit eingesetzt. Hier sind Fristen bis zum \n15.5. zum Beispiel drinne.",
+      "context": "Deswegen müssen wir gucken, dass ein eine baut auf das andere auf. Ja, \nmüssen wir gucken, was wir davon erledigt bekommen bis Mittwoch.\nPeter 13:54\nWas heißt, wir haben, wir haben keinen Zeitplan, ich hab den wirklich \nauch Olli gebeten, wo ich ach sagen wir ja OK ah OKOK.\nJelena Maric 13:57\nDoch, doch, doch.\nAuch nach Prioritäten. Doch, doch, doch, das ist schon nach Prioritäten \nalles. Ist schon alles sortiert.\nPeter 14:02\nOh.\nOkay,\nJa, aber ihr klingt nicht so happy. Also die Frage, ich hab mich gefragt, \nwann geht die Kampagne online? War meine Frage.\nStar movie.\nJelena Maric 14:16\nJa, das ist also, ich würde ich ja, also er sagte ja, die Aufgaben, die er für \nuns eingeteilt hat, die sollen wir bitte bis Mittwoch erledigen, weil wir am \nDonnerstag gern da drüber sprechen. Und wenn ich\nPeter 14:18\nDas ist das Eigene.\nMhm.\nJelena Maric 14:31\nAlso, hier sind jetzt nicht in Wochen. Ich weiß nicht, auf diesem \nUrsprungsformular, wie war das noch mal, Lisa? Das war ja 'ne Excel Tabelle, ne? Und hier haben wir das halt in 01020304 für Prioritäten \ngesetzt. Aber ich sehe nicht, dass in dem Trello.\nElizaveta Ivchenko 14:39\nJa.\nJelena Maric 14:47\nAch so, doch das sind Fristen mit eingesetzt. Hier sind Fristen bis zum \n15.5. zum Beispiel drinne. Elizaveta Ivchenko 14:53\nAber das ist automatisch, das das das stellt Trello nicht dich.\nPeter 14:55\nWhat's on?\nJelena Maric 14:56\nI'm not.\nElizaveta Ivchenko 14:58\nDieses Ding, das ist eine Woche automatisch, bis du das änderst.\nJelena Maric 14:58\nAh, OK.\nOK.\nOK.\nKönnt ihr mich noch hören?\nElizaveta Ivchenko 15:25\nJa, ich hör dich.\nPeter 15:25\nJa.\nJelena Maric 15:26\nOK, ja.\nAlso ja, ich denke, dass wenn wir am Donnerstag mit dem.\nOlli, unser Gespräch haben, dass wir dann abklopfen können, wie wann \ndie Kampagne online geht. Müssen wir dann mit ihm sehen, wie weit wir \nmit all den Sachen gekommen sind, vor allem mit den Sachen?\nPeter 15:41\nMhm.\nJa, aber das meine ich mit Zeitplan. Jetzt gar nicht jetzt vorbereiten, \nsondern wann geht die Kampagne und das ist ja.\nJelena Maric 15:49\nJa, ja, ach so.\nIch glaube, das ist jetzt aktuell tatsächlich ein bisschen schwierig, aber wir",
+      "pageNumber": 13,
+      "finalScore": 0.4456151366233826,
+      "distance": 0.7043848633766174,
+      "hasContext": true,
+      "fileName": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "vectorScore": 0.29561513662338257,
+      "prevText": "Deswegen müssen wir gucken, dass ein eine baut auf das andere auf. Ja, \nmüssen wir gucken, was wir davon erledigt bekommen bis Mittwoch.\nPeter 13:54\nWas heißt, wir haben, wir haben keinen Zeitplan, ich hab den wirklich \nauch Olli gebeten, wo ich ach sagen wir ja OK ah OKOK.\nJelena Maric 13:57\nDoch, doch, doch.\nAuch nach Prioritäten. Doch, doch, doch, das ist schon nach Prioritäten \nalles. Ist schon alles sortiert.\nPeter 14:02\nOh.\nOkay,\nJa, aber ihr klingt nicht so happy. Also die Frage, ich hab mich gefragt, \nwann geht die Kampagne online? War meine Frage.\nStar movie.\nJelena Maric 14:16\nJa, das ist also, ich würde ich ja, also er sagte ja, die Aufgaben, die er für \nuns eingeteilt hat, die sollen wir bitte bis Mittwoch erledigen, weil wir am \nDonnerstag gern da drüber sprechen. Und wenn ich\nPeter 14:18\nDas ist das Eigene.\nMhm.\nJelena Maric 14:31\nAlso, hier sind jetzt nicht in Wochen. Ich weiß nicht, auf diesem \nUrsprungsformular, wie war das noch mal, Lisa? Das war ja 'ne Excel",
+      "nextText": "Elizaveta Ivchenko 14:53\nAber das ist automatisch, das das das stellt Trello nicht dich.\nPeter 14:55\nWhat's on?\nJelena Maric 14:56\nI'm not.\nElizaveta Ivchenko 14:58\nDieses Ding, das ist eine Woche automatisch, bis du das änderst.\nJelena Maric 14:58\nAh, OK.\nOK.\nOK.\nKönnt ihr mich noch hören?\nElizaveta Ivchenko 15:25\nJa, ich hör dich.\nPeter 15:25\nJa.\nJelena Maric 15:26\nOK, ja.\nAlso ja, ich denke, dass wenn wir am Donnerstag mit dem.\nOlli, unser Gespräch haben, dass wir dann abklopfen können, wie wann \ndie Kampagne online geht. Müssen wir dann mit ihm sehen, wie weit wir \nmit all den Sachen gekommen sind, vor allem mit den Sachen?\nPeter 15:41\nMhm.\nJa, aber das meine ich mit Zeitplan. Jetzt gar nicht jetzt vorbereiten, \nsondern wann geht die Kampagne und das ist ja.\nJelena Maric 15:49\nJa, ja, ach so.\nIch glaube, das ist jetzt aktuell tatsächlich ein bisschen schwierig, aber wir"
+    },
+    {
+      "chunkId": "93664089-483d-4eb9-bbad-7d4fd3d47648",
+      "text": "Folgeaufgaben:\n\nBereitstellung von Beispieldaten: Sende Beispielsdaten, eine \nBeispielsfrage aus dem Ticketing-System und Beispieldokumente zur\nweiteren Analyse an das Partnerteam. (Speaker 1)\n\nDemo-Zugang zur Interview-Umgebung: Sende einen Link zur \nDemo-Umgebung, damit das Team einen Einblick in die Interview-\nFunktionalität erhält. (Dr. Michael Patrushev)",
+      "context": "verstehen und die KI-Lösung darauf abzustimmen.\no\nDemo-Zugang und Test: Holger Krause und Peter baten um \neinen Link zur Demo-Umgebung, um die Interview- und \nKonsolidierungsfunktionen der KI-Lösung praktisch zu \nerproben.\no\nFolgegespräch und NDA: Peter schlug vor, vor dem \nAustausch sensibler Daten eine NDA zu unterzeichnen und in \neinem weiteren Call die Datenstruktur und Prozesse detailliert \nzu besprechen.\no\nSchnelle erste Ergebnisse: Dr. Michael Patrushev stellte in \nAussicht, dass nach dem Hochladen erster Daten und \nInterviews bereits kurzfristig E-Learning-Module und Ticketing-\nFunktionen getestet werden können. Folgeaufgaben:\n\nBereitstellung von Beispieldaten: Sende Beispielsdaten, eine \nBeispielsfrage aus dem Ticketing-System und Beispieldokumente zur\nweiteren Analyse an das Partnerteam. (Speaker 1)\n\nDemo-Zugang zur Interview-Umgebung: Sende einen Link zur \nDemo-Umgebung, damit das Team einen Einblick in die Interview-\nFunktionalität erhält. (Dr. Michael Patrushev)",
+      "pageNumber": 3,
+      "finalScore": 0.4360646247863769,
+      "distance": 0.713935375213623,
+      "hasContext": true,
+      "fileName": "3f95a3f2-b26c-4fa5-859a-27076b593405.docx",
+      "vectorScore": 0.28606462478637695,
+      "prevText": "verstehen und die KI-Lösung darauf abzustimmen.\no\nDemo-Zugang und Test: Holger Krause und Peter baten um \neinen Link zur Demo-Umgebung, um die Interview- und \nKonsolidierungsfunktionen der KI-Lösung praktisch zu \nerproben.\no\nFolgegespräch und NDA: Peter schlug vor, vor dem \nAustausch sensibler Daten eine NDA zu unterzeichnen und in \neinem weiteren Call die Datenstruktur und Prozesse detailliert \nzu besprechen.\no\nSchnelle erste Ergebnisse: Dr. Michael Patrushev stellte in \nAussicht, dass nach dem Hochladen erster Daten und \nInterviews bereits kurzfristig E-Learning-Module und Ticketing-\nFunktionen getestet werden können.",
+      "nextText": null
+    },
+    {
+      "chunkId": "05499793-d8eb-4629-a7e2-acb59bc9548a",
+      "text": "Da sind einige Sachen noch zu tun, auf jeden Fall. Und am Donnerstag \nhaben wir wieder unser Follow-up-Termin mit ihm. Ansonsten, Mailing und \nWebinarteilnehmer. Das Mailing ist an Web an Teilnehmer und an No \nShows versendet werden mit der Webinaraufzeichnung.\nPeter 3:57\nAnd.\nI move.\nDropline.\nHm.\nJelena Maric 4:17\nEs ist auch alles raus. Über Hubspot haben wir das gemacht und Lisa hat \ndie Blogbeiträge und die sind online auf der Webseite und hat irgendwas \nnoch an an. Also, die Blogbeiträge sind noch an die Pressebox gesendet.",
+      "context": "Also ich probier den ja häufiger aus, der probiert der funktioniert häufig.\nNicht das ist echt ein Schwachpunkt. Ja, vielleicht sollte man. Ich habe \nauch gedacht, dass man sagt, man kann auch mit Kay Konik. Haben wir \ngesagt, nur mit Kay Konik Termine ausmachen? Nee, auch oder?\nJelena Maric 3:14\nOK.\nJa, sprecht mit ihm, steht in deinem Posting. Ja, OK, ich werde auf jeden \nFall Mike noch\nElizaveta Ivchenko 3:21\nJa.\nPeter 3:27\nJa, also vielleicht war das so. Ich würde sagen, ja.\nJelena Maric 3:31\nO. K., ich spreche noch mal mit ihm. Die Corporate Brain Images haben \nwir an die Grafikerin gesendet zwecks Überarbeitung. Jetzt braucht ihr \nnoch mal ein explizites, also die braucht ein Briefing jetzt erst mal, also \nwir haben es noch nicht geschickt, sie bekommt jetzt erst mal noch ein \nBriefing zwecks Änderung und was uns daran wichtig ist.\nAktuell bearbeiten die Lisa und ich prioritätsmäßig die Aufgaben im Trello \nvom Olli. Da sind einige Sachen noch zu tun, auf jeden Fall. Und am Donnerstag \nhaben wir wieder unser Follow-up-Termin mit ihm. Ansonsten, Mailing und \nWebinarteilnehmer. Das Mailing ist an Web an Teilnehmer und an No \nShows versendet werden mit der Webinaraufzeichnung.\nPeter 3:57\nAnd.\nI move.\nDropline.\nHm.\nJelena Maric 4:17\nEs ist auch alles raus. Über Hubspot haben wir das gemacht und Lisa hat \ndie Blogbeiträge und die sind online auf der Webseite und hat irgendwas \nnoch an an. Also, die Blogbeiträge sind noch an die Pressebox gesendet. Elizaveta Ivchenko 4:29\nPressable.\nPeter 4:33\nPossible.\nJelena Maric 4:35\nAnsonsten Visitenkarten sind die Bank.\nPeter 4:35\ngenau, weil ich hatte kurz mit dem Olli, ach so, ach so, nee, mach du \nerstmal, ich hab genau, sorry, nee, nee, weil auch nicht, find ich super, \ndass das jetzt so, weil Olli meinte nur, ja, mich am Wochenende, na ja, so\nJelena Maric 4:38\nIs out.\nTell me.\nPeter 4:48\nmal so 'n Plan sehen. Er meinte, er wird, wie er jetzt gesagt, ihr müsst das\nschaffen, weil da viel zu tun ist, wegen Webinar und Blogbeitrag. Da hab \nich so gehört, der Blogbeitrag, ich mein, ich hoffe, ne, das wär mir echt \nwichtig, dass ihr da auch mit Tools arbeitet. Das ist ja\nNicht lang und so ein Mailing ist ja auch nichts, weil ich kann mir gar nicht \nvorstellen, weil wir kommen nicht zur Kampagne wegen Blog und \nWebinar. Dann habe ich das falsch verstanden, habe ich mich ein bisschen\ngewundert.\nWeiß nicht, werde erstmal falsch verstanden.\nJelena Maric 5:16\nNee, also weiß ich nicht die.",
+      "pageNumber": 4,
+      "finalScore": 0.4219487428665161,
+      "distance": 0.7780512571334839,
+      "hasContext": true,
+      "fileName": "831f2e29-9b48-4aac-9356-6e47325df7a8.docx",
+      "vectorScore": 0.2219487428665161,
+      "prevText": "Also ich probier den ja häufiger aus, der probiert der funktioniert häufig.\nNicht das ist echt ein Schwachpunkt. Ja, vielleicht sollte man. Ich habe \nauch gedacht, dass man sagt, man kann auch mit Kay Konik. Haben wir \ngesagt, nur mit Kay Konik Termine ausmachen? Nee, auch oder?\nJelena Maric 3:14\nOK.\nJa, sprecht mit ihm, steht in deinem Posting. Ja, OK, ich werde auf jeden \nFall Mike noch\nElizaveta Ivchenko 3:21\nJa.\nPeter 3:27\nJa, also vielleicht war das so. Ich würde sagen, ja.\nJelena Maric 3:31\nO. K., ich spreche noch mal mit ihm. Die Corporate Brain Images haben \nwir an die Grafikerin gesendet zwecks Überarbeitung. Jetzt braucht ihr \nnoch mal ein explizites, also die braucht ein Briefing jetzt erst mal, also \nwir haben es noch nicht geschickt, sie bekommt jetzt erst mal noch ein \nBriefing zwecks Änderung und was uns daran wichtig ist.\nAktuell bearbeiten die Lisa und ich prioritätsmäßig die Aufgaben im Trello \nvom Olli.",
+      "nextText": "Elizaveta Ivchenko 4:29\nPressable.\nPeter 4:33\nPossible.\nJelena Maric 4:35\nAnsonsten Visitenkarten sind die Bank.\nPeter 4:35\ngenau, weil ich hatte kurz mit dem Olli, ach so, ach so, nee, mach du \nerstmal, ich hab genau, sorry, nee, nee, weil auch nicht, find ich super, \ndass das jetzt so, weil Olli meinte nur, ja, mich am Wochenende, na ja, so\nJelena Maric 4:38\nIs out.\nTell me.\nPeter 4:48\nmal so 'n Plan sehen. Er meinte, er wird, wie er jetzt gesagt, ihr müsst das\nschaffen, weil da viel zu tun ist, wegen Webinar und Blogbeitrag. Da hab \nich so gehört, der Blogbeitrag, ich mein, ich hoffe, ne, das wär mir echt \nwichtig, dass ihr da auch mit Tools arbeitet. Das ist ja\nNicht lang und so ein Mailing ist ja auch nichts, weil ich kann mir gar nicht \nvorstellen, weil wir kommen nicht zur Kampagne wegen Blog und \nWebinar. Dann habe ich das falsch verstanden, habe ich mich ein bisschen\ngewundert.\nWeiß nicht, werde erstmal falsch verstanden.\nJelena Maric 5:16\nNee, also weiß ich nicht die."
+    }
+  ],
+  "learning_video_answer_text": "",
+  "expert_id": "",
+  "answer_model": "google/gemini-3-flash-preview",
+  "is_brief_mode": false,
+  "is_expert_specific": true,
+  "image_data": false,
+  "screenshot_mode": false
+}

@@ -5,7 +5,8 @@ import asyncio
 import json
 import os
 import sys
-from datetime import datetime
+from copy import deepcopy
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -13,34 +14,51 @@ import streamlit as st
 
 # Allow imports from repository root (default_prompt, browser_prompt, llm_client)
 ROOT_DIR = Path(__file__).resolve().parent.parent
+APP_DIR = Path(__file__).resolve().parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
+if str(APP_DIR) not in sys.path:
+    sys.path.insert(0, str(APP_DIR))
 
 from browser_prompt import answer_generator_browser
 from default_prompt import answer_generator
 from llm_client import collect_stream
+from preset_loader import PRESET_KEYS, load_preset
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
 OPENROUTER_DEFAULT_MODEL = os.getenv(
     "OPENROUTER_DEFAULT_MODEL", "google/gemini-2.5-flash"
 )
 
-DEFAULT_CONFIG: dict[str, Any] = {
-    "prompt_type": "default",
-    "language": "uk",
-    "database_occurances": [],
-    "knowledge_base": [],
-    "examples": [],
-    "special_context_chunks": [],
-    "file_chunks": [],
-    "learning_video_answer_text": "",
-    "expert_id": "",
-    "answer_model": OPENROUTER_DEFAULT_MODEL,
-    "is_brief_mode": False,
-    "is_expert_specific": False,
-    "image_data": False,
-    "screenshot_mode": False,
-}
+DEFAULT_USER_QUESTION = (
+    "Open Redmine ticket 31275 and list the AL objects it references."
+)
+
+
+def _base_config() -> dict[str, Any]:
+    return {
+        "prompt_type": "default",
+        "language": "uk",
+        "database_occurances": [],
+        "knowledge_base": [],
+        "examples": [],
+        "special_context_chunks": [],
+        "file_chunks": [],
+        "learning_video_answer_text": "",
+        "expert_id": "",
+        "answer_model": OPENROUTER_DEFAULT_MODEL,
+        "is_brief_mode": False,
+        "is_expert_specific": False,
+        "image_data": False,
+        "screenshot_mode": False,
+    }
+
+
+def apply_preset_to_session(prompt_type: str) -> None:
+    preset = load_preset(prompt_type)
+    for key in PRESET_KEYS:
+        if key in preset:
+            st.session_state[key] = deepcopy(preset[key])
 
 
 def init_session_state() -> None:
@@ -48,13 +66,50 @@ def init_session_state() -> None:
         st.session_state.messages = []
     if "conversation_started" not in st.session_state:
         st.session_state.conversation_started = False
-    if "last_user_prompt" not in st.session_state:
-        st.session_state.last_user_prompt = ""
-    if "last_system_prompt" not in st.session_state:
-        st.session_state.last_system_prompt = ""
-    for key, value in DEFAULT_CONFIG.items():
-        if key not in st.session_state:
+    if "llm_logs" not in st.session_state:
+        st.session_state.llm_logs = []
+    if "user_question" not in st.session_state:
+        st.session_state.user_question = DEFAULT_USER_QUESTION
+    if "presets_initialized" not in st.session_state:
+        for key, value in _base_config().items():
             st.session_state[key] = value
+        apply_preset_to_session("default")
+        st.session_state.presets_initialized = True
+
+
+def sync_form_widgets_from_session() -> None:
+    st.session_state.cfg_language = st.session_state.language
+    st.session_state.cfg_answer_model = (
+        st.session_state.answer_model or OPENROUTER_DEFAULT_MODEL
+    )
+    st.session_state.cfg_expert_id = st.session_state.expert_id or ""
+    st.session_state.cfg_learning_video = st.session_state.learning_video_answer_text
+    st.session_state.cfg_brief_mode = st.session_state.is_brief_mode
+    st.session_state.cfg_expert_specific = st.session_state.is_expert_specific
+    st.session_state.cfg_image_data = st.session_state.image_data
+    st.session_state.cfg_screenshot_mode = st.session_state.screenshot_mode
+    st.session_state.cfg_database_occurances = json.dumps(
+        st.session_state.database_occurances, ensure_ascii=False, indent=2
+    )
+    st.session_state.cfg_knowledge_base = json.dumps(
+        st.session_state.knowledge_base, ensure_ascii=False, indent=2
+    )
+    st.session_state.cfg_examples = json.dumps(
+        st.session_state.examples, ensure_ascii=False, indent=2
+    )
+    st.session_state.cfg_special_context_chunks = json.dumps(
+        st.session_state.special_context_chunks, ensure_ascii=False, indent=2
+    )
+    st.session_state.cfg_file_chunks = json.dumps(
+        st.session_state.file_chunks, ensure_ascii=False, indent=2
+    )
+
+
+def on_prompt_type_change() -> None:
+    if st.session_state.conversation_started:
+        return
+    apply_preset_to_session(st.session_state.cfg_prompt_type)
+    sync_form_widgets_from_session()
 
 
 def parse_json_field(raw: str, field_name: str) -> Any:
@@ -131,6 +186,7 @@ def save_config_to_session(
 
 
 async def generate_answer(user_question: str, conversation_history: list) -> str:
+    llm_log: dict[str, Any] = {}
     common_kwargs = {
         "user_question": user_question,
         "conversation_history": conversation_history,
@@ -148,6 +204,7 @@ async def generate_answer(user_question: str, conversation_history: list) -> str
         "screenshot_mode": st.session_state.screenshot_mode,
         "answer_model": st.session_state.answer_model,
         "examples": st.session_state.examples,
+        "llm_log": llm_log,
     }
 
     if st.session_state.prompt_type == "browser":
@@ -155,7 +212,18 @@ async def generate_answer(user_question: str, conversation_history: list) -> str
     else:
         stream = await answer_generator(**common_kwargs)
 
-    return await collect_stream(stream)
+    response = await collect_stream(stream)
+
+    st.session_state.llm_logs.append({
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "turn": len(st.session_state.messages) + 1,
+        "user_question": user_question,
+        "conversation_history": conversation_history,
+        "assistant_response": response,
+        **llm_log,
+    })
+
+    return response
 
 
 def run_answer_generator(user_question: str, conversation_history: list) -> str:
@@ -165,22 +233,20 @@ def run_answer_generator(user_question: str, conversation_history: list) -> str:
 def get_download_json() -> str:
     payload = {
         "config": {
-            "prompt_type": st.session_state.prompt_type,
-            "language": st.session_state.language,
-            "database_occurances": st.session_state.database_occurances,
-            "knowledge_base": st.session_state.knowledge_base,
-            "examples": st.session_state.examples,
-            "special_context_chunks": st.session_state.special_context_chunks,
-            "file_chunks": st.session_state.file_chunks,
-            "learning_video_answer_text": st.session_state.learning_video_answer_text,
-            "expert_id": st.session_state.expert_id,
-            "answer_model": st.session_state.answer_model,
-            "is_brief_mode": st.session_state.is_brief_mode,
-            "is_expert_specific": st.session_state.is_expert_specific,
-            "image_data": st.session_state.image_data,
-            "screenshot_mode": st.session_state.screenshot_mode,
+            key: st.session_state.get(key)
+            for key in PRESET_KEYS
         },
+        "user_question": st.session_state.user_question,
         "messages": st.session_state.messages,
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2)
+
+
+def get_llm_logs_json() -> str:
+    payload = {
+        "exported_at": datetime.now(timezone.utc).isoformat(),
+        "prompt_type": st.session_state.prompt_type,
+        "llm_calls": st.session_state.llm_logs,
     }
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
@@ -196,9 +262,11 @@ def load_conversation_from_json(json_str: str) -> bool:
             ]
         elif isinstance(loaded, dict):
             config = loaded.get("config", {})
-            for key in DEFAULT_CONFIG:
+            for key in PRESET_KEYS:
                 if key in config:
                     st.session_state[key] = config[key]
+            if "user_question" in loaded:
+                st.session_state.user_question = loaded["user_question"]
             st.session_state.messages = [
                 {"role": m["role"], "content": m["content"]}
                 for m in loaded.get("messages", [])
@@ -219,12 +287,14 @@ def load_conversation_from_json(json_str: str) -> bool:
 
 
 def reset_conversation() -> None:
+    prompt_type = st.session_state.prompt_type
     st.session_state.messages = []
     st.session_state.conversation_started = False
-    st.session_state.last_user_prompt = ""
-    st.session_state.last_system_prompt = ""
-    for key, value in DEFAULT_CONFIG.items():
-        st.session_state[key] = value
+    st.session_state.llm_logs = []
+    st.session_state.user_question = DEFAULT_USER_QUESTION
+    apply_preset_to_session(prompt_type)
+    sync_form_widgets_from_session()
+    st.session_state.user_question_input = DEFAULT_USER_QUESTION
 
 
 def main() -> None:
@@ -306,6 +376,7 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
             index=0 if st.session_state.prompt_type == "default" else 1,
             disabled=disabled,
             key="cfg_prompt_type",
+            on_change=on_prompt_type_change,
         )
 
         language = st.text_input(
@@ -409,15 +480,27 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
 
         st.markdown("---")
 
-        if st.session_state.messages:
-            st.markdown("### Download Conversation")
-            st.download_button(
-                label="Download JSON",
-                data=get_download_json(),
-                file_name=f"conversation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
-                mime="application/json",
-                use_container_width=True,
-            )
+        if st.session_state.messages or st.session_state.llm_logs:
+            st.markdown("### Download")
+            if st.session_state.messages:
+                st.download_button(
+                    label="Download conversation JSON",
+                    data=get_download_json(),
+                    file_name=f"conversation_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json",
+                    use_container_width=True,
+                )
+            if st.session_state.llm_logs:
+                st.download_button(
+                    label="Download LLM logs JSON",
+                    data=get_llm_logs_json(),
+                    file_name=(
+                        f"{st.session_state.prompt_type}_llm_logs_"
+                        f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+                    ),
+                    mime="application/json",
+                    use_container_width=True,
+                )
             st.markdown("---")
 
         st.markdown("### Load Conversation")
@@ -457,11 +540,15 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
         )
 
         if not st.session_state.conversation_started:
-            first_message = st.text_input(
-                "First message:",
-                placeholder="Enter your question...",
-                key="first_message_input",
+            user_question = st.text_area(
+                "User question",
+                value=st.session_state.user_question,
+                height=100,
+                disabled=disabled,
+                key="user_question_input",
+                help="Question sent to the LLM as user_question (separate from chat follow-ups).",
             )
+            st.session_state.user_question = user_question
 
             if st.button("Start Conversation", use_container_width=True):
                 try:
@@ -488,12 +575,13 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
                     st.error(str(exc))
                     st.stop()
 
-                if not first_message.strip():
-                    st.warning("Please enter a first message.")
+                question = st.session_state.user_question.strip()
+                if not question:
+                    st.warning("Please enter a user question.")
                     st.stop()
 
                 st.session_state.messages.append(
-                    {"role": "user", "content": first_message.strip()}
+                    {"role": "user", "content": question}
                 )
 
                 conversation_history = [
@@ -503,9 +591,7 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
 
                 with st.spinner("Generating answer..."):
                     try:
-                        response = run_answer_generator(
-                            first_message.strip(), conversation_history
-                        )
+                        response = run_answer_generator(question, conversation_history)
                     except Exception as exc:
                         st.error(f"API error: {exc}")
                         st.session_state.messages.pop()
