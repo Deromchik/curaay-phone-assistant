@@ -197,8 +197,9 @@ async def answer_generator_browser(
             "as flowing speech instead.\n"
             "\n"
             "### Length\n"
-            "Give a concise spoken answer: 3–5 sentences by default. "
-            "If BRIEF_MODE is also ON, keep it to 3–4 sentences maximum.\n"
+            "Keep the answer laconic: 3–4 sentences maximum, including the closing question. "
+            "Cover only the most important facts from the sources — no background, no tangents. "
+            "If the sources are rich, prioritize the single most relevant point; the user can ask for more.\n"
             "\n"
             "### Sound authentically human\n"
             "Imagine you are leaving a thoughtful voice message for a smart colleague. "
@@ -237,9 +238,11 @@ async def answer_generator_browser(
             "Use Business Central instead of Microsoft Dynamics / MS.\n"
             "\n"
             "### Final self-check before responding\n"
-            "Re-read your output. Ask yourself: Could a text-to-speech engine read this aloud and sound like "
-            "a natural person? If you see any Markdown symbol, any list structure, or any stiff formal phrasing — "
-            "rewrite that sentence in plain spoken language before sending.\n"
+            "Re-read your output. Check that:\n"
+            "- The entire answer is at most 3–4 sentences. If longer, shorten it before sending.\n"
+            "- It could be read aloud by TTS and sound like a natural person.\n"
+            "- There are no Markdown symbols, list structures, or stiff formal phrasing — rewrite any such parts "
+            "in plain spoken language.\n"
         )
 
     user_prompt = build_user_prompt(
