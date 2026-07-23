@@ -53,7 +53,7 @@ def _base_config() -> dict[str, Any]:
         "is_expert_specific": False,
         "image_data": False,
         "screenshot_mode": False,
-        "is_voice_mode": False,
+        "is_voice_mode": True,
     }
 
 
@@ -397,9 +397,14 @@ OPENROUTER_DEFAULT_MODEL = "google/gemini-2.5-flash"
             on_change=on_prompt_type_change,
         )
 
-        language = st.text_input(
+        language_options = ["uk", "en", "de"]
+        language_labels = {"uk": "Ukrainian", "en": "English", "de": "German"}
+        
+        language = st.selectbox(
             "Language",
-            value=st.session_state.language,
+            options=language_options,
+            format_func=lambda x: language_labels.get(x, x),
+            index=language_options.index(st.session_state.language) if st.session_state.language in language_options else 0,
             disabled=disabled,
             key="cfg_language",
         )
